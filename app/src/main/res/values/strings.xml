@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RailwayApp</string>
+    <string name="title_activity_scoreboard">ScoreboardActivity</string>
+    <string name="scoreboard_header">Scoreboard</string>
+</resources>
