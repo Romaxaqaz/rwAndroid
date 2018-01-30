@@ -6,7 +6,7 @@ import java.util.Map;
 import by.client.android.railwayapp.api.Stantion;
 
 /**
- * Конвертер для перевода станции в код
+ * Конвертер для преобразования типа {@link Stantion} в код станции
  *
  * @author Roman Panteleev
  */

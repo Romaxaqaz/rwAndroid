@@ -1,117 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp">
-
-    <TextView
-            android:id="@+id/trainName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textAlignment="center"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/witeText"
-            android:height="40dp" />
-
+        android:layout_height="match_parent">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="horizontal"
+                android:layout_margin="2dp">
 
-            <TextView
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Время прибытия"
-                    android:textStyle="bold"
-                    android:textAlignment="center" />
+                    android:orientation="vertical"
+                    android:layout_weight="7">
 
-            <TextView
-                    android:id="@+id/trainType"
+                <ImageView
+                        android:id="@+id/icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:layout_margin="2dp" />
+
+                <TextView
+                        android:id="@+id/id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/text_size_micro" />
+            </LinearLayout>
+
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textAlignment="center" />
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="4dp">
+
+                <TextView
+                        android:id="@+id/path"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                        android:id="@+id/type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_micro" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp">
 
-            <TextView
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Время отправления"
-                    android:textStyle="bold"
-                    android:textAlignment="center" />
+                    android:orientation="vertical"
+                    android:layout_weight="2.5">
 
-            <TextView
-                    android:id="@+id/trainTime"
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/path"
+                        style="@style/HeaderTextView" />
+
+                <TextView
+                        android:id="@+id/way"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/BodyTextView" />
+
+            </LinearLayout>
+
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textAlignment="center" />
+                    android:orientation="vertical"
+                    android:layout_weight="2">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/paltform"
+                        style="@style/HeaderTextView" />
+
+                <TextView
+                        android:id="@+id/paltform"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/BodyTextView" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/arrival"
+                        style="@style/HeaderTextView" />
+
+                <TextView
+                        android:id="@+id/start"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/BodyTextView" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/arrive"
+                        style="@style/HeaderTextView" />
+
+                <TextView
+                        android:id="@+id/end"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/BodyTextView" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Путь"
-                    android:textStyle="bold"
-                    android:textAlignment="center" />
-
-            <TextView
-                    android:id="@+id/trainPath"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textAlignment="center" />
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Платформа"
-                    android:textStyle="bold"
-                    android:textAlignment="center" />
-
-            <TextView
-                    android:id="@+id/trainPlatform"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textAlignment="center" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+</FrameLayout>

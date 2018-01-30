@@ -29,7 +29,7 @@ public abstract class BaseListAdapter<T, ViewHolder extends BaseHolder> extends 
         this.context = context;
     }
 
-    public void setItemLayout(int itemResource) {
+    protected void setItemLayout(int itemResource) {
         this.itemResource = itemResource;
     }
 

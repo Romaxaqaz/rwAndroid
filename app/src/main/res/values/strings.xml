@@ -1,5 +1,17 @@
 <resources>
     <string name="app_name">RailwayApp</string>
     <string name="title_activity_scoreboard">ScoreboardActivity</string>
-    <string name="scoreboard_header">Scoreboard</string>
+    <string name="scoreboard_header">Онлайн табло</string>
+    <string name="path">Путь</string>
+    <string name="paltform">Платформа</string>
+    <string name="arrival">Прибытие</string>
+    <string name="arrive">Отправление</string>
+    <string name="scoreboard_detail_title">Scoreboard detail</string>
+    <string name="add_to_notification">Добавить в центр уведомлений</string>
+    <string name="travel_time">Время в пути</string>
+    <string name="stay">Стоянка</string>
+    <string name="route_not_founded">Маршрут не найден. Проверьте введенные данные</string>
+    <string name="title_activity_train_routes">TrainRoutesActivity</string>
+    <string name="error_parsing_page">Произошла ошибка парсинга страницы.</string>
+    <string name="error_connect">Отсутствует подключение к интернету.</string>
 </resources>

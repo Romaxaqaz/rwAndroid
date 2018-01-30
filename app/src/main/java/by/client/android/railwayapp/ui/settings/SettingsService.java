@@ -34,7 +34,7 @@ public class SettingsService {
      *
      * @param settings модель настроек {@link Settings}.
      */
-    void saveSettings(Settings settings) {
+    public void saveSettings(Settings settings) {
         this.settings = settings;
 
         sharedPreferences.setValue(URL_KEY, settings.getUrl());

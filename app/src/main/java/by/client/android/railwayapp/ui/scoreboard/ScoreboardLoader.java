@@ -19,17 +19,47 @@ class ScoreboardLoader implements Loader {
     private Stantion stantion;
     private RegisterLoader registerLoader;
 
-    ScoreboardLoader(RegisterLoader registerLoader, Stantion stantion) {
-        this.registerLoader = new SafeRegistrationSendListener(registerLoader);
+    ScoreboardLoader(Stantion stantion, RegisterLoader registerLoader) {
         this.stantion = stantion;
+        this.registerLoader = new SafeRegistrationSendListener(registerLoader);
     }
 
     @Override
     public void load() {
-        new LoadScoreboardAsync().execute();
+        new LoadScoreboardAsync(registerLoader).execute(stantion);
+
+//        OriginDestinationInformation originDestinationInformation = new OriginDestinationInformation();
+//        originDestinationInformation.setDepartureDate("2018-02-16");
+//        originDestinationInformation.setDestinationLocation(new DestinationLocation().withLocationCode("2100170"));
+//        originDestinationInformation.setOriginLocation(new OriginLocation().withLocationCode("2100000"));
+//        originDestinationInformation.setDepartureTimeRange(new DepartureTimeRange().withFrom("00:00").withTo("24:00"));
+//
+//        List<OriginDestinationInformation> originDestinationInformationList = new ArrayList<>();
+//        originDestinationInformationList.add(originDestinationInformation);
+//        Q q = new Q();
+//        q.setOriginDestinationInformation(originDestinationInformationList);
+//        SearchTrainRoute searchTrainRoute = new SearchTrainRoute().withQ(q).withRqType("railroad");
+//
+//        new BiletixService().getBiletixAPI().savePost(searchTrainRoute).enqueue(new Callback<Object>() {
+//            @Override
+//            public void onResponse(Call<Object> call, Response<Object> response) {
+//                Object s = response.body();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Object> call, Throwable t) {
+//                String s = "";
+//            }
+//        });
     }
 
-    private class LoadScoreboardAsync extends BaseAsyncTask<Void, List<Train>> {
+    private static class LoadScoreboardAsync extends BaseAsyncTask<Stantion, List<Train>> {
+
+        private RegisterLoader registerLoader;
+
+        LoadScoreboardAsync(RegisterLoader registerLoader) {
+            this.registerLoader = registerLoader;
+        }
 
         @Override
         protected void onStart() {
@@ -52,8 +82,8 @@ class ScoreboardLoader implements Loader {
         }
 
         @Override
-        protected List<Train> runTask(Void... param) throws Exception {
-            return new ScoreboardParsing(stantion).load();
+        protected List<Train> runTask(Stantion... param) throws Exception {
+            return new ScoreboardParsing(param[0]).pars();
         }
     }
 }

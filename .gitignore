@@ -7,3 +7,9 @@
 /build
 /captures
 .externalNativeBuild
+/src/custom.properties
+custom.properties
+local.properties
+google-services.json
+target
+out

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_train_time_table"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="6dp"
+        tools:context="by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Откуда"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"/>
+
+        <EditText
+                android:id="@+id/arrive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="введите станцию" />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="4dp">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Куда"
+                android:layout_marginLeft="4dp" />
+
+        <EditText
+                android:id="@+id/when"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="введите станцию" />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="4dp">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Дата поездки"
+                android:layout_marginLeft="4dp" />
+
+        <EditText
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="12.12.2012" />
+
+    </LinearLayout>
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Найти"/>
+
+</LinearLayout>

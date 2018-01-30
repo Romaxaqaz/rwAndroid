@@ -1,7 +1,7 @@
 package by.client.android.railwayapp.model;
 
 /**
- * Модель настроек риложения
+ * Модель настроек приложения
  *
  * @author Q-RPA
  */

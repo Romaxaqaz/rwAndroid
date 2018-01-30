@@ -21,15 +21,11 @@ public interface RegisterLoader {
 
     /**
      * Вызывается при завершении загрузки
-     *
-     * @param successful
      */
     void onFinish(boolean successful);
 
     /**
      * Вызывается при возникновении любой ошибки в процессе загрузки
-     *
-     * @param throwable
      */
     void onError(Throwable throwable);
 }
