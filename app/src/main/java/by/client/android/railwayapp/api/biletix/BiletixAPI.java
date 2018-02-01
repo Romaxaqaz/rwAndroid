@@ -12,5 +12,5 @@ import retrofit2.http.POST;
 public interface BiletixAPI {
 
     //@POST("/api/searchOffers")
-    //Call<Object> savePost(@Body SearchTrainRoute search);
+    //Call<Object> savePost(@Body SearchStantion search);
 }

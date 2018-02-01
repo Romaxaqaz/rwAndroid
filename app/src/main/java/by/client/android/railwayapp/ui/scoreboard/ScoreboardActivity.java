@@ -3,11 +3,13 @@ package by.client.android.railwayapp.ui.scoreboard;
 import java.util.Arrays;
 import java.util.List;
 
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -15,7 +17,6 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import by.client.android.railwayapp.AndroidApplication;
-import by.client.android.railwayapp.GlobalExceptionHandler;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.BaseLoaderListener;
 import by.client.android.railwayapp.api.Client;
@@ -28,7 +29,7 @@ import by.client.android.railwayapp.ui.utils.UiUtils;
  *
  * @author Roman Panteleev
  */
-public class ScoreboardActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class ScoreboardActivity extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final int SCOREBOARD_ACTIVITY_CODE = 1;
 
@@ -42,32 +43,29 @@ public class ScoreboardActivity extends AppCompatActivity implements SwipeRefres
     private Spinner stantions;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scoreboard);
-        getSupportActionBar().hide();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_scoreboard, container, false);
+        ButterKnife.inject(view);
 
-        ButterKnife.inject(this);
-
-        client = ((AndroidApplication) getApplicationContext()).getClient();
-
-        initView();
+        client = ((AndroidApplication) view.getContext().getApplicationContext()).getClient();
+        initView(view);
+        return view;
     }
 
-    private void initView() {
-        swipeRefreshLayout = findViewById(R.id.swiperefresh);
+    private void initView(View view) {
+        swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        Toolbar toolbar = findViewById(R.id.toolBar);
+        Toolbar toolbar = view.findViewById(R.id.toolBar);
         stantions = toolbar.findViewById(R.id.planets_spinner);
 
-        stantionAdapter = new StantionAdapter(this);
+        stantionAdapter = new StantionAdapter(view.getContext());
         stantionAdapter.setData(Arrays.asList(Stantion.values()));
         stantions.setAdapter(stantionAdapter);
         stantions.setOnItemSelectedListener(new StantionClickListener());
 
-        trainsAdapter = new TrainAdapter(this);
-        ListView trainsListView = findViewById(R.id.trains);
+        trainsAdapter = new TrainAdapter(view.getContext());
+        ListView trainsListView = view.findViewById(R.id.trains);
         trainsListView.setOnItemClickListener(new TrainClickListener());
         trainsListView.setAdapter(trainsAdapter);
     }
@@ -89,7 +87,7 @@ public class ScoreboardActivity extends AppCompatActivity implements SwipeRefres
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            ScroreboardDetailActivity.start(ScoreboardActivity.this, trainsAdapter.getItem(position),
+            ScroreboardDetailActivity.start(getActivity(), trainsAdapter.getItem(position),
                 SCOREBOARD_ACTIVITY_CODE);
         }
     }
@@ -124,7 +122,7 @@ public class ScoreboardActivity extends AppCompatActivity implements SwipeRefres
 
         @Override
         protected void onError(ScoreboardActivity reference, Exception exception) {
-            new GlobalExceptionHandler(reference).handle(exception);
+            // new GlobalExceptionHandler(reference).handle(exception);
         }
 
         @Override

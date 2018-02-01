@@ -38,7 +38,7 @@ class ScoreboardLoader implements Loader {
 //        originDestinationInformationList.add(originDestinationInformation);
 //        Q q = new Q();
 //        q.setOriginDestinationInformation(originDestinationInformationList);
-//        SearchTrainRoute searchTrainRoute = new SearchTrainRoute().withQ(q).withRqType("railroad");
+//        SearchStantion searchTrainRoute = new SearchStantion().withQ(q).withRqType("railroad");
 //
 //        new BiletixService().getBiletixAPI().savePost(searchTrainRoute).enqueue(new Callback<Object>() {
 //            @Override
