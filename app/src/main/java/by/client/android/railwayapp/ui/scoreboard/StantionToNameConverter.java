@@ -8,7 +8,7 @@ import by.client.android.railwayapp.api.Stantion;
 /**
  * Класс конвертер для преобразования типа {@link Stantion} в название станции
  *
- * @author Roman PAnteleev
+ * @author ROMAN PANTELEEV
  */
 class StantionToNameConverter {
 

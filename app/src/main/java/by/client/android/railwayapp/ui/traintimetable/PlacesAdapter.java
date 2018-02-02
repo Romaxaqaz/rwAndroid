@@ -11,7 +11,7 @@ import by.client.android.railwayapp.ui.BaseListAdapter;
 /**
  * Created by PanteleevRV on 19.01.2018.
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 class PlacesAdapter extends BaseListAdapter<Place, BaseHolder<Place>> {
 

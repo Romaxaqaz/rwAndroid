@@ -6,7 +6,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by PanteleevRV on 31.01.2018.
  */
-
 public class RwService {
 
     private static RwService instance = null;

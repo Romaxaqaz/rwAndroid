@@ -9,7 +9,7 @@ import by.client.android.railwayapp.R;
 /**
  * Класс конвертер для преобразования строки типа поезда в иконку
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class TrainTypeToImage {
 

@@ -13,11 +13,10 @@ import android.view.MenuItem;
 import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivity;
 import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity;
 
-
 /**
  * Главная страница приложения с отображением меню
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class ShellActivity extends AppCompatActivity {
 

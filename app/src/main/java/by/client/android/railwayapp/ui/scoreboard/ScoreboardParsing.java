@@ -17,7 +17,7 @@ import by.client.android.railwayapp.ui.BaseParsing;
 /**
  * Класс дял парсинга поездов станции
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 class ScoreboardParsing extends BaseParsing<Train, Stantion> {
 

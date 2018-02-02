@@ -20,7 +20,7 @@ import by.client.android.railwayapp.ui.utils.PushNotification;
 /**
  * Страница для отображения детальной информации поезда
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class ScroreboardDetailActivity extends AppCompatActivity {
 
@@ -93,12 +93,12 @@ public class ScroreboardDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.trainRoute)
     void trainrouteButton(View view) {
-        TrainRouteActivity.start(ScroreboardDetailActivity.this, train, SCOREBOARD_DETAIL_ACTIVITY_CODE);
+        //TrainRouteActivity.start(ScroreboardDetailActivity.this, train, SCOREBOARD_DETAIL_ACTIVITY_CODE);
     }
 
     @OnClick(R.id.test)
     void testButton(View view) {
-        TrainRoutesActivity.start(ScroreboardDetailActivity.this, SCOREBOARD_DETAIL_ACTIVITY_CODE);
+       // TrainRoutesActivity.start(ScroreboardDetailActivity.this, SCOREBOARD_DETAIL_ACTIVITY_CODE);
     }
 
     @Override

@@ -6,16 +6,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import by.client.android.railwayapp.AndroidApplication;
 import by.client.android.railwayapp.GlobalExceptionHandler;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.BaseLoaderListener;
 import by.client.android.railwayapp.api.Client;
 import by.client.android.railwayapp.model.RouteItem;
-import by.client.android.railwayapp.model.Train;
+import by.client.android.railwayapp.model.routetrain.TrainRoute;
+import by.client.android.railwayapp.ui.scoreboard.TrainTypeToImage;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 
 public class TrainRouteActivity extends AppCompatActivity {
@@ -26,7 +30,19 @@ public class TrainRouteActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private RouteAdapter routeAdapter;
 
-    public static void start(Activity activity, Train train, int requestCode) {
+    @InjectView(R.id.icon)
+    ImageView ico;
+
+    @InjectView(R.id.id)
+    TextView id;
+
+    @InjectView(R.id.path)
+    TextView path;
+
+    @InjectView(R.id.type)
+    TextView type;
+
+    public static void start(Activity activity, TrainRoute train, int requestCode) {
         Intent intent = new Intent(activity, TrainRouteActivity.class);
         intent.putExtra(TRAIN_KEY, train);
         activity.startActivityForResult(intent, requestCode);
@@ -37,11 +53,14 @@ public class TrainRouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_train_route);
 
+        ButterKnife.inject(this);
+
         client = ((AndroidApplication) getApplicationContext()).getClient();
-        Train train = (Train) getIntent().getSerializableExtra(TRAIN_KEY);
+        TrainRoute train = (TrainRoute) getIntent().getSerializableExtra(TRAIN_KEY);
 
         initView();
-        loadData("732Б");
+        loadData(train.getId());
+        initHeader(train);
     }
 
     private void initView() {
@@ -49,6 +68,13 @@ public class TrainRouteActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         ListView trainRoute = findViewById(R.id.trainRoute);
         trainRoute.setAdapter(routeAdapter);
+    }
+
+    private void initHeader(TrainRoute trainRoute) {
+        id.setText(trainRoute.getId());
+        ico.setBackgroundResource(new TrainTypeToImage().convert(trainRoute.getIco()));
+        type.setText(trainRoute.getTrainType());
+        path.setText(trainRoute.getPath());
     }
 
     private void loadData(String trainNumber) {

@@ -12,20 +12,12 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity
-                android:name=".ui.scoreboard.ScoreboardActivity"
-                android:label="@string/title_activity_scoreboard"
-                android:screenOrientation="portrait" />
+        <activity android:name=".ui.scoreboard.ScoreboardActivity" />
         <activity android:name=".ui.scoreboard.ScroreboardDetailActivity" />
-
         <service android:name=".ui.scoreboard.TimeService" />
-
-        <activity android:name=".ui.trainroute.TrainRouteActivity" />
+        <activity android:name=".ui.trainroute.TrainRouteActivity"/>
         <activity android:name=".ui.traintimetable.TrainTimeTableActivity" />
-        <activity
-                android:name=".ui.traintimetable.TrainRoutesActivity"
-                android:label="@string/title_activity_train_routes"
-                android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.traintimetable.TrainRoutesActivity" />
         <activity android:name=".ShellActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.traintimetable.SearchStantionActivity"></activity>
+        <activity android:name=".ui.traintimetable.SearchStantionActivity"/>
     </application>
 
 </manifest>

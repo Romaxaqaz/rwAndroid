@@ -8,7 +8,7 @@ import java.lang.ref.WeakReference;
  * @param <Context> ссылка на контекст данных
  * @param <Result> результат запроса
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public abstract class BaseLoaderListener<Context, Result> implements RegisterLoader {
 

@@ -5,8 +5,10 @@ import java.util.List;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.routetrain.Place;
 import by.client.android.railwayapp.ui.traintimetable.TrainPlaceAdapter;
@@ -15,12 +17,15 @@ import by.client.android.railwayapp.ui.utils.UiUtils;
 /**
  * Created by PanteleevRV on 30.01.2018.
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class TrainPlaceView extends FrameLayout {
 
     private View rootView;
     private ListView listView;
+    private TextView emptyView;
+    private TrainPlaceAdapter trainPlaceAdapter;
+    private OnPlaceItemClickListener onPlaceItemClickListener;
 
     public TrainPlaceView(Context context) {
         super(context);
@@ -40,14 +45,31 @@ public class TrainPlaceView extends FrameLayout {
     private void init(Context context) {
         rootView = inflate(context, R.layout.train_route_places, this);
         listView = rootView.findViewById(R.id.placeListView);
+        emptyView = rootView.findViewById(R.id.emptyView);
         listView.setScrollContainer(false);
     }
 
     public void initPlaces(List<Place> places) {
-        TrainPlaceAdapter trainPlaceAdapter = new TrainPlaceAdapter(this.getContext());
+        trainPlaceAdapter = new TrainPlaceAdapter(this.getContext());
         trainPlaceAdapter.setData(places);
 
         listView.setAdapter(trainPlaceAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                onPlaceItemClickListener.selectedStantion(trainPlaceAdapter.getItem(i));
+            }
+        });
         UiUtils.setListViewHeightBasedOnItems(listView);
+        UiUtils.setVisibility(places.size() <= 0, emptyView);
+    }
+
+    public void setClickListener(OnPlaceItemClickListener onPlaceItemClickListener) {
+        this.onPlaceItemClickListener = onPlaceItemClickListener;
+    }
+
+    public interface OnPlaceItemClickListener {
+
+        void selectedStantion(Place place);
     }
 }

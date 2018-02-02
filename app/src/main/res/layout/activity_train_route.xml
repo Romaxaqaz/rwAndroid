@@ -1,22 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_train_route"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="by.client.android.railwayapp.ui.trainroute.TrainRouteActivity">
+        android:id="@+id/shellId">
 
-    <ListView
-            android:id="@+id/trainRoute"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
 
-    <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateOnly="true"
-            android:layout_gravity="center"/>
+       <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
 
-</FrameLayout>
+           <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_margin="2dp">
+
+               <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical"
+                       android:layout_weight="7">
+
+                   <ImageView
+                           android:id="@+id/icon"
+                           android:layout_width="20dp"
+                           android:layout_height="20dp"
+                           android:textAlignment="center"
+                           android:layout_gravity="center"
+                           android:layout_margin="2dp" />
+
+                   <TextView
+                           android:id="@+id/id"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:textAlignment="center"
+                           android:textSize="@dimen/text_size_micro" />
+               </LinearLayout>
+
+               <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical"
+                       android:layout_weight="1"
+                       android:layout_marginLeft="4dp">
+
+                   <TextView
+                           android:id="@+id/path"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:textSize="@dimen/text_size_medium" />
+
+                   <TextView
+                           android:id="@+id/type"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:textSize="@dimen/text_size_micro" />
+
+               </LinearLayout>
+
+           </LinearLayout>
+
+           <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="0dp"
+                   android:orientation="vertical"
+                   android:layout_weight="1">
+
+               <FrameLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent">
+
+                   <ListView
+                           android:id="@+id/trainRoute"
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:scrollbars="vertical" />
+
+                   <ProgressBar
+                           android:id="@+id/progressBar"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:indeterminateOnly="true"
+                           android:layout_gravity="center" />
+
+               </FrameLayout>
+
+           </LinearLayout>
+
+       </LinearLayout>
+
+</RelativeLayout>

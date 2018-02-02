@@ -12,7 +12,7 @@ import by.client.android.railwayapp.ui.BaseListAdapter;
 /**
  * Адаптер для отображения элемента списка поездов
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 class TrainAdapter extends BaseListAdapter<Train, BaseHolder<Train>> {
 

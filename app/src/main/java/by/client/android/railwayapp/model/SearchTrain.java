@@ -3,55 +3,45 @@ package by.client.android.railwayapp.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import by.client.android.railwayapp.api.rw.model.SearchStantion;
+
 /**
  * Created by PanteleevRV on 18.01.2018.
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class SearchTrain implements Serializable {
 
     /**
      * Откуда
      */
-    private String whence;
+    private SearchStantion arrive;
 
     /**
      * Куда
      */
-    private String where;
+    private SearchStantion arrival;
 
     /**
      * Когда
      */
     private Date when;
 
-    public SearchTrain(String whence, String where, Date when) {
-        this.whence = whence;
-        this.where = where;
+    public SearchTrain(SearchStantion arrive, SearchStantion arrival, Date when) {
+        this.arrive = arrive;
+        this.arrival = arrival;
         this.when = when;
     }
 
-    public String getWhence() {
-        return whence;
+    public SearchStantion getArrive() {
+        return arrive;
     }
 
-    public void setWhence(String whence) {
-        this.whence = whence;
-    }
-
-    public String getWhere() {
-        return where;
-    }
-
-    public void setWhere(String where) {
-        this.where = where;
+    public SearchStantion getArrival() {
+        return arrival;
     }
 
     public Date getWhen() {
         return when;
-    }
-
-    public void setWhen(Date when) {
-        this.when = when;
     }
 }

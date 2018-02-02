@@ -17,6 +17,7 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import by.client.android.railwayapp.AndroidApplication;
+import by.client.android.railwayapp.GlobalExceptionHandler;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.BaseLoaderListener;
 import by.client.android.railwayapp.api.Client;
@@ -27,7 +28,7 @@ import by.client.android.railwayapp.ui.utils.UiUtils;
 /**
  * Страница "Виртуальное онлайн-табло" отправки и прибытия поездов
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class ScoreboardActivity extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -122,7 +123,7 @@ public class ScoreboardActivity extends Fragment implements SwipeRefreshLayout.O
 
         @Override
         protected void onError(ScoreboardActivity reference, Exception exception) {
-            // new GlobalExceptionHandler(reference).handle(exception);
+            new GlobalExceptionHandler(reference.getContext()).handle(exception);
         }
 
         @Override

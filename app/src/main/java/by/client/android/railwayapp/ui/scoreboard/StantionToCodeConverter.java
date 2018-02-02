@@ -8,7 +8,7 @@ import by.client.android.railwayapp.api.Stantion;
 /**
  * Конвертер для преобразования типа {@link Stantion} в код станции
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 class StantionToCodeConverter {
 

@@ -8,7 +8,7 @@ import by.client.android.railwayapp.ui.settings.SettingsService;
 /**
  * Created by PanteleevRV on 15.01.2018.
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class AndroidApplication extends Application {
 

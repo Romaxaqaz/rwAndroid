@@ -14,7 +14,7 @@ import by.client.android.railwayapp.ui.ParsingException;
 /**
  * Класс для обработки глобальных ошибок
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class GlobalExceptionHandler {
 
@@ -36,17 +36,17 @@ public class GlobalExceptionHandler {
 
         Class exceptionClass = exception.getClass();
         if (exceptionMap.containsKey(exceptionClass)) {
-            OnDefaultThreadSafeHandler(context.getString(exceptionMap.get(exceptionClass)));
+            onDefaultThreadSafeHandler(context.getString(exceptionMap.get(exceptionClass)));
         }
 
-        OnDefaultThreadSafeHandler(exception);
+        onDefaultThreadSafeHandler(exception);
     }
 
-    private void OnDefaultThreadSafeHandler(final Exception exception) {
+    private void onDefaultThreadSafeHandler(final Exception exception) {
         showError(exception.getMessage());
     }
 
-    private void OnDefaultThreadSafeHandler(final String message) {
+    private void onDefaultThreadSafeHandler(final String message) {
         showError(message);
     }
 

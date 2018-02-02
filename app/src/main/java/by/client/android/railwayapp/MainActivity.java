@@ -8,7 +8,7 @@ import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivity;
 /**
  * Кланвая странциа приложения
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class MainActivity extends AppCompatActivity {
 

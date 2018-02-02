@@ -1,9 +1,11 @@
 package by.client.android.railwayapp.api.rw.model;
 
+import java.io.Serializable;
+
 /**
  * Модель для описания станции
  */
-public class SearchStantion {
+public class SearchStantion implements Serializable {
 
     private String prefix;
     private String label;

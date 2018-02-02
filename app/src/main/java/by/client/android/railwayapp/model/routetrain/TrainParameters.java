@@ -1,11 +1,13 @@
 package by.client.android.railwayapp.model.routetrain;
 
+import java.io.Serializable;
+
 /**
  * Параметры поезда
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
-public class TrainParameters {
+public class TrainParameters implements Serializable {
 
     /**
      * Возможность электронной регистрации

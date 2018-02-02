@@ -12,7 +12,7 @@ import by.client.android.railwayapp.ui.BaseAsyncTask;
 /**
  * Created by PanteleevRV on 19.01.2018.
  *
- * @author Roman PAnteleev
+ * @author ROMAN PANTELEEV
  */
 class TrainTimeLoader implements Loader {
 
@@ -59,7 +59,7 @@ class TrainTimeLoader implements Loader {
 
         @Override
         protected List<TrainRoute> runTask(SearchTrain... param) throws Exception {
-            return new TrainTimeParsing(null).pars();
+            return new TrainTimeParsing(param[0]).pars();
         }
     }
 }

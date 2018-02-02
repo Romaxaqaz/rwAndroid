@@ -3,7 +3,7 @@ package by.client.android.railwayapp.model.routetrain;
 /**
  * Класс для представления стоимости проезда
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class TrainCost {
 

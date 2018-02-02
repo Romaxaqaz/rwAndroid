@@ -1,4 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'checkstyle'
+
+def versionPropsFile = file("${project.rootDir}/version.txt")
+def buildPath = file("${project.rootDir}/build")
+def versionBuild
 
 android {
     compileSdkVersion 26
@@ -8,13 +13,18 @@ android {
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "$versionBuild"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = file("$buildPath/" + versionBuild + ".apk")
         }
     }
     packagingOptions {
@@ -31,6 +41,41 @@ android {
     }
 }
 
+check.dependsOn 'checkstyle'
+assemble.dependsOn 'loadVersion'
+
+task checkstyle(type: Checkstyle) {
+    configFile file("${project.rootDir}/config/checkstyle.xml")
+    configProperties.checkstyleConfigDir = configFile.parentFile
+    ignoreFailures = false
+    source 'src/main/java'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude '**/R.java'
+    exclude '**/BuildConfig.java'
+    classpath = files()
+}
+
+task loadVersion {
+    println "Loading version from $versionPropsFile"
+
+    if (!versionPropsFile.exists()) {
+        throw new GradleException("File $versionPropsFile not found")
+    }
+    if (!versionPropsFile.canRead()) {
+        throw new GradleException("Could not read file $versionPropsFile")
+    }
+
+    def Properties versionProps = new Properties()
+    versionProps.load(new FileInputStream(versionPropsFile))
+    versionBuild = versionProps['version']
+
+    if (versionBuild == null) {
+        throw new GradleException("Could not read 'versionBuild' param")
+    }
+    println "Version: $versionBuild"
+}
+
 repositories {
     maven { url "https://maven.google.com" }
 }
@@ -40,7 +85,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
 
     compile 'com.android.support:support-v4:26.1.0'
     compile 'com.android.support:appcompat-v7:26.1.0'

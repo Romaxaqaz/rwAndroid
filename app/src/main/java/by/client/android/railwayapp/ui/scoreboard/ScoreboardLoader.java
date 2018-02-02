@@ -12,7 +12,7 @@ import by.client.android.railwayapp.ui.BaseAsyncTask;
 /**
  * Загрузчик данных для страницы {@link ScoreboardActivity}
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 class ScoreboardLoader implements Loader {
 

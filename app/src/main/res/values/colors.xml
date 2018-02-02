@@ -23,4 +23,6 @@
     <color name="divider_light">#0c000000</color>
 
     <color name="bottom_tab_color">#ffffff</color>
+
+    <color name="accent_activity_background">#b4b3b3</color>
 </resources>

@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 /**
  * Created by PanteleevRV on 30.01.2018.
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class TableBuilder {
 

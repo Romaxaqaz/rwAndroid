@@ -1,13 +1,14 @@
 package by.client.android.railwayapp.model.routetrain;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by PanteleevRV on 19.01.2018.
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
-public class TrainRoute {
+public class TrainRoute implements Serializable {
 
     /**
      * Номер поезда

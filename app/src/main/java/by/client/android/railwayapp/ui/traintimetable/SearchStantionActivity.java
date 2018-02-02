@@ -2,10 +2,14 @@ package by.client.android.railwayapp.ui.traintimetable;
 
 import java.util.List;
 
+import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.SearchView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import by.client.android.railwayapp.R;
@@ -15,26 +19,52 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchStantionActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+
+/**
+ * Страница для ввода параметров для поиска поездов
+ *
+ * @author ROMAN PANTELEEV
+ */
+public class SearchStantionActivity extends DialogFragment implements SearchView.OnQueryTextListener {
 
     private SearchView searchView;
     private ListView resultListView;
     private StantionAdapter stantionAdapter;
+    private ChooseStantionDialogListener stantionDialogListener;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_stantion);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_search_stantion, container, false);
 
-        searchView = findViewById(R.id.searchView);
-        resultListView = findViewById(R.id.resultListView);
+        searchView = view.findViewById(R.id.searchView);
+        resultListView = view.findViewById(R.id.resultListView);
         resultListView.setTextFilterEnabled(true);
-        stantionAdapter = new StantionAdapter(this);
+        stantionAdapter = new StantionAdapter(view.getContext());
         resultListView.setAdapter(stantionAdapter);
         resultListView.setOnItemClickListener(new StantionClickListener());
 
         setupSearchView();
+        return view;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog d = getDialog();
+        if (d != null) {
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+            d.getWindow().setLayout(width, height);
+        }
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
+    }
+
 
     private void setupSearchView() {
         searchView.setIconifiedByDefault(false);
@@ -46,6 +76,15 @@ public class SearchStantionActivity extends AppCompatActivity implements SearchV
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
+    }
+
+    public interface ChooseStantionDialogListener {
+
+        void selectedStantion(SearchStantion stantion);
+    }
+
+    public void setClickListener(ChooseStantionDialogListener stantionDialogListener) {
+        this.stantionDialogListener = stantionDialogListener;
     }
 
     @Override
@@ -78,6 +117,8 @@ public class SearchStantionActivity extends AppCompatActivity implements SearchV
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
             SearchStantion stantion = stantionAdapter.getItem(position);
+            stantionDialogListener.selectedStantion(stantion);
+            dismiss();
         }
     }
 }

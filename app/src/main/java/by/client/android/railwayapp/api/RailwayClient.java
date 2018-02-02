@@ -3,7 +3,7 @@ package by.client.android.railwayapp.api;
 /**
  * Клиент для загрузки различных данных
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class RailwayClient implements Client {
 

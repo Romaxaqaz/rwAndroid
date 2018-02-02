@@ -15,11 +15,12 @@ import by.client.android.railwayapp.model.routetrain.TrainParameters;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
 import by.client.android.railwayapp.model.routetrain.TrainTime;
 import by.client.android.railwayapp.ui.BaseParsing;
+import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 
 /**
  * Created by PanteleevRV on 19.01.2018.
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 class TrainTimeParsing extends BaseParsing<TrainRoute, SearchTrain> {
 
@@ -43,13 +44,13 @@ class TrainTimeParsing extends BaseParsing<TrainRoute, SearchTrain> {
     @Override
     public List<TrainRoute> pars() throws Exception {
         Document doc = Jsoup.connect("http://rasp.rw.by/ru/route/")
-            .data("from", "Минск-Пассажирский")
-            .data("to", "Орша-Центральная")
-            .data("date", "2018-02-12")
-            .data("from_exp", "0")
-            .data("from_esr", "0")
-            .data("to_exp", "2100170")
-            .data("to_esr", "166403")
+            .data("from", getParam().getArrival().getValue())
+            .data("to", getParam().getArrive().getValue())
+            .data("date", new DateToStringConverter().convert(getParam().getWhen()))
+            .data("from_exp", getParam().getArrive().getExp())
+            .data("from_esr", getParam().getArrive().getEcp())
+            .data("to_exp", getParam().getArrival().getExp())
+            .data("to_esr", getParam().getArrival().getEcp())
             .get();
 
         List<TrainRoute> strList = new ArrayList<>();

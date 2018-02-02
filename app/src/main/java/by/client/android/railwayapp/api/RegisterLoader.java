@@ -3,7 +3,7 @@ package by.client.android.railwayapp.api;
 /**
  * Callback обработчика загрузки данных
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public interface RegisterLoader {
 

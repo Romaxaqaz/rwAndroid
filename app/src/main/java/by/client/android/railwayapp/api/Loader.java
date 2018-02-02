@@ -3,7 +3,7 @@ package by.client.android.railwayapp.api;
 /**
  * Интерфейс для реализации загрузчиков данных
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public interface Loader {
 

@@ -3,7 +3,7 @@ package by.client.android.railwayapp.api;
 /**
  * Интерфейс для реализации клиента для загрузки данных
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public interface Client {
 

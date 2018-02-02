@@ -3,7 +3,7 @@ package by.client.android.railwayapp.model;
 /**
  * Описание сущности элемента маршрута поезда
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public class RouteItem {
 

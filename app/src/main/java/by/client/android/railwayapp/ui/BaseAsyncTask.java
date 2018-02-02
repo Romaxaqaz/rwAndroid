@@ -15,7 +15,7 @@ import android.os.AsyncTask;
  * @param <Params> тип входного параметра
  * @param <Result> тип возвращаемого результата при успешном выполнении задачи
  *
- * @author Roman Panteleev
+ * @author ROMAN PANTELEEV
  */
 public abstract class BaseAsyncTask<Params, Result> extends AsyncTask<Params, Void, Result> {
 
