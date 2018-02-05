@@ -14,6 +14,11 @@ import by.client.android.railwayapp.model.routetrain.TrainRoute;
 import by.client.android.railwayapp.ui.scoreboard.TrainTypeToImage;
 import by.client.android.railwayapp.ui.view.TrainPlaceView;
 
+/**
+ * Адаптер для отображения элемента списка поездов
+ *
+ * @author PRV
+ */
 class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecyclerAdapter.ViewHolder> {
 
     private List<TrainRoute> items = new ArrayList<>();
@@ -66,7 +71,7 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
         this.recyclerViewClickListener = recyclerViewClickListener;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView icon;
         private TextView id;
@@ -77,14 +82,14 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
         private TextView travelTime;
         private TrainPlaceView placesTest;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             icon = view.findViewById(R.id.icon);
             id = view.findViewById(R.id.id);
             path = view.findViewById(R.id.path);
             type = view.findViewById(R.id.type);
-            arrival = view.findViewById(R.id.arrival);
-            arrived = view.findViewById(R.id.arrive);
+            arrival = view.findViewById(R.id.departureStation);
+            arrived = view.findViewById(R.id.destinationStantion);
             travelTime = view.findViewById(R.id.travelTime);
             placesTest = view.findViewById(R.id.placesTest);
             placesTest.setClickListener(onPlaceItemClickListener);

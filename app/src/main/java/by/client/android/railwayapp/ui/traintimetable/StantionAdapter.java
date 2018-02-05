@@ -9,7 +9,9 @@ import by.client.android.railwayapp.ui.BaseHolder;
 import by.client.android.railwayapp.ui.BaseListAdapter;
 
 /**
- * Created by PanteleevRV on 31.01.2018.
+ * Адаптер для отображения станций марщрута
+ *
+ * @author PRV
  */
 class StantionAdapter extends BaseListAdapter<SearchStantion, BaseHolder<SearchStantion>> {
 

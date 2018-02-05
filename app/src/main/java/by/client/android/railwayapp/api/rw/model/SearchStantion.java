@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Модель для описания станции
+ *
+ * @author PRV
  */
 public class SearchStantion implements Serializable {
 

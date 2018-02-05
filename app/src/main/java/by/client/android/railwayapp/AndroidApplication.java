@@ -1,8 +1,9 @@
 package by.client.android.railwayapp;
 
+import javax.inject.Inject;
+
 import android.app.Application;
 import by.client.android.railwayapp.api.Client;
-import by.client.android.railwayapp.api.RailwayClient;
 import by.client.android.railwayapp.ui.settings.SettingsService;
 
 /**
@@ -12,29 +13,39 @@ import by.client.android.railwayapp.ui.settings.SettingsService;
  */
 public class AndroidApplication extends Application {
 
-    private Client client;
-    private SettingsService settingsService;
+    private ApplicationComponent applicationComponent;
+    private static AndroidApplication app;
+
+    @Inject
+    SettingsService settingsService;
+
+    @Inject
+    Client client;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        client = new RailwayClient();
-        settingsService = new SettingsService(this);
+        app = this;
+        getApplicationComponent().inject(this);
     }
-
-    /**
-     * Класс для работы с настройками приложения.
-     */
-    public SettingsService getSettingsService() {
-        return settingsService;
-    }
-
 
     /**
      * Класс для загрузки данных с сервера
      */
     public Client getClient() {
         return client;
+    }
+
+    public static AndroidApplication getApp() {
+        return app;
+    }
+
+    public ApplicationComponent getApplicationComponent() {
+        if (applicationComponent == null) {
+            applicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
+        }
+        return applicationComponent;
     }
 }

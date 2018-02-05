@@ -1,7 +1,7 @@
 package by.client.android.railwayapp.model;
 
 /**
- * Описание сущности элемента маршрута поезда
+ * Модель описания остановочного пункта по маршруту
  *
  * @author ROMAN PANTELEEV
  */

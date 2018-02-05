@@ -9,18 +9,14 @@ import by.client.android.railwayapp.ui.BaseHolder;
 import by.client.android.railwayapp.ui.BaseListAdapter;
 
 /**
- * Created by PanteleevRV on 30.01.2018.
+ * Адаптер для отображения мест поезда
+ *
+ * @author PRV
  */
 public class TrainPlaceAdapter extends BaseListAdapter<Place, BaseHolder<Place>> {
 
     private Context context;
 
-    /**
-     * Конструктор класса {@link BaseListAdapter}
-     *
-
-     * @param context контекст данных
-     */
     public TrainPlaceAdapter(Context context) {
         super(context);
         this.context = context;

@@ -3,17 +3,31 @@ package by.client.android.railwayapp.model.routetrain;
 import java.io.Serializable;
 
 /**
- * Created by PanteleevRV on 19.01.2018.
+ * Модель для описания доступных мест поезда
+ *
+ * @author PRV
  */
-
 public class Place implements Serializable {
 
+    /**
+     * Тип места
+     * <p>Плацкарт, общий и т.д.</p>
+     */
     private String name;
 
+    /**
+     * Количество свободных мест
+     */
     private String freePlaces;
 
+    /**
+     * Сслыка для запроса подробной информации по магону
+     */
     private String link;
 
+    /**
+     * Стоимоть места
+     */
     private String price;
 
     public Place(String name, String freePlaces, String link, String price) {

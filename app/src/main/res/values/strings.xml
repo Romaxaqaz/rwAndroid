@@ -4,8 +4,8 @@
     <string name="scoreboard_header">Онлайн табло</string>
     <string name="path">Путь</string>
     <string name="paltform">Платформа</string>
-    <string name="arrival">Прибытие</string>
-    <string name="arrive">Отправление</string>
+    <string name="destinationStantion">Прибытие</string>
+    <string name="departureStation">Отправление</string>
     <string name="scoreboard_detail_title">Scoreboard detail</string>
     <string name="add_to_notification">Добавить в центр уведомлений</string>
     <string name="travel_time">Время в пути</string>
@@ -30,4 +30,5 @@
     <string name="error_required_departure">Станция отправления обязательна для заполнения</string>
     <string name="error_required_destination">Станция назначения обязательна для заполнения</string>
     <string name="error_required_date">Дата отправления обязательна для заполнения</string>
+    <string name="title_activity_test">testActivity</string>
 </resources>

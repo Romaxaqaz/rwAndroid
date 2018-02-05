@@ -4,23 +4,23 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 import by.client.android.railwayapp.R;
-import by.client.android.railwayapp.api.Stantion;
+import by.client.android.railwayapp.api.ScoreboardStantion;
 import by.client.android.railwayapp.ui.BaseHolder;
 import by.client.android.railwayapp.ui.BaseListAdapter;
 
 /**
- * Адаптер для отображения элементов в выпадающем списке
+ * Адаптер для отображения станций в выпадающем списке
  *
  * @author ROMAN PANTELEEV
  */
-class StantionAdapter extends BaseListAdapter<Stantion, BaseHolder<Stantion>> {
+class StantionAdapter extends BaseListAdapter<ScoreboardStantion, BaseHolder<ScoreboardStantion>> {
 
     StantionAdapter(Context context) {
         super(context);
         setItemLayout(R.layout.dropdown_item);
     }
 
-    private static class ViewHolder implements BaseHolder<Stantion> {
+    private static class ViewHolder implements BaseHolder<ScoreboardStantion> {
 
         private TextView statusName;
 
@@ -29,8 +29,8 @@ class StantionAdapter extends BaseListAdapter<Stantion, BaseHolder<Stantion>> {
         }
 
         @Override
-        public void bind(Stantion stantion) {
-            statusName.setText(new StantionToNameConverter().convert(stantion));
+        public void bind(ScoreboardStantion scoreboardStantion) {
+            statusName.setText(new StantionToNameConverter().convert(scoreboardStantion));
         }
     }
 

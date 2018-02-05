@@ -6,42 +6,42 @@ import java.util.Date;
 import by.client.android.railwayapp.api.rw.model.SearchStantion;
 
 /**
- * Created by PanteleevRV on 18.01.2018.
+ * Модель запроса поездов
  *
  * @author ROMAN PANTELEEV
  */
 public class SearchTrain implements Serializable {
 
     /**
-     * Откуда
+     * Станция отправления
      */
-    private SearchStantion arrive;
+    private SearchStantion departureStation;
 
     /**
      * Куда
      */
-    private SearchStantion arrival;
+    private SearchStantion destinationStantion;
 
     /**
-     * Когда
+     * Дата отправления
      */
-    private Date when;
+    private Date departureDate;
 
-    public SearchTrain(SearchStantion arrive, SearchStantion arrival, Date when) {
-        this.arrive = arrive;
-        this.arrival = arrival;
-        this.when = when;
+    public SearchTrain(SearchStantion departureStation, SearchStantion destinationStantion, Date departureDate) {
+        this.departureStation = departureStation;
+        this.destinationStantion = destinationStantion;
+        this.departureDate = departureDate;
     }
 
-    public SearchStantion getArrive() {
-        return arrive;
+    public SearchStantion getDepartureStation() {
+        return departureStation;
     }
 
-    public SearchStantion getArrival() {
-        return arrival;
+    public SearchStantion getDestinationStantion() {
+        return destinationStantion;
     }
 
-    public Date getWhen() {
-        return when;
+    public Date getDepartureDate() {
+        return departureDate;
     }
 }

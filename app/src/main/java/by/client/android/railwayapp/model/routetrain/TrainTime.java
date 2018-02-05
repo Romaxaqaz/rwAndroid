@@ -3,7 +3,9 @@ package by.client.android.railwayapp.model.routetrain;
 import java.io.Serializable;
 
 /**
- * Created by PanteleevRV on 19.01.2018.
+ * Модель описания времени прибытия и отправления
+ *
+ * @author PRV
  */
 public class TrainTime implements Serializable {
 

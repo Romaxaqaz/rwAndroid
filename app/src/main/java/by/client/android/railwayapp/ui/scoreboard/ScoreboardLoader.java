@@ -5,55 +5,31 @@ import java.util.List;
 import by.client.android.railwayapp.api.Loader;
 import by.client.android.railwayapp.api.RegisterLoader;
 import by.client.android.railwayapp.api.SafeRegistrationSendListener;
-import by.client.android.railwayapp.api.Stantion;
+import by.client.android.railwayapp.api.ScoreboardStantion;
 import by.client.android.railwayapp.model.Train;
 import by.client.android.railwayapp.ui.BaseAsyncTask;
 
 /**
- * Загрузчик данных для страницы {@link ScoreboardActivity}
+ * Загрузчик данных для страницы {@link ScoreboardActivityFragment}
  *
  * @author ROMAN PANTELEEV
  */
 class ScoreboardLoader implements Loader {
 
-    private Stantion stantion;
+    private ScoreboardStantion scoreboardStantion;
     private RegisterLoader registerLoader;
 
-    ScoreboardLoader(Stantion stantion, RegisterLoader registerLoader) {
-        this.stantion = stantion;
+    ScoreboardLoader(ScoreboardStantion scoreboardStantion, RegisterLoader registerLoader) {
+        this.scoreboardStantion = scoreboardStantion;
         this.registerLoader = new SafeRegistrationSendListener(registerLoader);
     }
 
     @Override
     public void load() {
-        new LoadScoreboardAsync(registerLoader).execute(stantion);
-
-//        OriginDestinationInformation originDestinationInformation = new OriginDestinationInformation();
-//        originDestinationInformation.setDepartureDate("2018-02-16");
-//        originDestinationInformation.setDestinationLocation(new DestinationLocation().withLocationCode("2100170"));
-//        originDestinationInformation.setOriginLocation(new OriginLocation().withLocationCode("2100000"));
-//        originDestinationInformation.setDepartureTimeRange(new DepartureTimeRange().withFrom("00:00").withTo("24:00"));
-//
-//        List<OriginDestinationInformation> originDestinationInformationList = new ArrayList<>();
-//        originDestinationInformationList.add(originDestinationInformation);
-//        Q q = new Q();
-//        q.setOriginDestinationInformation(originDestinationInformationList);
-//        SearchStantion searchTrainRoute = new SearchStantion().withQ(q).withRqType("railroad");
-//
-//        new BiletixService().getBiletixAPI().savePost(searchTrainRoute).enqueue(new Callback<Object>() {
-//            @Override
-//            public void onResponse(Call<Object> call, Response<Object> response) {
-//                Object s = response.body();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Object> call, Throwable t) {
-//                String s = "";
-//            }
-//        });
+        new LoadScoreboardAsync(registerLoader).execute(scoreboardStantion);
     }
 
-    private static class LoadScoreboardAsync extends BaseAsyncTask<Stantion, List<Train>> {
+    private static class LoadScoreboardAsync extends BaseAsyncTask<ScoreboardStantion, List<Train>> {
 
         private RegisterLoader registerLoader;
 
@@ -82,7 +58,7 @@ class ScoreboardLoader implements Loader {
         }
 
         @Override
-        protected List<Train> runTask(Stantion... param) throws Exception {
+        protected List<Train> runTask(ScoreboardStantion... param) throws Exception {
             return new ScoreboardParsing(param[0]).pars();
         }
     }

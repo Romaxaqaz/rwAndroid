@@ -10,7 +10,7 @@ import by.client.android.railwayapp.model.routetrain.TrainRoute;
 import by.client.android.railwayapp.ui.BaseAsyncTask;
 
 /**
- * Created by PanteleevRV on 19.01.2018.
+ * Загрузчик поездов по заданному маршруту
  *
  * @author ROMAN PANTELEEV
  */

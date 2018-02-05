@@ -1,79 +1,69 @@
 package by.client.android.railwayapp.ui.scoreboard;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.ViewById;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.Train;
-import by.client.android.railwayapp.ui.trainroute.TrainRouteActivity;
-import by.client.android.railwayapp.ui.traintimetable.TrainRoutesActivity;
 import by.client.android.railwayapp.ui.utils.PushNotification;
 
 /**
- * Страница для отображения детальной информации поезда
+ * Страница для отображения детальной информации поезда со страницы "Виртуально табло"
  *
  * @author ROMAN PANTELEEV
  */
+@EActivity(R.layout.activity_scroreboard_detail)
 public class ScroreboardDetailActivity extends AppCompatActivity {
 
-    private static final int SCOREBOARD_DETAIL_ACTIVITY_CODE = 2;
     private static final String TRAIN_KEY = "TRAIN_KEY";
 
-    @InjectView(R.id.icon)
+    @ViewById(R.id.icon)
     ImageView ico;
 
-    @InjectView(R.id.id)
+    @ViewById(R.id.id)
     TextView id;
 
-    @InjectView(R.id.way)
+    @ViewById(R.id.way)
     TextView way;
 
-    @InjectView(R.id.path)
+    @ViewById(R.id.path)
     TextView path;
 
-    @InjectView(R.id.type)
+    @ViewById(R.id.type)
     TextView type;
 
-    @InjectView(R.id.trainPlatform)
+    @ViewById(R.id.trainPlatform)
     TextView trainPlatform;
 
-    @InjectView(R.id.startTime)
+    @ViewById(R.id.startTime)
     TextView startTime;
 
-    @InjectView(R.id.endTime)
+    @ViewById(R.id.endTime)
     TextView endTime;
 
-    private Train train;
+    @Extra(TRAIN_KEY)
+    Train train;
 
     public static void start(Activity activity, Train train, int requestCode) {
-        Intent intent = new Intent(activity, ScroreboardDetailActivity.class);
+        Intent intent = new Intent(activity, ScroreboardDetailActivity_.class);
         intent.putExtra(ScroreboardDetailActivity.TRAIN_KEY, train);
         activity.startActivityForResult(intent, requestCode);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scroreboard_detail);
-        setTitle(getString(R.string.scoreboard_detail_title));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @AfterViews
+    void initView() {
+        getSupportActionBar().setHomeButtonEnabled(true);
 
-        ButterKnife.inject(this);
-
-        train = (Train) getIntent().getSerializableExtra(TRAIN_KEY);
-
-        initView(train);
-    }
-
-    private void initView(Train train) {
         id.setText(train.getId());
         ico.setBackgroundResource(new TrainTypeToImage().convert(train.getPathType()));
         type.setText(train.getTrainType());
@@ -84,21 +74,11 @@ public class ScroreboardDetailActivity extends AppCompatActivity {
         endTime.setText(train.getEnd());
     }
 
-    @OnClick(R.id.sendPush)
+    @Click(R.id.sendPush)
     void submitButton(View view) {
         if (view.getId() == R.id.sendPush) {
             PushNotification.send(this, getPushContent(), null);
         }
-    }
-
-    @OnClick(R.id.trainRoute)
-    void trainrouteButton(View view) {
-        //TrainRouteActivity.start(ScroreboardDetailActivity.this, train, SCOREBOARD_DETAIL_ACTIVITY_CODE);
-    }
-
-    @OnClick(R.id.test)
-    void testButton(View view) {
-       // TrainRoutesActivity.start(ScroreboardDetailActivity.this, SCOREBOARD_DETAIL_ACTIVITY_CODE);
     }
 
     @Override

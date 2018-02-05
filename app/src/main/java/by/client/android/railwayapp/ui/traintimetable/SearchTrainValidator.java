@@ -9,13 +9,13 @@ import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.ui.Validator;
 
 /**
- * Created by PanteleevRV on 02.02.2018.
+ * Валидатор модели {@link SearchTrain}
  *
  * @author ROMAN PANTELEEV
  */
-public class SearchTrainValidator extends Validator {
+class SearchTrainValidator extends Validator {
 
-    public SearchTrainValidator(Context context) {
+    SearchTrainValidator(Context context) {
         super(context);
     }
 
@@ -27,6 +27,4 @@ public class SearchTrainValidator extends Validator {
 
         return isValid() ? new SearchTrain(dep, des, dat.getTime()) : null;
     }
-
-
 }

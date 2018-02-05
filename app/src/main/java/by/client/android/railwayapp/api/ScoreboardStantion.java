@@ -5,10 +5,12 @@ package by.client.android.railwayapp.api;
  *
  * @author ROMAN PANTELEEV
  */
-public enum Stantion {
+public enum ScoreboardStantion {
 
     /**
      * Станция Минск-Пассажирский
      */
-    MINSK
+    MINSK,
+
+    ORSHA
 }

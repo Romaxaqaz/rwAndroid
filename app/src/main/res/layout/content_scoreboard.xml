@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_scoreboard"
-        tools:context="by.client.android.railwayapp.ui.scoreboard.ScoreboardActivity">
+        tools:context="by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment">
 
     <TextView
             android:id="@+id/emptyView"

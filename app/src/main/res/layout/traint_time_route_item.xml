@@ -1,170 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:layout_marginTop="4dp">
+        android:layout_height="wrap_content">
 
-    <include layout="@layout/default_divider" />
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="2dp">
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="7">
-
-            <ImageView
-                    android:id="@+id/icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_margin="2dp" />
-
-            <TextView
-                    android:id="@+id/id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/text_size_micro" />
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_marginLeft="4dp">
-
-            <TextView
-                    android:id="@+id/path"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_medium" />
-
-            <TextView
-                    android:id="@+id/type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_micro" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="2">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/arrival"
-                    style="@style/HeaderTextView" />
-
-            <TextView
-                    android:id="@+id/arrival"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/BodyTextView" />
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="2">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/arrive"
-                    style="@style/HeaderTextView" />
-
-            <TextView
-                    android:id="@+id/arrive"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/BodyTextView" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Время в пути"
-                style="@style/HeaderTextView" />
-
-        <TextView
-                android:id="@+id/travelTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/BodyTextView" />
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="4dp">
-
-        <TextView
-                android:text="Тип"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_size_small" />
-
-        <TextView
-                android:text="Свободных мест"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                style="@style/HeaderTextView" />
-
-        <TextView
-                android:text="Стоимость"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                style="@style/HeaderTextView" />
-    </LinearLayout>
-
-    <include layout="@layout/default_divider" />
-
-    <by.client.android.railwayapp.ui.view.TrainPlaceView
-            android:id="@+id/placesTest"
+    <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="4dp" />
+            android:layout_margin="5dp"
+            app:cardCornerRadius="5dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="7"
+                        android:layout_gravity="center">
+
+                    <ImageView
+                            android:id="@+id/icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:textAlignment="center"
+                            android:layout_gravity="center" />
+
+                    <TextView
+                            android:id="@+id/id"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/text_size_micro" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="4dp">
+
+                    <TextView
+                            android:id="@+id/path"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_medium" />
+
+                    <TextView
+                            android:id="@+id/type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_micro" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:text="@string/destinationStantion"
+                            android:gravity="center"
+                            style="@style/HeaderTextView" />
+
+                    <TextView
+                            android:id="@+id/destinationStantion"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/BodyTextView" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                    <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/clock" />
+
+                    <TextView
+                            android:id="@+id/travelTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/BodyTextView" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:text="@string/departureStation"
+                            android:layout_height="30dp"
+                            android:gravity="center"
+                            style="@style/HeaderTextView" />
+
+                    <TextView
+                            android:id="@+id/departureStation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/BodyTextView" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="4dp">
+
+                <TextView
+                        android:text="Тип вагона"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                        android:text="Свободных мест"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        style="@style/HeaderTextView" />
+
+                <TextView
+                        android:text="Стоимость"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        style="@style/HeaderTextView" />
+            </LinearLayout>
+
+            <include layout="@layout/default_divider" />
+
+            <by.client.android.railwayapp.ui.view.TrainPlaceView
+                    android:id="@+id/placesTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

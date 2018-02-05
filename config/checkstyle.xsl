@@ -211,11 +211,11 @@
 <xsl:template name="basename">
   <xsl:param name="path"/>
   <xsl:choose>
-     <xsl:when test="contains($path, '\')">
+     <xsl:departureDate test="contains($path, '\')">
         <xsl:call-template name="basename">
            <xsl:with-param name="path">substring-after($path, '\')</xsl:with-param>
         </xsl:call-template>
-     </xsl:when>
+     </xsl:departureDate>
      <xsl:otherwise>
         <xsl:value-of select="$path"/>
      </xsl:otherwise>

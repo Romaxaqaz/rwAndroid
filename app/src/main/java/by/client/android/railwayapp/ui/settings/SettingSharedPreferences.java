@@ -8,13 +8,13 @@ import android.content.SharedPreferences;
  *
  * @author Q-RPA
  */
-public class SettingSharedPreferences {
+class SettingSharedPreferences {
 
     private static final String LOCAL_STORAGE_FILE = "LOCAL_SETTINGS";
 
     private SharedPreferences sharedPreferences;
 
-    public SettingSharedPreferences(Context context) {
+    SettingSharedPreferences(Context context) {
         sharedPreferences = context.getSharedPreferences(LOCAL_STORAGE_FILE, Context.MODE_PRIVATE);
     }
 
@@ -25,7 +25,7 @@ public class SettingSharedPreferences {
      * @param defaultValue значение по умолчанию.
      * @return возвращает значение параметра из хранилища.
      */
-    public String getValue(String key, String defaultValue) {
+    String getValue(String key, String defaultValue) {
         return sharedPreferences.getString(key, defaultValue);
     }
 
@@ -35,7 +35,7 @@ public class SettingSharedPreferences {
      * @param key ключ параметра.
      * @param value значение параметра.
      */
-    public void setValue(String key, String value) {
+    void setValue(String key, String value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
         editor.apply();

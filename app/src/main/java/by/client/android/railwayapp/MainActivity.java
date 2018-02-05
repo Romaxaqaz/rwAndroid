@@ -3,7 +3,7 @@ package by.client.android.railwayapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivity;
+import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment;
 
 /**
  * Кланвая странциа приложения
@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, ScoreboardActivity.class);
+        Intent intent = new Intent(this, ScoreboardActivityFragment.class);
         startActivity(intent);
     }
 }

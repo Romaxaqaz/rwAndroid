@@ -119,7 +119,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/arrival"
+                        android:text="@string/destinationStantion"
                         style="@style/HeaderTextView" />
 
                 <TextView
@@ -139,7 +139,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/arrive"
+                        android:text="@string/departureStation"
                         style="@style/HeaderTextView" />
 
                 <TextView

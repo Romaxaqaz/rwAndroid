@@ -35,8 +35,8 @@ class RouteAdapter extends BaseListAdapter<RouteItem, BaseHolder<RouteItem>> {
 
         ViewHolder(View view) {
             route = view.findViewById(R.id.route);
-            arrival = view.findViewById(R.id.arrival);
-            arrived = view.findViewById(R.id.arrive);
+            arrival = view.findViewById(R.id.departureStation);
+            arrived = view.findViewById(R.id.destinationStantion);
             travelTime = view.findViewById(R.id.travelTime);
             stay = view.findViewById(R.id.stay);
         }

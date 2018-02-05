@@ -2,61 +2,57 @@ package by.client.android.railwayapp.ui.traintimetable;
 
 import java.util.Calendar;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
 import android.app.DatePickerDialog;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import static android.text.TextUtils.join;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.model.SearchStantion;
 import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 
+/**
+ * Страница ввода данных для поиска поездов
+ *
+ * @author PRV
+ */
+@EFragment(R.layout.activity_train_time_table)
 public class TrainTimeTableActivity extends Fragment {
 
     private static final int TRAIN_ROUTE_ACTIVITY_CODE = 2;
     private static final String TAG = TrainTimeTableActivity.class.getSimpleName();
 
-    @InjectView(R.id.arrive)
+    @ViewById(R.id.departureStation)
     TextView arriveEditText;
 
-    @InjectView(R.id.arrival)
+    @ViewById(R.id.destinationStantion)
     TextView arrivalEditText;
 
-    @InjectView(R.id.date)
+    @ViewById(R.id.date)
     TextView date;
 
-    @InjectView(R.id.searchStantionButton)
+    @ViewById(R.id.searchStantionButton)
     Button searchStantionButton;
 
     private SearchStantion arrive;
     private SearchStantion arrival;
     private Calendar currentDate;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_train_time_table, container, false);
-
-        ButterKnife.inject(this, view);
-        initView();
-        return view;
-    }
-
-    private void initView() {
+    @AfterViews
+    void initView() {
         arriveEditText.setOnClickListener(new OpenSearchStantion(new StantionArriveSelected()));
         arrivalEditText.setOnClickListener(new OpenSearchStantion(new StantionArrivalSelected()));
         date.setOnClickListener(new OnDatePickerClickListener());
         searchStantionButton.setOnClickListener(new SearchClickListenr());
     }
-
 
     private class OpenSearchStantion implements View.OnClickListener {
 
@@ -68,7 +64,7 @@ public class TrainTimeTableActivity extends Fragment {
 
         @Override
         public void onClick(View view) {
-            SearchStantionActivity searchStantionActivity = new SearchStantionActivity();
+            SearchStantionActivity searchStantionActivity = new SearchStantionActivity_();
             searchStantionActivity.setClickListener(listener);
             searchStantionActivity.show(getFragmentManager(), TAG);
         }

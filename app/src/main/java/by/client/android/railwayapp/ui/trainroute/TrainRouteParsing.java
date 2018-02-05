@@ -29,14 +29,14 @@ class TrainRouteParsing extends BaseParsing<RouteItem, String> {
     protected List<RouteItem> pars() throws Exception {
         Document doc = Jsoup.connect(String.format(BASE_URL, getParam())).get();
 
-        List<RouteItem> strList = new ArrayList<>();
+        List<RouteItem> routeItemList = new ArrayList<>();
         Element table = doc.select(TABLE).first();
         if (table == null) {
             throw new ParsingException("Table for parsing data not found");
         }
 
-        Elements names = table.select(TR);
-        for (Element item : names) {
+        Elements rows = table.select(TR);
+        for (Element item : rows) {
             String stantion = checkEmpty(item.select(STANTION).first());
             if (stantion == EMPTY_STRING) {
                 continue;
@@ -54,9 +54,9 @@ class TrainRouteParsing extends BaseParsing<RouteItem, String> {
                 .setTravelTime(travelTime)
                 .setStay(stay);
 
-            strList.add(train);
+            routeItemList.add(train);
         }
 
-        return strList;
+        return routeItemList;
     }
 }

@@ -3,44 +3,53 @@ package by.client.android.railwayapp;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.os.Bundle;
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivity;
-import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity;
+import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment_;
+import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity_;
 
 /**
  * Главная страница приложения с отображением меню
  *
  * @author ROMAN PANTELEEV
  */
-public class ShellActivity extends AppCompatActivity {
+@EActivity(R.layout.activity_shell)
+public class ShellActivity extends BaseDaggerActivity {
+
+    @ViewById(R.id.bottom_navigation)
+    BottomNavigationView bottomNavigationView;
 
     private static final Map<Integer, Fragment> fragmentMap = new HashMap<>();
     private static final Map<Integer, String> fragmentHeader = new HashMap<>();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shell);
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+    @AfterViews
+    void initView() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new ButtomMenuListener());
 
-        fragmentMap.put(R.id.action_favorites, new ScoreboardActivity());
-        fragmentMap.put(R.id.action_schedules, new TrainTimeTableActivity());
+        fragmentMap.put(R.id.action_favorites, new ScoreboardActivityFragment_());
+        fragmentMap.put(R.id.action_schedules, new TrainTimeTableActivity_());
 
         fragmentHeader.put(R.id.action_favorites, "Виртуальное табло");
         fragmentHeader.put(R.id.action_schedules, "Поиск маршрута");
+
+        bottomNavigationView.setSelectedItemId(R.id.action_schedules);
     }
 
     private void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
+    @Override
+    public void injectActivity(ApplicationComponent component) {
+        component.inject(this);
     }
 
     private class ButtomMenuListener implements BottomNavigationView.OnNavigationItemSelectedListener {

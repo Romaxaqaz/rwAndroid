@@ -56,6 +56,5 @@ public class UiUtils {
         } else {
             return false;
         }
-
     }
 }

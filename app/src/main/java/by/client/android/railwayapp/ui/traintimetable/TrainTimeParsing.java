@@ -18,9 +18,9 @@ import by.client.android.railwayapp.ui.BaseParsing;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 
 /**
- * Created by PanteleevRV on 19.01.2018.
+ * Класс для парсинга страницы поездов, удовлетворяющих запросу
  *
- * @author ROMAN PANTELEEV
+ * @author PRV
  */
 class TrainTimeParsing extends BaseParsing<TrainRoute, SearchTrain> {
 
@@ -44,13 +44,13 @@ class TrainTimeParsing extends BaseParsing<TrainRoute, SearchTrain> {
     @Override
     public List<TrainRoute> pars() throws Exception {
         Document doc = Jsoup.connect("http://rasp.rw.by/ru/route/")
-            .data("from", getParam().getArrival().getValue())
-            .data("to", getParam().getArrive().getValue())
-            .data("date", new DateToStringConverter().convert(getParam().getWhen()))
-            .data("from_exp", getParam().getArrive().getExp())
-            .data("from_esr", getParam().getArrive().getEcp())
-            .data("to_exp", getParam().getArrival().getExp())
-            .data("to_esr", getParam().getArrival().getEcp())
+            .data("from", getParam().getDestinationStantion().getValue())
+            .data("to", getParam().getDepartureStation().getValue())
+            .data("date", new DateToStringConverter().convert(getParam().getDepartureDate()))
+            .data("from_exp", getParam().getDepartureStation().getExp())
+            .data("from_esr", getParam().getDepartureStation().getEcp())
+            .data("to_exp", getParam().getDestinationStantion().getExp())
+            .data("to_esr", getParam().getDestinationStantion().getEcp())
             .get();
 
         List<TrainRoute> strList = new ArrayList<>();

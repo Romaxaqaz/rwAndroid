@@ -135,7 +135,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/arrival"
+                        android:text="@string/destinationStantion"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:textSize="@dimen/text_size_small" />
@@ -158,7 +158,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/arrive"
+                        android:text="@string/departureStation"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:textSize="@dimen/text_size_small" />
@@ -188,20 +188,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:text="@string/add_to_notification" />
-
-        <Button
-                android:id="@+id/trainRoute"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:text="Маршрут поезда" />
-
-        <Button
-                android:id="@+id/test"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:text="test" />
 
     </LinearLayout>
 

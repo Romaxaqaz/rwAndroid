@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by PanteleevRV on 19.01.2018.
+ * Модель описания поезда
  *
  * @author ROMAN PANTELEEV
  */

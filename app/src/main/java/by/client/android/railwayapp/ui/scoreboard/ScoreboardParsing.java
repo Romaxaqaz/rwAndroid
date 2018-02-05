@@ -10,16 +10,18 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import by.client.android.railwayapp.api.Stantion;
+import by.client.android.railwayapp.api.ScoreboardStantion;
 import by.client.android.railwayapp.model.Train;
 import by.client.android.railwayapp.ui.BaseParsing;
 
 /**
  * Класс дял парсинга поездов станции
  *
+ * <p>Произвродит загрузку и парсинг html-страницы</p>
+ *
  * @author ROMAN PANTELEEV
  */
-class ScoreboardParsing extends BaseParsing<Train, Stantion> {
+class ScoreboardParsing extends BaseParsing<Train, ScoreboardStantion> {
 
     private static final String TRAIN_ID = "small[class=train_id]";
     private static final String PATH_ICO = "i[class]";
@@ -33,17 +35,17 @@ class ScoreboardParsing extends BaseParsing<Train, Stantion> {
 
     private static final String baseUrl = "http://rasp.rw.by/ru/tablo/?st_exp=%s";
 
-    ScoreboardParsing(Stantion stantion) {
-        super(stantion);
+    ScoreboardParsing(ScoreboardStantion scoreboardStantion) {
+        super(scoreboardStantion);
     }
 
     protected List<Train> pars() throws IOException {
         Document doc = Jsoup.connect(String.format(baseUrl, new StantionToCodeConverter().convert(getParam()))).get();
 
-        List<Train> strList = new ArrayList<>();
-        Elements names = doc.select(TABLE).first().select(TR);
+        List<Train> scoreboardList = new ArrayList<>();
+        Elements tableRows = doc.select(TABLE).first().select(TR);
 
-        for (Element item : names) {
+        for (Element item : tableRows) {
             String id = checkEmpty(item.select(TRAIN_ID).first());
             if (Objects.equals(id, EMPTY_STRING)) {
                 continue;
@@ -71,9 +73,9 @@ class ScoreboardParsing extends BaseParsing<Train, Stantion> {
                 .setPlatform(platform)
                 .setPathType(ico);
 
-            strList.add(train);
+            scoreboardList.add(train);
         }
 
-        return strList;
+        return scoreboardList;
     }
 }

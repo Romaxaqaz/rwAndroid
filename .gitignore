@@ -3,6 +3,8 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
+/config/checkstyle.xml
+/config/checkstyle.xls
 .DS_Store
 /build
 /captures

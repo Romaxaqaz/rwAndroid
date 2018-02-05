@@ -2,11 +2,14 @@ package by.client.android.railwayapp.ui.traintimetable;
 
 import java.util.List;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.SearchView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -19,42 +22,42 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 /**
- * Страница для ввода параметров для поиска поездов
+ * Страница для ввода параметров маршрута для поиска поездов
  *
- * @author ROMAN PANTELEEV
+ * @author PRV
  */
+@EFragment(R.layout.activity_search_stantion)
 public class SearchStantionActivity extends DialogFragment implements SearchView.OnQueryTextListener {
 
-    private SearchView searchView;
-    private ListView resultListView;
+    @ViewById(R.id.searchView)
+    SearchView searchView;
+
+    @ViewById(R.id.resultListView)
+    ListView resultListView;
+
+
     private StantionAdapter stantionAdapter;
     private ChooseStantionDialogListener stantionDialogListener;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_search_stantion, container, false);
-
-        searchView = view.findViewById(R.id.searchView);
-        resultListView = view.findViewById(R.id.resultListView);
+    @AfterViews
+    void onCreateView() {
         resultListView.setTextFilterEnabled(true);
-        stantionAdapter = new StantionAdapter(view.getContext());
+        stantionAdapter = new StantionAdapter(getActivity());
         resultListView.setAdapter(stantionAdapter);
         resultListView.setOnItemClickListener(new StantionClickListener());
 
         setupSearchView();
-        return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        Dialog d = getDialog();
-        if (d != null) {
+        Dialog dialog = getDialog();
+        if (dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
-            d.getWindow().setLayout(width, height);
+            dialog.getWindow().setLayout(width, height);
         }
     }
 
@@ -64,7 +67,6 @@ public class SearchStantionActivity extends DialogFragment implements SearchView
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         return dialog;
     }
-
 
     private void setupSearchView() {
         searchView.setIconifiedByDefault(false);
@@ -109,6 +111,7 @@ public class SearchStantionActivity extends DialogFragment implements SearchView
 
         @Override
         public void onFailure(Call<List<SearchStantion>> call, Throwable t) {
+
         }
     }
 

@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import android.nfc.FormatException;
 
@@ -62,6 +63,6 @@ public class DateToStringConverter {
     }
 
     private static DateFormat getFormat(String format) {
-        return new SimpleDateFormat(format);
+        return new SimpleDateFormat(format, new Locale("ru"));
     }
 }
