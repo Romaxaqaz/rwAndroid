@@ -1,4 +1,4 @@
-package by.client.android.railwayapp.api;
+package by.client.android.railwayapp.support;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

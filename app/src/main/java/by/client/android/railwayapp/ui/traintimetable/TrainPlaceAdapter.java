@@ -15,11 +15,8 @@ import by.client.android.railwayapp.ui.BaseListAdapter;
  */
 public class TrainPlaceAdapter extends BaseListAdapter<Place, BaseHolder<Place>> {
 
-    private Context context;
-
     public TrainPlaceAdapter(Context context) {
         super(context);
-        this.context = context;
         setItemLayout(R.layout.place_item);
     }
 
@@ -42,11 +39,9 @@ public class TrainPlaceAdapter extends BaseListAdapter<Place, BaseHolder<Place>>
 
         @Override
         public void bind(Place place) {
-            if (place != null) {
-                placeName.setText(place.getName());
-                placeCost.setText(place.getPrice());
-                placeCount.setText(place.getFreePlaces());
-            }
+            placeName.setText(place.getName());
+            placeCost.setText(place.getPrice());
+            placeCount.setText(place.getFreePlaces());
         }
     }
 }

@@ -17,6 +17,13 @@ import by.client.android.railwayapp.ui.view.TrainPlaceView;
 /**
  * Адаптер для отображения элемента списка поездов
  *
+ * <ul>
+ *     <li>{@link TrainRoutesRecyclerAdapter#setItemClickListener(RecyclerViewClickListener)}
+ *     - устанавливет слушатель нажатия на элемент списка поездов</li>
+ *     <li>{@link TrainRoutesRecyclerAdapter#setPlaceItemClickListener(TrainPlaceView.OnPlaceItemClickListener)} -
+ *     устанавливает слушатель нажатия на элемент списка мест поезда</li>
+ * </ul>
+ *
  * @author PRV
  */
 class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecyclerAdapter.ViewHolder> {
@@ -31,11 +38,6 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
         final ViewHolder mViewHolder = new ViewHolder(view);
         view.setOnClickListener(new OnTrainItemClickListener(mViewHolder));
         return mViewHolder;
-    }
-
-    public void setData(List<TrainRoute> list) {
-        items = new ArrayList<>(list);
-        notifyDataSetChanged();
     }
 
     @Override
@@ -59,16 +61,13 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
         return items.size();
     }
 
+    public void setData(List<TrainRoute> list) {
+        items = new ArrayList<>(list);
+        notifyDataSetChanged();
+    }
+
     TrainRoute getItem(int index) {
         return items.get(index);
-    }
-
-    void setClickListener(TrainPlaceView.OnPlaceItemClickListener onPlaceItemClickListener) {
-        this.onPlaceItemClickListener = onPlaceItemClickListener;
-    }
-
-    void setItemClickListener(RecyclerViewClickListener recyclerViewClickListener) {
-        this.recyclerViewClickListener = recyclerViewClickListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -108,6 +107,14 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
         public void onClick(View view) {
             recyclerViewClickListener.recyclerViewListClicked(view, viewHolder.getLayoutPosition());
         }
+    }
+
+    void setPlaceItemClickListener(TrainPlaceView.OnPlaceItemClickListener onPlaceItemClickListener) {
+        this.onPlaceItemClickListener = onPlaceItemClickListener;
+    }
+
+    void setItemClickListener(RecyclerViewClickListener recyclerViewClickListener) {
+        this.recyclerViewClickListener = recyclerViewClickListener;
     }
 
     interface RecyclerViewClickListener {

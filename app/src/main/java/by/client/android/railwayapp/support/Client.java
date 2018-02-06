@@ -1,7 +1,7 @@
-package by.client.android.railwayapp.api;
+package by.client.android.railwayapp.support;
 
 /**
- * Интерфейс для реализации клиента для загрузки данных
+ * Интерфейс для реализации клиента загрузки данных
  *
  * @author ROMAN PANTELEEV
  */

@@ -1,15 +1,24 @@
 package by.client.android.railwayapp.ui.utils;
 
+import android.app.Dialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 /**
- * Created by PanteleevRV on 16.01.2018.
+ * Утилитный класс для работы с UI
+ *
+ * @author PRV
  */
 public class UiUtils {
 
+    /**
+     * Устанавливает видимость view
+     *
+     * @param visible true - элемент отображается, false - не отображается
+     * @param views view для которого/которых необходимо устанвить видимость/невидимость
+     */
     public static void setVisibility(boolean visible, View... views) {
         View[] var2 = views;
         int var3 = views.length;
@@ -56,5 +65,18 @@ public class UiUtils {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Отображает диалог в режиме fullscreen
+     */
+    public static void setFullscreenDialog(Dialog dialog) {
+        if (dialog == null) {
+            throw new NullPointerException("Dialog can not be null");
+        }
+
+        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+        int height = ViewGroup.LayoutParams.MATCH_PARENT;
+        dialog.getWindow().setLayout(width, height);
     }
 }

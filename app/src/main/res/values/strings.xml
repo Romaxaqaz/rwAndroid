@@ -31,4 +31,11 @@
     <string name="error_required_destination">Станция назначения обязательна для заполнения</string>
     <string name="error_required_date">Дата отправления обязательна для заполнения</string>
     <string name="title_activity_test">testActivity</string>
+    <string name="title_activity_place_info">PlaceInfoActivity</string>
+    <string name="departure">Отправление</string>
+    <string name="arrival">Прибытие</string>
+    <string name="travelTime">Время в пути</string>
+    <string name="train_list_not_founded">Список поездов для данного маршрута не найден.</string>
+    <string name="input_stantion_name">Введите название станции</string>
+    <string name="train_route">Маршрут поезда</string>
 </resources>

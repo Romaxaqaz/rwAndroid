@@ -20,6 +20,8 @@ public class GlobalExceptionHandler {
 
     private static Logger logger = Logger.getLogger(GlobalExceptionHandler.class.getName());
 
+    private static final String DEFAULT_MESSAGE = "Произошла непредвиденная ошибка.";
+
     private Map<Class, Integer> exceptionMap = new HashMap<>();
 
     private Context context;
@@ -39,8 +41,13 @@ public class GlobalExceptionHandler {
             onDefaultThreadSafeHandler(context.getString(exceptionMap.get(exceptionClass)));
         }
 
-        onDefaultThreadSafeHandler(exception);
+        onDefaultThreadSafeHandler(DEFAULT_MESSAGE);
     }
+
+    public void handle(Throwable throwable) {
+        handle(new Exception(throwable));
+    }
+
 
     private void onDefaultThreadSafeHandler(final Exception exception) {
         showError(exception.getMessage());

@@ -14,20 +14,18 @@ import by.client.android.railwayapp.ui.ParsingException;
 
 class TrainRouteParsing extends BaseParsing<RouteItem, String> {
 
-    private static final String BASE_URL = "http://rasp.rw.by/ru/train/?train=%s&date=everyday";
-
     private static final String STANTION = "a[class=train_name -map train_text]";
     private static final String ARRIVAL = "b[class=train_end-time]";
     private static final String ARRIVED = "b[class=train_start-time]";
     private static final String TRAVEL_TIME = "span[class=train_time-total]";
     private static final String STAY = "b[class=train_stop-time]";
 
-    TrainRouteParsing(String trainNumber) {
-        super(trainNumber);
+    TrainRouteParsing(String page) {
+        super(page);
     }
 
     protected List<RouteItem> pars() throws Exception {
-        Document doc = Jsoup.connect(String.format(BASE_URL, getParam())).get();
+        Document doc = Jsoup.parse(getParam());
 
         List<RouteItem> routeItemList = new ArrayList<>();
         Element table = doc.select(TABLE).first();

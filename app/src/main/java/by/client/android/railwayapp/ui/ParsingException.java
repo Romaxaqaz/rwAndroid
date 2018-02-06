@@ -1,9 +1,10 @@
 package by.client.android.railwayapp.ui;
 
 /**
- * Created by PanteleevRV on 18.01.2018.
+ * Ошибка парсинга html страницы
+ *
+ * @author PRV
  */
-
 public class ParsingException extends Exception {
 
     public ParsingException(String message) {

@@ -11,22 +11,24 @@ import org.androidannotations.annotations.ViewById;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import by.client.android.railwayapp.ApplicationComponent;
 import by.client.android.railwayapp.BaseDaggerActivity;
 import by.client.android.railwayapp.GlobalExceptionHandler;
 import by.client.android.railwayapp.R;
-import by.client.android.railwayapp.api.BaseLoaderListener;
-import by.client.android.railwayapp.api.Client;
+import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.model.routetrain.Place;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
+import by.client.android.railwayapp.support.BaseLoaderListener;
+import by.client.android.railwayapp.support.Client;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 import by.client.android.railwayapp.ui.trainroute.TrainRouteActivity;
 import by.client.android.railwayapp.ui.utils.UiUtils;
@@ -47,6 +49,9 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
     Client client;
 
     @Inject
+    RailwayApi railwayApi;
+
+    @Inject
     GlobalExceptionHandler globalExceptionHandler;
 
     @ViewById(R.id.startTextView)
@@ -63,6 +68,9 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
 
     @ViewById(R.id.traintRoutesTime)
     RecyclerView recyclerView;
+
+    @ViewById(R.id.emptyView)
+    FrameLayout emptyView;
 
     @Extra(TRAIN_ROUTE_ID)
     SearchTrain searchTrain;
@@ -81,7 +89,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         trainRoutesAdapter = new TrainRoutesRecyclerAdapter();
-        trainRoutesAdapter.setClickListener(new TrainPlaceClickListener());
+        trainRoutesAdapter.setPlaceItemClickListener(new TrainPlaceClickListener());
         trainRoutesAdapter.setItemClickListener(new TrainRouteClickListener());
         recyclerView.setAdapter(trainRoutesAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -107,7 +115,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
     }
 
     private void loadData(SearchTrain trainRoute) {
-        client.load(new TrainTimeLoader(trainRoute, new TrainTimeLoadListener(this)));
+        client.load(new TrainTimeLoader(railwayApi, trainRoute, new TrainTimeLoadListener(this)));
     }
 
     private static class TrainTimeLoadListener extends BaseLoaderListener<TrainRoutesActivity, List<TrainRoute>> {
@@ -119,6 +127,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
         @Override
         protected void onStart(TrainRoutesActivity reference) {
             UiUtils.setVisibility(true, reference.progressBar);
+            UiUtils.setVisibility(false, reference.emptyView);
         }
 
         @Override
@@ -128,7 +137,11 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
 
         @Override
         protected void onError(TrainRoutesActivity reference, Exception exception) {
-            reference.globalExceptionHandler.handle(exception);
+            if (exception instanceof Resources.NotFoundException) {
+                UiUtils.setVisibility(true, reference.emptyView);
+            } else {
+                reference.globalExceptionHandler.handle(exception);
+            }
         }
 
         @Override
@@ -151,7 +164,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
 
         @Override
         public void selectedStantion(Place place) {
-            Toast.makeText(TrainRoutesActivity.this, place.getLink(), Toast.LENGTH_SHORT).show();
+            PlaceInfoActivity.start(TrainRoutesActivity.this, place, TRAIN_ROUTE_ACTIVITY_CODE);
         }
     }
 }

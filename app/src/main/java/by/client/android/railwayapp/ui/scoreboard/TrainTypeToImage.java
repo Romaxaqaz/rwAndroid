@@ -3,6 +3,8 @@ package by.client.android.railwayapp.ui.scoreboard;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import by.client.android.railwayapp.R;
 
 
@@ -28,6 +30,15 @@ public class TrainTypeToImage {
     public Integer convert(String type) {
         if (type != null && imageDictionary.containsKey(type)) {
             return imageDictionary.get(type);
+        }
+        return R.drawable.default_line;
+    }
+
+    public Integer convertIfContain(String type) {
+        for (Map.Entry<String, Integer> item : imageDictionary.entrySet()) {
+            if (item.getKey().contains(type)) {
+                return item.getValue();
+            }
         }
         return R.drawable.default_line;
     }

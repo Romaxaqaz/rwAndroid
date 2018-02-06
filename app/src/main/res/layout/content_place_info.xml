@@ -1,42 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
+        android:id="@+id/content_place_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/activity_place_info"
+        tools:context="by.client.android.railwayapp.ui.traintimetable.PlaceInfoActivity">
 
-    <android.support.v7.widget.CardView
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            app:cardCornerRadius="5dp">
+            android:layout_height="wrap_content">
 
         <LinearLayout
+                android:id="@+id/headerLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="8dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp">
+                android:orientation="vertical">
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_margin="2dp">
 
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_weight="7"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:layout_weight="7">
 
                     <ImageView
                             android:id="@+id/icon"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:textAlignment="center"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center"
+                            android:layout_margin="2dp" />
 
                     <TextView
                             android:id="@+id/id"
@@ -44,7 +46,6 @@
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
                             android:textSize="@dimen/text_size_micro" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -73,73 +74,103 @@
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:orientation="horizontal">
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:text="@string/destinationStantion"
-                            android:gravity="center"
-                            style="@style/HeaderTextView" />
-
-                    <TextView
-                            android:id="@+id/destinationStantion"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            style="@style/BodyTextView" />
-
-                </LinearLayout>
+                    android:orientation="vertical"
+                    android:layout_margin="4dp">
 
                 <TextView
-                        android:id="@+id/travelTime"
+                        android:text="Маршрут следования пассажира"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        style="@style/BodyTextView" />
+                        android:layout_marginLeft="4dp"/>
 
-                <LinearLayout
+                <TextView
+                        android:id="@+id/passengerRoute"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:text="@string/departureStation"
-                            android:layout_height="30dp"
-                            android:gravity="center"
-                            style="@style/HeaderTextView" />
-
-                    <TextView
-                            android:id="@+id/departureStation"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            style="@style/BodyTextView" />
-
-                </LinearLayout>
+                        android:textSize="22sp"
+                        android:layout_marginLeft="4dp"/>
 
             </LinearLayout>
 
-            <include layout="@layout/default_divider" />
-
-            <by.client.android.railwayapp.ui.view.TrainPlaceView
-                    android:id="@+id/placesTest"
+            <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="4dp" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="4dp">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                    <TextView
+                            android:text="@string/departure"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/HeaderTextView" />
+
+                    <TextView
+                            android:id="@+id/departureTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                    <TextView
+                            android:text="@string/arrival"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/HeaderTextView" />
+
+                    <TextView
+                            android:id="@+id/arrivalTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                    <TextView
+                            android:text="@string/travelTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/HeaderTextView" />
+
+                    <TextView
+                            android:id="@+id/travelTimeTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/tariffsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:scrollbars="vertical"
+                android:layout_below="@+id/headerLayout" />
 
-</LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

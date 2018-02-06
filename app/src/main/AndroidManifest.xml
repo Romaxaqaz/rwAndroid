@@ -14,7 +14,6 @@
         <activity android:name=".ShellActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -22,10 +21,7 @@
         <activity android:name=".ui.traintimetable.TrainRoutesActivity_" />
         <activity android:name=".ui.trainroute.TrainRouteActivity_" />
         <activity android:name=".MainActivity" />
-        <activity
-                android:name=".ui.view.testActivity"
-                android:label="@string/title_activity_test"
-                android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.traintimetable.PlaceInfoActivity_" android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

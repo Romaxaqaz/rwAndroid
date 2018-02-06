@@ -20,9 +20,10 @@ import by.client.android.railwayapp.ApplicationComponent;
 import by.client.android.railwayapp.BaseDaggerFragment;
 import by.client.android.railwayapp.GlobalExceptionHandler;
 import by.client.android.railwayapp.R;
-import by.client.android.railwayapp.api.BaseLoaderListener;
-import by.client.android.railwayapp.api.Client;
+import by.client.android.railwayapp.support.BaseLoaderListener;
+import by.client.android.railwayapp.support.Client;
 import by.client.android.railwayapp.api.ScoreboardStantion;
+import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.model.Train;
 import by.client.android.railwayapp.ui.settings.SettingsService;
 import by.client.android.railwayapp.ui.utils.UiUtils;
@@ -41,6 +42,9 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
 
     @Inject
     Client client;
+
+    @Inject
+    RailwayApi railwayApi;
 
     @Inject
     SettingsService settingsService;
@@ -67,7 +71,7 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
     private StantionAdapter stantionAdapter;
 
     @AfterViews
-    void initView() {
+    void initFragment() {
         List<ScoreboardStantion> scoreboardStantions = Arrays.asList(ScoreboardStantion.values());
 
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -93,7 +97,7 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
     }
 
     private void loadData(ScoreboardStantion scoreboardStantion) {
-        client.load(new ScoreboardLoader(scoreboardStantion, new ScoreboardLoadListener(this)));
+        client.load(new ScoreboardLoader(railwayApi, scoreboardStantion, new ScoreboardLoadListener(this)));
         settingsService.saveScoreboardStantion(scoreboardStantion);
     }
 

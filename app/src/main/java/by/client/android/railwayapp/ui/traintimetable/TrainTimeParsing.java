@@ -9,20 +9,19 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import by.client.android.railwayapp.model.SearchTrain;
+import android.content.res.Resources;
 import by.client.android.railwayapp.model.routetrain.Place;
 import by.client.android.railwayapp.model.routetrain.TrainParameters;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
 import by.client.android.railwayapp.model.routetrain.TrainTime;
 import by.client.android.railwayapp.ui.BaseParsing;
-import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 
 /**
  * Класс для парсинга страницы поездов, удовлетворяющих запросу
  *
  * @author PRV
  */
-class TrainTimeParsing extends BaseParsing<TrainRoute, SearchTrain> {
+class TrainTimeParsing extends BaseParsing<TrainRoute, String> {
 
     private static final String TRAIN_ID = "small[class=train_id]";
     private static final String PATH_ICO = "i[class]";
@@ -37,26 +36,23 @@ class TrainTimeParsing extends BaseParsing<TrainRoute, SearchTrain> {
 
     private static final String TRAVEL_TIME = "span[class=train_time-total]";
 
-    TrainTimeParsing(SearchTrain searchTrain) {
-        super(searchTrain);
+    TrainTimeParsing(String page) {
+        super(page);
     }
 
     @Override
     public List<TrainRoute> pars() throws Exception {
-        Document doc = Jsoup.connect("http://rasp.rw.by/ru/route/")
-            .data("from", getParam().getDestinationStantion().getValue())
-            .data("to", getParam().getDepartureStation().getValue())
-            .data("date", new DateToStringConverter().convert(getParam().getDepartureDate()))
-            .data("from_exp", getParam().getDepartureStation().getExp())
-            .data("from_esr", getParam().getDepartureStation().getEcp())
-            .data("to_exp", getParam().getDestinationStantion().getExp())
-            .data("to_esr", getParam().getDestinationStantion().getEcp())
-            .get();
+        Document doc = Jsoup.parse(getParam());
 
         List<TrainRoute> strList = new ArrayList<>();
-        Elements names = doc.select(TABLE).first().select(TR);
+        Element table = doc.select(TABLE).first();
 
-        for (Element item : names) {
+        if (table == null) {
+            throw new Resources.NotFoundException("Table for train parsing not found!");
+        }
+
+        Elements trCollection = table.select(TR);
+        for (Element item : trCollection) {
             String id = checkEmpty(item.select(TRAIN_ID).first());
             if (Objects.equals(id, EMPTY_STRING)) {
                 continue;

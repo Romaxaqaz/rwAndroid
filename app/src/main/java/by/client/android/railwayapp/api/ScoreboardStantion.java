@@ -12,5 +12,8 @@ public enum ScoreboardStantion {
      */
     MINSK,
 
+    /**
+     * Станция Орша-Центральная
+     */
     ORSHA
 }

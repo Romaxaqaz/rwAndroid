@@ -8,13 +8,11 @@ import by.client.android.railwayapp.model.RouteItem;
 import by.client.android.railwayapp.ui.BaseHolder;
 import by.client.android.railwayapp.ui.BaseListAdapter;
 
+/**
+ * Адаптер элементов списка маршрута поезда
+ */
 class RouteAdapter extends BaseListAdapter<RouteItem, BaseHolder<RouteItem>> {
 
-    /**
-     * Конструктор класса {@link BaseListAdapter}
-     *
-     * @param context контекст данных
-     */
     RouteAdapter(Context context) {
         super(context);
         setItemLayout(R.layout.route_item);

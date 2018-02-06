@@ -38,71 +38,118 @@
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="6dp">
 
-                    <TextView
+                    <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/arrival_marker"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"
+                            android:tint="@color/tint_default"/>
+
+                    <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Откуда"
-                            style="@style/HeaderTextStyle" />
+                            android:orientation="vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="4dp">
 
-                    <TextView
-                            android:id="@+id/departureStation"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="введите станцию"
-                            android:textSize="22sp" />
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Откуда"
+                                style="@style/HeaderTextStyle" />
+
+                        <TextView
+                                android:id="@+id/departureStation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="введите станцию"
+                                android:textSize="22sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp">
 
-                    <TextView
+                    <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/destination_marker"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"
+                            android:tint="@color/tint_default"/>
+
+                    <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Куда"
-                            style="@style/HeaderTextStyle" />
+                            android:orientation="vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="4dp">
 
-                    <TextView
-                            android:id="@+id/destinationStantion"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="введите станцию"
-                            android:textSize="22sp" />
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Куда"
+                                style="@style/HeaderTextStyle" />
+
+                        <TextView
+                                android:id="@+id/destinationStantion"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="введите станцию"
+                                android:textSize="22sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp">
 
-                    <TextView
+                    <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/calendar"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"
+                            android:tint="@color/tint_default"/>
+
+                    <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Дата поездки"
-                            style="@style/HeaderTextStyle" />
+                            android:orientation="vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="4dp">
 
-                    <TextView
-                            android:id="@+id/date"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="выберите дату"
-                            android:textSize="22sp" />
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Дата поездки"
+                                style="@style/HeaderTextStyle" />
+
+                        <TextView
+                                android:id="@+id/date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="выберите дату"
+                                android:textSize="22sp" />
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
+
 
                 <Button
                         android:id="@+id/searchStantionButton"

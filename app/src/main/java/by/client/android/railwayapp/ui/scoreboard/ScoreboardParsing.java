@@ -17,11 +17,11 @@ import by.client.android.railwayapp.ui.BaseParsing;
 /**
  * Класс дял парсинга поездов станции
  *
- * <p>Произвродит загрузку и парсинг html-страницы</p>
+ * <p>Произвродит парсинг html-страницы</p>
  *
  * @author ROMAN PANTELEEV
  */
-class ScoreboardParsing extends BaseParsing<Train, ScoreboardStantion> {
+class ScoreboardParsing extends BaseParsing<Train, String> {
 
     private static final String TRAIN_ID = "small[class=train_id]";
     private static final String PATH_ICO = "i[class]";
@@ -33,14 +33,12 @@ class ScoreboardParsing extends BaseParsing<Train, ScoreboardStantion> {
     private static final String WAY = "td[class=train_item train_halts train_way]";
     private static final String PLATFORM = "td[class=train_item train_halts train_platform]";
 
-    private static final String baseUrl = "http://rasp.rw.by/ru/tablo/?st_exp=%s";
-
-    ScoreboardParsing(ScoreboardStantion scoreboardStantion) {
-        super(scoreboardStantion);
+    ScoreboardParsing(String page) {
+        super(page);
     }
 
     protected List<Train> pars() throws IOException {
-        Document doc = Jsoup.connect(String.format(baseUrl, new StantionToCodeConverter().convert(getParam()))).get();
+        Document doc = Jsoup.parse(getParam());
 
         List<Train> scoreboardList = new ArrayList<>();
         Elements tableRows = doc.select(TABLE).first().select(TR);

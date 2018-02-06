@@ -21,7 +21,6 @@ import by.client.android.railwayapp.ui.utils.UiUtils;
  */
 public class TrainPlaceView extends FrameLayout {
 
-    private View rootView;
     private ListView listView;
     private TextView emptyView;
     private TrainPlaceAdapter trainPlaceAdapter;
@@ -43,7 +42,7 @@ public class TrainPlaceView extends FrameLayout {
     }
 
     private void init(Context context) {
-        rootView = inflate(context, R.layout.train_route_places, this);
+        View rootView = inflate(context, R.layout.train_route_places, this);
         listView = rootView.findViewById(R.id.placeListView);
         emptyView = rootView.findViewById(R.id.emptyView);
         listView.setScrollContainer(false);
@@ -56,8 +55,8 @@ public class TrainPlaceView extends FrameLayout {
         listView.setAdapter(trainPlaceAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                onPlaceItemClickListener.selectedStantion(trainPlaceAdapter.getItem(i));
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                onPlaceItemClickListener.selectedStantion(trainPlaceAdapter.getItem(position));
             }
         });
         UiUtils.setListViewHeightBasedOnItems(listView);

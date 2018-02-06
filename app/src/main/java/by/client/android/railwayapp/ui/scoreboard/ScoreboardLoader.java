@@ -2,10 +2,11 @@ package by.client.android.railwayapp.ui.scoreboard;
 
 import java.util.List;
 
-import by.client.android.railwayapp.api.Loader;
-import by.client.android.railwayapp.api.RegisterLoader;
-import by.client.android.railwayapp.api.SafeRegistrationSendListener;
+import by.client.android.railwayapp.support.Loader;
+import by.client.android.railwayapp.support.RegisterLoader;
+import by.client.android.railwayapp.support.SafeRegistrationSendListener;
 import by.client.android.railwayapp.api.ScoreboardStantion;
+import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.model.Train;
 import by.client.android.railwayapp.ui.BaseAsyncTask;
 
@@ -18,24 +19,20 @@ class ScoreboardLoader implements Loader {
 
     private ScoreboardStantion scoreboardStantion;
     private RegisterLoader registerLoader;
+    private RailwayApi railwayApi;
 
-    ScoreboardLoader(ScoreboardStantion scoreboardStantion, RegisterLoader registerLoader) {
+    ScoreboardLoader(RailwayApi railwayApi, ScoreboardStantion scoreboardStantion, RegisterLoader registerLoader) {
+        this.railwayApi = railwayApi;
         this.scoreboardStantion = scoreboardStantion;
         this.registerLoader = new SafeRegistrationSendListener(registerLoader);
     }
 
     @Override
     public void load() {
-        new LoadScoreboardAsync(registerLoader).execute(scoreboardStantion);
+        new LoadScoreboardAsync().execute(scoreboardStantion);
     }
 
-    private static class LoadScoreboardAsync extends BaseAsyncTask<ScoreboardStantion, List<Train>> {
-
-        private RegisterLoader registerLoader;
-
-        LoadScoreboardAsync(RegisterLoader registerLoader) {
-            this.registerLoader = registerLoader;
-        }
+    private class LoadScoreboardAsync extends BaseAsyncTask<ScoreboardStantion, List<Train>> {
 
         @Override
         protected void onStart() {
@@ -59,7 +56,9 @@ class ScoreboardLoader implements Loader {
 
         @Override
         protected List<Train> runTask(ScoreboardStantion... param) throws Exception {
-            return new ScoreboardParsing(param[0]).pars();
+            String stantion = new StantionToCodeConverter().convert(scoreboardStantion);
+            String page = railwayApi.getScoreboardTable(stantion).execute().body().string();
+            return new ScoreboardParsing(page).pars();
         }
     }
 }

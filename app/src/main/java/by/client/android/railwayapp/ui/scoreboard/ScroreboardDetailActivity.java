@@ -61,7 +61,7 @@ public class ScroreboardDetailActivity extends AppCompatActivity {
     }
 
     @AfterViews
-    void initView() {
+    void initActivity() {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         id.setText(train.getId());

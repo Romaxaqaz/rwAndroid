@@ -1,4 +1,4 @@
-package by.client.android.railwayapp.api;
+package by.client.android.railwayapp.support;
 
 /**
  * Клиент для загрузки различных данных

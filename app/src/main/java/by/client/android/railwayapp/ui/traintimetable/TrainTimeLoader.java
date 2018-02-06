@@ -2,12 +2,14 @@ package by.client.android.railwayapp.ui.traintimetable;
 
 import java.util.List;
 
-import by.client.android.railwayapp.api.Loader;
-import by.client.android.railwayapp.api.RegisterLoader;
-import by.client.android.railwayapp.api.SafeRegistrationSendListener;
+import by.client.android.railwayapp.support.Loader;
+import by.client.android.railwayapp.support.RegisterLoader;
+import by.client.android.railwayapp.support.SafeRegistrationSendListener;
+import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
 import by.client.android.railwayapp.ui.BaseAsyncTask;
+import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 
 /**
  * Загрузчик поездов по заданному маршруту
@@ -16,26 +18,22 @@ import by.client.android.railwayapp.ui.BaseAsyncTask;
  */
 class TrainTimeLoader implements Loader {
 
+    private RailwayApi railwayApi;
     private SearchTrain searchTrain;
     private RegisterLoader registerLoader;
 
-    TrainTimeLoader(SearchTrain searchTrain, RegisterLoader registerLoader) {
+    TrainTimeLoader(RailwayApi railwayApi, SearchTrain searchTrain, RegisterLoader registerLoader) {
+        this.railwayApi = railwayApi;
         this.searchTrain = searchTrain;
         this.registerLoader = new SafeRegistrationSendListener(registerLoader);
     }
 
     @Override
     public void load() {
-        new LoadTrainTimeAsync(registerLoader).execute(searchTrain);
+        new LoadTrainTimeAsync().execute(searchTrain);
     }
 
-    private static class LoadTrainTimeAsync extends BaseAsyncTask<SearchTrain, List<TrainRoute>> {
-
-        private RegisterLoader registerLoader;
-
-        LoadTrainTimeAsync(RegisterLoader registerLoader) {
-            this.registerLoader = registerLoader;
-        }
+    private class LoadTrainTimeAsync extends BaseAsyncTask<SearchTrain, List<TrainRoute>> {
 
         @Override
         protected void onStart() {
@@ -59,7 +57,17 @@ class TrainTimeLoader implements Loader {
 
         @Override
         protected List<TrainRoute> runTask(SearchTrain... param) throws Exception {
-            return new TrainTimeParsing(param[0]).pars();
+
+            String page = railwayApi.getTrainRoutes(
+                searchTrain.getDestinationStantion().getValue(),
+                searchTrain.getDepartureStation().getValue(),
+                new DateToStringConverter().convert(searchTrain.getDepartureDate()),
+                searchTrain.getDepartureStation().getExp(),
+                searchTrain.getDepartureStation().getEcp(),
+                searchTrain.getDestinationStantion().getExp(),
+                searchTrain.getDestinationStantion().getEcp()).execute().body().string();
+
+            return new TrainTimeParsing(page).pars();
         }
     }
 }
