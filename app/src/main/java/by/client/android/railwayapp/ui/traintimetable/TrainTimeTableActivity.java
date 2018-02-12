@@ -2,22 +2,29 @@ package by.client.android.railwayapp.ui.traintimetable;
 
 import java.util.Calendar;
 
+import javax.inject.Inject;
+
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import android.app.DatePickerDialog;
-import android.support.v4.app.Fragment;
 import static android.text.TextUtils.join;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
+import by.client.android.railwayapp.ApplicationComponent;
+import by.client.android.railwayapp.BaseDaggerFragment;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.model.SearchStantion;
 import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
+import by.client.android.railwayapp.ui.traintimetable.history.ObjectHistory;
+import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryFragment;
+import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryFragment_;
 
 /**
  * Страница ввода данных для поиска поездов
@@ -25,10 +32,13 @@ import by.client.android.railwayapp.ui.converters.DateToStringConverter;
  * @author PRV
  */
 @EFragment(R.layout.activity_train_time_table)
-public class TrainTimeTableActivity extends Fragment {
+public class TrainTimeTableActivity extends BaseDaggerFragment {
 
     private static final int TRAIN_ROUTE_ACTIVITY_CODE = 2;
     private static final String TAG = TrainTimeTableActivity.class.getSimpleName();
+
+    @Inject
+    ObjectHistory<SearchTrain> trainRouteHistory;
 
     @ViewById(R.id.departureStation)
     TextView arriveEditText;
@@ -54,6 +64,25 @@ public class TrainTimeTableActivity extends Fragment {
         searchStantionButton.setOnClickListener(new SearchClickListenr());
     }
 
+    @Override
+    public void injectFragment(ApplicationComponent component) {
+        component.inject(this);
+    }
+
+    @Click(R.id.history)
+    void showHistory() {
+        TrainRouteHistoryFragment trainRouteHistoryFragment = new TrainRouteHistoryFragment_();
+        trainRouteHistoryFragment.setClickListener(new TrainRouteHistoryFragment.ChooseRouteDialogListener() {
+            @Override
+            public void onSelectedStantion(SearchTrain searchTrain) {
+                setArrive(searchTrain.getDepartureStation());
+                setArrival(searchTrain.getDestinationStantion());
+            }
+        });
+        trainRouteHistoryFragment.show(getFragmentManager(), TAG);
+    }
+
+
     private class OpenSearchStantion implements View.OnClickListener {
 
         private SearchStantionActivity.ChooseStantionDialogListener listener;
@@ -74,8 +103,7 @@ public class TrainTimeTableActivity extends Fragment {
 
         @Override
         public void selectedStantion(SearchStantion selected) {
-            arrive = selected;
-            arriveEditText.setText(selected.getValue());
+            setArrive(selected);
         }
     }
 
@@ -83,9 +111,18 @@ public class TrainTimeTableActivity extends Fragment {
 
         @Override
         public void selectedStantion(SearchStantion selected) {
-            arrival = selected;
-            arrivalEditText.setText(selected.getValue());
+            setArrival(selected);
         }
+    }
+
+    private void setArrive(SearchStantion selected) {
+        arrive = selected;
+        arriveEditText.setText(selected.getValue());
+    }
+
+    private void setArrival(SearchStantion selected) {
+        arrival = selected;
+        arrivalEditText.setText(selected.getValue());
     }
 
     private class OnDatePickerClickListener implements View.OnClickListener {
@@ -107,6 +144,7 @@ public class TrainTimeTableActivity extends Fragment {
             SearchTrainValidator trainValidator = new SearchTrainValidator(getContext());
             SearchTrain searchTrain = trainValidator.validate(arrive, arrival, currentDate);
             if (searchTrain != null) {
+                trainRouteHistory.add(searchTrain);
                 TrainRoutesActivity.start(getActivity(), TRAIN_ROUTE_ACTIVITY_CODE, searchTrain);
             } else {
                 Toast.makeText(getContext(), join("\n", trainValidator.getErrors()), Toast.LENGTH_LONG).show();

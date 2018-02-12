@@ -7,6 +7,8 @@ import by.client.android.railwayapp.ui.trainroute.TrainRouteActivity;
 import by.client.android.railwayapp.ui.traintimetable.PlaceInfoActivity;
 import by.client.android.railwayapp.ui.traintimetable.SearchStantionActivity;
 import by.client.android.railwayapp.ui.traintimetable.TrainRoutesActivity;
+import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity;
+import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryFragment;
 import dagger.Component;
 
 /**
@@ -15,7 +17,7 @@ import dagger.Component;
  * @autor PRV
  */
 @Singleton
-@Component(modules = {ApplicationModule.class})
+@Component(modules = {ApplicationModule.class, ApplicationCacheModule.class})
 public interface ApplicationComponent {
 
     void inject(AndroidApplication androidApplication);
@@ -31,4 +33,8 @@ public interface ApplicationComponent {
     void inject(PlaceInfoActivity placeInfoActivity);
 
     void inject(BaseDaggerActivity activity);
+
+    void inject(TrainTimeTableActivity activity);
+
+    void inject(TrainRouteHistoryFragment trainRouteHistoryFragment);
 }

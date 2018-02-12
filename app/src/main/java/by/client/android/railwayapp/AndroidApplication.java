@@ -3,9 +3,9 @@ package by.client.android.railwayapp;
 import android.app.Application;
 
 /**
- * Created by PanteleevRV on 15.01.2018.
+ * Класс инициализации приложения
  *
- * @author ROMAN PANTELEEV
+ * @author PRV
  */
 public class AndroidApplication extends Application {
 
@@ -27,6 +27,7 @@ public class AndroidApplication extends Application {
         if (applicationComponent == null) {
             applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
+                .applicationCacheModule(new ApplicationCacheModule(this))
                 .build();
         }
         return applicationComponent;

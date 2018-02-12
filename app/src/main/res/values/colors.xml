@@ -27,4 +27,5 @@
     <color name="accent_activity_background">#b4b3b3</color>
 
     <color name="tint_default">#b4b3b3</color>
+    <color name="tint_white">#ffffff</color>
 </resources>

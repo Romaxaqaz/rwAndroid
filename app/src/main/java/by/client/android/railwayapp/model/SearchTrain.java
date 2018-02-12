@@ -44,4 +44,25 @@ public class SearchTrain implements Serializable {
     public Date getDepartureDate() {
         return departureDate;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        SearchTrain that = (SearchTrain) o;
+        return departureStation.equals(that.departureStation) && destinationStantion.equals(that.destinationStantion);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = departureStation.hashCode();
+        result = 31 * result + destinationStantion.hashCode();
+        return result;
+    }
 }

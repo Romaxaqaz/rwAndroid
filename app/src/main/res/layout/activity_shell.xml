@@ -19,6 +19,7 @@
             app:itemBackground="@color/colorPrimary"
             app:itemIconTint="@color/bottom_tab_color"
             app:itemTextColor="@color/bottom_tab_color"
+            android:clickable="true"
             app:menu="@menu/buttom_menu" />
 
 </RelativeLayout>

@@ -8,7 +8,8 @@
             android:id="@+id/carriageNumber"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:textSize="22sp"
-            android:textColor="@color/witeText"/>
+            android:textSize="20sp"
+            android:textColor="@color/witeText"
+            android:gravity="center"/>
 
 </LinearLayout>

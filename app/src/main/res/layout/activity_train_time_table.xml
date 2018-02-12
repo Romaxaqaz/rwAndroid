@@ -5,6 +5,7 @@
         android:id="@+id/activity_train_time_table"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/accent_activity_background"
         tools:context="by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity">
 
     <ImageView
@@ -157,6 +158,12 @@
                         android:layout_height="wrap_content"
                         android:text="Найти"
                         android:layout_marginTop="12dp" />
+
+                <Button
+                        android:id="@+id/history"
+                        android:text="История запросов"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
             </LinearLayout>
 

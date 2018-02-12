@@ -38,4 +38,6 @@
     <string name="train_list_not_founded">Список поездов для данного маршрута не найден.</string>
     <string name="input_stantion_name">Введите название станции</string>
     <string name="train_route">Маршрут поезда</string>
+    <string name="clear_history">очистить историю</string>
+    <string name="route_list_history_empty">Список истории запросов пуст</string>
 </resources>
