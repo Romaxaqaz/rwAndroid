@@ -10,7 +10,7 @@ public class RouteItem {
     /**
      * Станция
      */
-    private String stantion;
+    private String station;
 
     /**
      * Время отправления
@@ -39,8 +39,8 @@ public class RouteItem {
         return new RouteItem();
     }
 
-    public RouteItem setStantion(String stantion) {
-        this.stantion = stantion;
+    public RouteItem setStation(String station) {
+        this.station = station;
         return this;
     }
 
@@ -64,8 +64,8 @@ public class RouteItem {
         return this;
     }
 
-    public String getStantion() {
-        return stantion;
+    public String getStation() {
+        return station;
     }
 
     public String getArrival() {

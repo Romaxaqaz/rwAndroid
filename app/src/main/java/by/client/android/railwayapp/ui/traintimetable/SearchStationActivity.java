@@ -22,7 +22,7 @@ import by.client.android.railwayapp.AndroidApplication;
 import by.client.android.railwayapp.GlobalExceptionHandler;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.RailwayApi;
-import by.client.android.railwayapp.api.rw.model.SearchStantion;
+import by.client.android.railwayapp.api.rw.model.SearchStation;
 import by.client.android.railwayapp.ui.RetrofitCallback;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 import retrofit2.Call;
@@ -33,8 +33,8 @@ import retrofit2.Response;
  *
  * @author PRV
  */
-@EFragment(R.layout.activity_search_stantion)
-public class SearchStantionActivity extends DialogFragment implements SearchView.OnQueryTextListener {
+@EFragment(R.layout.activity_search_station)
+public class SearchStationActivity extends DialogFragment implements SearchView.OnQueryTextListener {
 
     @Inject
     RailwayApi railwayApi;
@@ -51,17 +51,17 @@ public class SearchStantionActivity extends DialogFragment implements SearchView
     @ViewById(R.id.progressBar)
     ProgressBar progressBar;
 
-    private StantionAdapter stantionAdapter;
-    private ChooseStantionDialogListener stantionDialogListener;
+    private StationAdapter stationAdapter;
+    private ChooseStationDialogListener stationDialogListener;
 
     @AfterViews
     void onCreateView() {
         AndroidApplication.getApp().getApplicationComponent().inject(this);
 
         resultListView.setTextFilterEnabled(true);
-        stantionAdapter = new StantionAdapter(getActivity());
-        resultListView.setAdapter(stantionAdapter);
-        resultListView.setOnItemClickListener(new StantionClickListener());
+        stationAdapter = new StationAdapter(getActivity());
+        resultListView.setAdapter(stationAdapter);
+        resultListView.setOnItemClickListener(new StationClickListener());
 
         setupSearchView();
     }
@@ -85,8 +85,8 @@ public class SearchStantionActivity extends DialogFragment implements SearchView
         return false;
     }
 
-    public void setClickListener(ChooseStantionDialogListener stantionDialogListener) {
-        this.stantionDialogListener = stantionDialogListener;
+    public void setClickListener(ChooseStationDialogListener stationDialogListener) {
+        this.stationDialogListener = stationDialogListener;
     }
 
     @Override
@@ -99,14 +99,14 @@ public class SearchStantionActivity extends DialogFragment implements SearchView
         searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(this);
         searchView.setSubmitButtonEnabled(false);
-        searchView.setQueryHint(getString(R.string.input_stantion_name));
+        searchView.setQueryHint(getString(R.string.input_station_name));
     }
 
-    private void updateListView(List<SearchStantion> stantions) {
-        stantionAdapter.setData(stantions);
+    private void updateListView(List<SearchStation> stations) {
+        stationAdapter.setData(stations);
     }
 
-    private class SearchResultListener extends RetrofitCallback<List<SearchStantion>> {
+    private class SearchResultListener extends RetrofitCallback<List<SearchStation>> {
 
         @Override
         public void onStart() {
@@ -114,15 +114,15 @@ public class SearchStantionActivity extends DialogFragment implements SearchView
         }
 
         @Override
-        public void onComplete(Call<List<SearchStantion>> call, Response<List<SearchStantion>> response) {
-            List<SearchStantion> body = response.body();
+        public void onComplete(Call<List<SearchStation>> call, Response<List<SearchStation>> response) {
+            List<SearchStation> body = response.body();
             if (body != null) {
                 updateListView(body);
             }
         }
 
         @Override
-        public void onError(Call<List<SearchStantion>> call, Throwable throwable) {
+        public void onError(Call<List<SearchStation>> call, Throwable throwable) {
             globalExceptionHandler.handle(throwable);
         }
 
@@ -132,12 +132,12 @@ public class SearchStantionActivity extends DialogFragment implements SearchView
         }
     }
 
-    private class StantionClickListener implements AdapterView.OnItemClickListener {
+    private class StationClickListener implements AdapterView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            SearchStantion stantion = stantionAdapter.getItem(position);
-            stantionDialogListener.selectedStantion(stantion);
+            SearchStation station = stationAdapter.getItem(position);
+            stationDialogListener.selectedStation(station);
             dismiss();
         }
     }
@@ -145,9 +145,9 @@ public class SearchStantionActivity extends DialogFragment implements SearchView
     /**
      * Callback выбора станции
      */
-    public interface ChooseStantionDialogListener {
+    public interface ChooseStationDialogListener {
 
-        void selectedStantion(SearchStantion stantion);
+        void selectedStation(SearchStation station);
     }
 }
 

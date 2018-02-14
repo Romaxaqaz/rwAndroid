@@ -20,7 +20,7 @@ import by.client.android.railwayapp.ApplicationComponent;
 import by.client.android.railwayapp.BaseDaggerFragment;
 import by.client.android.railwayapp.GlobalExceptionHandler;
 import by.client.android.railwayapp.R;
-import by.client.android.railwayapp.api.ScoreboardStantion;
+import by.client.android.railwayapp.api.ScoreboardStation;
 import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.model.Train;
 import by.client.android.railwayapp.support.BaseLoaderListener;
@@ -65,22 +65,21 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
     ListView trainsListView;
 
     @ViewById(R.id.planets_spinner)
-    Spinner stantions;
+    Spinner stations;
 
     private TrainAdapter trainsAdapter;
-    private StantionAdapter stantionAdapter;
+    private StationAdapter stationAdapter;
 
     @AfterViews
     void initFragment() {
-        List<ScoreboardStantion> scoreboardStantions = Arrays.asList(ScoreboardStantion.values());
+        List<ScoreboardStation> scoreboardStations = Arrays.asList(ScoreboardStation.values());
 
         swipeRefreshLayout.setOnRefreshListener(this);
-        stantionAdapter = new StantionAdapter(getActivity());
-        stantionAdapter.setData(scoreboardStantions);
-
-        stantions.setAdapter(stantionAdapter);
-        stantions.setOnItemSelectedListener(new StantionClickListener());
-        stantions.setSelection(scoreboardStantions.indexOf(settingsService.getScoreboardStantion()));
+        stationAdapter = new StationAdapter(getActivity());
+        stationAdapter.setData(scoreboardStations);
+        stations.setAdapter(stationAdapter);
+        stations.setOnItemSelectedListener(new StationClickListener());
+        stations.setSelection(scoreboardStations.indexOf(settingsService.getScoreboardStation()));
 
         trainsAdapter = new TrainAdapter(getActivity());
         trainsListView.setOnItemClickListener(new TrainClickListener());
@@ -94,13 +93,13 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
 
     @Override
     public void onRefresh() {
-        loadData(UiUtils.<ScoreboardStantion>getSpinnerSelected(stantions));
+        loadData(UiUtils.<ScoreboardStation>getSpinnerSelected(stations));
     }
 
-    private void loadData(ScoreboardStantion scoreboardStantion) {
-        client.send(new ScoreboardLoader(railwayApi, scoreboardStantion),
+    private void loadData(ScoreboardStation scoreboardStation) {
+        client.send(new ScoreboardLoader(railwayApi, scoreboardStation),
             new ScoreboardLoadListener(this));
-        settingsService.saveScoreboardStantion(scoreboardStantion);
+        settingsService.saveScoreboardStation(scoreboardStation);
     }
 
     private void initTrains(List<Train> trains) {
@@ -115,11 +114,11 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
         }
     }
 
-    private class StantionClickListener implements AdapterView.OnItemSelectedListener {
+    private class StationClickListener implements AdapterView.OnItemSelectedListener {
 
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-            loadData(stantionAdapter.getItem(position));
+            loadData(stationAdapter.getItem(position));
         }
 
         @Override

@@ -33,13 +33,13 @@ class RouteAdapter extends BaseListAdapter<RouteItem, BaseHolder<RouteItem>> {
         ViewHolder(View view) {
             route = view.findViewById(R.id.route);
             arrival = view.findViewById(R.id.departureStation);
-            arrived = view.findViewById(R.id.destinationStantion);
+            arrived = view.findViewById(R.id.destinationStation);
             stay = view.findViewById(R.id.stay);
         }
 
         @Override
         public void bind(RouteItem routeItem) {
-            route.setText(routeItem.getStantion());
+            route.setText(routeItem.getStation());
             arrival.setText(routeItem.getArrival());
             arrived.setText(routeItem.getArrived());
             stay.setText(routeItem.getStay());

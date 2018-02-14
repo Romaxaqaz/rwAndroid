@@ -4,7 +4,7 @@
     <string name="scoreboard_header">Онлайн табло</string>
     <string name="path">Путь</string>
     <string name="paltform">Платформа</string>
-    <string name="destinationStantion">Прибытие</string>
+    <string name="destinationStation">Прибытие</string>
     <string name="departureStation">Отправление</string>
     <string name="scoreboard_detail_title">Scoreboard detail</string>
     <string name="add_to_notification">Добавить в центр уведомлений</string>
@@ -35,7 +35,7 @@
     <string name="arrival">Прибытие</string>
     <string name="travelTime">Время в пути</string>
     <string name="train_list_not_founded">Список поездов для данного маршрута не найден.</string>
-    <string name="input_stantion_name">Введите название станции</string>
+    <string name="input_station_name">Введите название станции</string>
     <string name="train_route">Маршрут поезда</string>
     <string name="clear_history">очистить историю</string>
     <string name="route_list_history_empty">Список истории запросов пуст</string>

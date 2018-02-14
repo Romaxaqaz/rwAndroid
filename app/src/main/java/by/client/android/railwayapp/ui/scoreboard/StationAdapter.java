@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 import by.client.android.railwayapp.R;
-import by.client.android.railwayapp.api.ScoreboardStantion;
+import by.client.android.railwayapp.api.ScoreboardStation;
 import by.client.android.railwayapp.ui.BaseHolder;
 import by.client.android.railwayapp.ui.BaseListAdapter;
 
@@ -13,24 +13,24 @@ import by.client.android.railwayapp.ui.BaseListAdapter;
  *
  * @author PRV
  */
-class StantionAdapter extends BaseListAdapter<ScoreboardStantion, BaseHolder<ScoreboardStantion>> {
+class StationAdapter extends BaseListAdapter<ScoreboardStation, BaseHolder<ScoreboardStation>> {
 
-    StantionAdapter(Context context) {
+    StationAdapter(Context context) {
         super(context);
         setItemLayout(R.layout.dropdown_item);
     }
 
-    private static class ViewHolder implements BaseHolder<ScoreboardStantion> {
+    private static class ViewHolder implements BaseHolder<ScoreboardStation> {
 
         private TextView statusName;
 
         ViewHolder(View view) {
-            statusName = view.findViewById(R.id.stantionNane);
+            statusName = view.findViewById(R.id.stationNane);
         }
 
         @Override
-        public void bind(ScoreboardStantion scoreboardStantion) {
-            statusName.setText(new StantionToNameConverter().convert(scoreboardStantion));
+        public void bind(ScoreboardStation scoreboardStation) {
+            statusName.setText(new StationToNameConverter().convert(scoreboardStation));
         }
     }
 

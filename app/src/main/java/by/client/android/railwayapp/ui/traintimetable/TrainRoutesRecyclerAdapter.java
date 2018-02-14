@@ -96,7 +96,7 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
             path = view.findViewById(R.id.path);
             type = view.findViewById(R.id.type);
             arrival = view.findViewById(R.id.departureStation);
-            arrived = view.findViewById(R.id.destinationStantion);
+            arrived = view.findViewById(R.id.destinationStation);
             travelTime = view.findViewById(R.id.travelTime);
             placesTest = view.findViewById(R.id.placesTest);
             placesTest.setClickListener(onPlaceItemClickListener);

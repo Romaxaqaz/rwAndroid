@@ -28,17 +28,17 @@ class RouteHistoryAdapter extends BaseListAdapter<SearchTrain, BaseHolder<Search
     private class ViewHolder implements BaseHolder<SearchTrain> {
 
         private TextView departureStation;
-        private TextView destinationStantion;
+        private TextView destinationStation;
 
         ViewHolder(View view) {
             departureStation = view.findViewById(R.id.departureStation);
-            destinationStantion = view.findViewById(R.id.destinationStantion);
+            destinationStation = view.findViewById(R.id.destinationStation);
         }
 
         @Override
         public void bind(SearchTrain searchTrain) {
             departureStation.setText(searchTrain.getDepartureStation().getValue());
-            destinationStantion.setText(searchTrain.getDestinationStantion().getValue());
+            destinationStation.setText(searchTrain.getDestinationStation().getValue());
         }
     }
 }

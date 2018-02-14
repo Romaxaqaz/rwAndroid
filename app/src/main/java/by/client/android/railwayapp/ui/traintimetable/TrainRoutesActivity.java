@@ -108,7 +108,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
 
     private void initHeader() {
         startTextView.setText(searchTrain.getDepartureStation().getValue());
-        endTextView.setText(searchTrain.getDestinationStantion().getValue());
+        endTextView.setText(searchTrain.getDestinationStation().getValue());
         dateTextView.setText(new DateToStringConverter("dd MMMM yyyy").convert(searchTrain.getDepartureDate()));
     }
 
@@ -117,8 +117,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
     }
 
     private void loadData(SearchTrain trainRoute) {
-        client.send(new TrainTimeLoader(railwayApi, trainRoute),
-            new TrainTimeLoadListener(this));
+        client.send(new TrainTimeLoader(railwayApi, trainRoute), new TrainTimeLoadListener(this));
     }
 
     private static class TrainTimeLoadListener extends BaseLoaderListener<TrainRoutesActivity, List<TrainRoute>> {
@@ -166,7 +165,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
     private class TrainPlaceClickListener implements TrainPlaceView.OnPlaceItemClickListener {
 
         @Override
-        public void selectedStantion(Place place) {
+        public void selectedStation(Place place) {
             if (Utils.isBlank(place.getFreePlaces())) {
                 Dialogs.showToast(getApplicationContext(), R.string.error_detalization_places);
             } else {

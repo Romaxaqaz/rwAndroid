@@ -2,7 +2,7 @@ package by.client.android.railwayapp.api.rw;
 
 import java.util.List;
 
-import by.client.android.railwayapp.api.rw.model.SearchStantion;
+import by.client.android.railwayapp.api.rw.model.SearchStation;
 import by.client.android.railwayapp.api.rw.model.places.TrainPlaceInfo;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -32,10 +32,10 @@ public interface RailwayApi {
      * Запрос на получение списка станций удовлетворяющих введенному названию
      *
      * @param text символы, входящие в название станции или полное наименование станции
-     * @return список станций {@link SearchStantion}, удовлетворяющих введенному названию
+     * @return список станций {@link SearchStation}, удовлетворяющих введенному названию
      */
     @GET("/ru/ajax/autocomplete/search/")
-    Call<List<SearchStantion>> searchStation(@Query("term") String text, @Query("limit") String limit,
+    Call<List<SearchStation>> searchStation(@Query("term") String text, @Query("limit") String limit,
         @Query("timestamp") String timestamp);
 
     /**
@@ -50,11 +50,11 @@ public interface RailwayApi {
     /**
      * Запрос на получение информации о прибытии и отправлении поездов заданной станции
      *
-     * @param stantionId идентификатор станции
+     * @param stationId идентификатор станции
      * @return возвращает {@link ResponseBody} для получения и парсинга html страницы
      */
     @GET("/ru/tablo")
-    Call<ResponseBody> getScoreboardTable(@Query(value = "st_exp", encoded = true) String stantionId);
+    Call<ResponseBody> getScoreboardTable(@Query(value = "st_exp", encoded = true) String stationId);
 
     /**
      * Запрос на получение маршрута поезда

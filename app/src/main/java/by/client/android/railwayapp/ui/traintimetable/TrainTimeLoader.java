@@ -40,13 +40,13 @@ class TrainTimeLoader implements Loader {
         protected List<TrainRoute> call(SearchTrain searchTrain) throws Exception {
 
             String page = railwayApi.getTrainRoutes(
-                searchTrain.getDestinationStantion().getValue(),
+                searchTrain.getDestinationStation().getValue(),
                 searchTrain.getDepartureStation().getValue(),
                 new DateToStringConverter().convert(searchTrain.getDepartureDate()),
                 searchTrain.getDepartureStation().getExp(),
                 searchTrain.getDepartureStation().getEcp(),
-                searchTrain.getDestinationStantion().getExp(),
-                searchTrain.getDestinationStantion().getEcp()).execute().body().string();
+                searchTrain.getDestinationStation().getExp(),
+                searchTrain.getDestinationStation().getEcp()).execute().body().string();
 
             return new TrainTimeParsing(page).pars();
         }

@@ -14,7 +14,7 @@ import by.client.android.railwayapp.ui.ParsingException;
 
 class TrainRouteParsing extends BaseParsing<RouteItem, String> {
 
-    private static final String STANTION = "a[class=train_name -map train_text]";
+    private static final String STATION = "a[class=train_name -map train_text]";
     private static final String ARRIVAL = "b[class=train_end-time]";
     private static final String ARRIVED = "b[class=train_start-time]";
     private static final String TRAVEL_TIME = "span[class=train_time-total]";
@@ -35,8 +35,8 @@ class TrainRouteParsing extends BaseParsing<RouteItem, String> {
 
         Elements rows = table.select(TR);
         for (Element item : rows) {
-            String stantion = checkEmpty(item.select(STANTION).first());
-            if (stantion == EMPTY_STRING) {
+            String station = checkEmpty(item.select(STATION).first());
+            if (station == EMPTY_STRING) {
                 continue;
             }
 
@@ -46,7 +46,7 @@ class TrainRouteParsing extends BaseParsing<RouteItem, String> {
             String stay = checkEmpty(item.select(STAY).first());
 
             RouteItem train = RouteItem.createBuilder()
-                .setStantion(stantion)
+                .setStation(station)
                 .setArrival(arrival)
                 .setArrived(arrived)
                 .setTravelTime(travelTime)

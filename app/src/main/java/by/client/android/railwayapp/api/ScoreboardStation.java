@@ -5,7 +5,7 @@ package by.client.android.railwayapp.api;
  *
  * @author ROMAN PANTELEEV
  */
-public enum ScoreboardStantion {
+public enum ScoreboardStation {
 
     /**
      * Станция Минск-Пассажирский

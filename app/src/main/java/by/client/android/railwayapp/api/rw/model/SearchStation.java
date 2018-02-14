@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author PRV
  */
-public class SearchStantion implements Serializable {
+public class SearchStation implements Serializable {
 
     private String prefix;
     private String label;

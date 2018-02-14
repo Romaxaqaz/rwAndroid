@@ -52,11 +52,11 @@
                         <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/destinationStantion"
+                                android:text="@string/destinationStation"
                                 style="@style/HeaderTextView" />
 
                         <TextView
-                                android:id="@+id/destinationStantion"
+                                android:id="@+id/destinationStation"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 style="@style/BodyTextView" />

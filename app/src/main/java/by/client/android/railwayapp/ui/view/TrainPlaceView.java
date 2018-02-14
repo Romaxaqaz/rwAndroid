@@ -56,7 +56,7 @@ public class TrainPlaceView extends FrameLayout {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                onPlaceItemClickListener.selectedStantion(trainPlaceAdapter.getItem(position));
+                onPlaceItemClickListener.selectedStation(trainPlaceAdapter.getItem(position));
             }
         });
         UiUtils.setListViewHeightBasedOnItems(listView);
@@ -72,6 +72,6 @@ public class TrainPlaceView extends FrameLayout {
      */
     public interface OnPlaceItemClickListener {
 
-        void selectedStantion(Place place);
+        void selectedStation(Place place);
     }
 }

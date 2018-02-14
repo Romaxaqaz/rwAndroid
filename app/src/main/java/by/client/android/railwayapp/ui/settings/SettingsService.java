@@ -1,7 +1,7 @@
 package by.client.android.railwayapp.ui.settings;
 
 import android.content.Context;
-import by.client.android.railwayapp.api.ScoreboardStantion;
+import by.client.android.railwayapp.api.ScoreboardStation;
 import by.client.android.railwayapp.model.Settings;
 
 /**
@@ -13,7 +13,7 @@ public class SettingsService {
 
     private static final String URL_KEY = "BASE_URL_KEY";
 
-    private static final String SCOREBOARD_STANTION_KEY = "SCOREBOARD_STANTION_KEY";
+    private static final String SCOREBOARD_STATION_KEY = "SCOREBOARD_STATION_KEY";
 
     private SettingSharedPreferences sharedPreferences;
     private ApplicationProperties applicationProperties;
@@ -52,12 +52,12 @@ public class SettingsService {
         return settings;
     }
 
-    public void saveScoreboardStantion(ScoreboardStantion stantion) {
-        sharedPreferences.setValue(SCOREBOARD_STANTION_KEY, String.valueOf(stantion));
+    public void saveScoreboardStation(ScoreboardStation station) {
+        sharedPreferences.setValue(SCOREBOARD_STATION_KEY, String.valueOf(station));
     }
 
-    public ScoreboardStantion getScoreboardStantion() {
-        String stantion = sharedPreferences.getValue(SCOREBOARD_STANTION_KEY, String.valueOf(ScoreboardStantion.MINSK));
-        return ScoreboardStantion.valueOf(stantion);
+    public ScoreboardStation getScoreboardStation() {
+        String station = sharedPreferences.getValue(SCOREBOARD_STATION_KEY, String.valueOf(ScoreboardStation.MINSK));
+        return ScoreboardStation.valueOf(station);
     }
 }

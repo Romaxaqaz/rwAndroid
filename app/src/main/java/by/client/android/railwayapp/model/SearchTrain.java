@@ -3,7 +3,7 @@ package by.client.android.railwayapp.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import by.client.android.railwayapp.api.rw.model.SearchStantion;
+import by.client.android.railwayapp.api.rw.model.SearchStation;
 
 /**
  * Модель запроса поездов
@@ -15,30 +15,30 @@ public class SearchTrain implements Serializable {
     /**
      * Станция отправления
      */
-    private SearchStantion departureStation;
+    private SearchStation departureStation;
 
     /**
      * Станция назначения
      */
-    private SearchStantion destinationStantion;
+    private SearchStation destinationStation;
 
     /**
      * Дата отправления
      */
     private Date departureDate;
 
-    public SearchTrain(SearchStantion departureStation, SearchStantion destinationStantion, Date departureDate) {
+    public SearchTrain(SearchStation departureStation, SearchStation destinationStation, Date departureDate) {
         this.departureStation = departureStation;
-        this.destinationStantion = destinationStantion;
+        this.destinationStation = destinationStation;
         this.departureDate = departureDate;
     }
 
-    public SearchStantion getDepartureStation() {
+    public SearchStation getDepartureStation() {
         return departureStation;
     }
 
-    public SearchStantion getDestinationStantion() {
-        return destinationStantion;
+    public SearchStation getDestinationStation() {
+        return destinationStation;
     }
 
     public Date getDepartureDate() {
@@ -55,13 +55,13 @@ public class SearchTrain implements Serializable {
         }
 
         SearchTrain that = (SearchTrain) o;
-        return departureStation.equals(that.departureStation) && destinationStantion.equals(that.destinationStantion);
+        return departureStation.equals(that.departureStation) && destinationStation.equals(that.destinationStation);
     }
 
     @Override
     public int hashCode() {
         int result = departureStation.hashCode();
-        result = 31 * result + destinationStantion.hashCode();
+        result = 31 * result + destinationStation.hashCode();
         return result;
     }
 }

@@ -85,7 +85,7 @@ public class TrainRouteHistoryFragment extends DialogFragment {
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            chooseRouteDialogListener.onSelectedStantion(routeHistoryAdapter.getItem(position));
+            chooseRouteDialogListener.onSelectedStation(routeHistoryAdapter.getItem(position));
             dismiss();
         }
     }
@@ -100,12 +100,11 @@ public class TrainRouteHistoryFragment extends DialogFragment {
         }
     }
 
-
     /**
      * Callback выбора маршрута
      */
     public interface ChooseRouteDialogListener {
 
-        void onSelectedStantion(SearchTrain searchTrain);
+        void onSelectedStation(SearchTrain searchTrain);
     }
 }

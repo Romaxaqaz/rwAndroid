@@ -19,7 +19,7 @@ import android.widget.Toast;
 import by.client.android.railwayapp.ApplicationComponent;
 import by.client.android.railwayapp.BaseDaggerFragment;
 import by.client.android.railwayapp.R;
-import by.client.android.railwayapp.api.rw.model.SearchStantion;
+import by.client.android.railwayapp.api.rw.model.SearchStation;
 import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 import by.client.android.railwayapp.ui.traintimetable.history.ObjectHistory;
@@ -43,25 +43,25 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
     @ViewById(R.id.departureStation)
     TextView arriveEditText;
 
-    @ViewById(R.id.destinationStantion)
+    @ViewById(R.id.destinationStation)
     TextView arrivalEditText;
 
     @ViewById(R.id.date)
     TextView date;
 
-    @ViewById(R.id.searchStantionButton)
-    Button searchStantionButton;
+    @ViewById(R.id.searchStationButton)
+    Button searchStationButton;
 
-    private SearchStantion arrive;
-    private SearchStantion arrival;
+    private SearchStation arrive;
+    private SearchStation arrival;
     private Calendar currentDate;
 
     @AfterViews
     void initView() {
-        arriveEditText.setOnClickListener(new OpenSearchStantion(new StantionArriveSelected()));
-        arrivalEditText.setOnClickListener(new OpenSearchStantion(new StantionArrivalSelected()));
+        arriveEditText.setOnClickListener(new OpenSearchStation(new StationArriveSelected()));
+        arrivalEditText.setOnClickListener(new OpenSearchStation(new StationArrivalSelected()));
         date.setOnClickListener(new OnDatePickerClickListener());
-        searchStantionButton.setOnClickListener(new SearchClickListenr());
+        searchStationButton.setOnClickListener(new SearchClickListenr());
     }
 
     @Override
@@ -74,53 +74,53 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
         TrainRouteHistoryFragment trainRouteHistoryFragment = new TrainRouteHistoryFragment_();
         trainRouteHistoryFragment.setClickListener(new TrainRouteHistoryFragment.ChooseRouteDialogListener() {
             @Override
-            public void onSelectedStantion(SearchTrain searchTrain) {
+            public void onSelectedStation(SearchTrain searchTrain) {
                 setArrive(searchTrain.getDepartureStation());
-                setArrival(searchTrain.getDestinationStantion());
+                setArrival(searchTrain.getDestinationStation());
             }
         });
         trainRouteHistoryFragment.show(getFragmentManager(), TAG);
     }
 
 
-    private class OpenSearchStantion implements View.OnClickListener {
+    private class OpenSearchStation implements View.OnClickListener {
 
-        private SearchStantionActivity.ChooseStantionDialogListener listener;
+        private SearchStationActivity.ChooseStationDialogListener listener;
 
-        private OpenSearchStantion(SearchStantionActivity.ChooseStantionDialogListener listener) {
+        private OpenSearchStation(SearchStationActivity.ChooseStationDialogListener listener) {
             this.listener = listener;
         }
 
         @Override
         public void onClick(View view) {
-            SearchStantionActivity searchStantionActivity = new SearchStantionActivity_();
-            searchStantionActivity.setClickListener(listener);
-            searchStantionActivity.show(getFragmentManager(), TAG);
+            SearchStationActivity searchStationActivity = new SearchStationActivity_();
+            searchStationActivity.setClickListener(listener);
+            searchStationActivity.show(getFragmentManager(), TAG);
         }
     }
 
-    private class StantionArriveSelected implements SearchStantionActivity.ChooseStantionDialogListener {
+    private class StationArriveSelected implements SearchStationActivity.ChooseStationDialogListener {
 
         @Override
-        public void selectedStantion(SearchStantion selected) {
-            setArrive(selected);
+        public void selectedStation(SearchStation station) {
+            setArrive(station);
         }
     }
 
-    private class StantionArrivalSelected implements SearchStantionActivity.ChooseStantionDialogListener {
+    private class StationArrivalSelected implements SearchStationActivity.ChooseStationDialogListener {
 
         @Override
-        public void selectedStantion(SearchStantion selected) {
-            setArrival(selected);
+        public void selectedStation(SearchStation station) {
+            setArrival(station);
         }
     }
 
-    private void setArrive(SearchStantion selected) {
+    private void setArrive(SearchStation selected) {
         arrive = selected;
         arriveEditText.setText(selected.getValue());
     }
 
-    private void setArrival(SearchStantion selected) {
+    private void setArrival(SearchStation selected) {
         arrival = selected;
         arrivalEditText.setText(selected.getValue());
     }

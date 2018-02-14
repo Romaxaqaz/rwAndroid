@@ -102,7 +102,7 @@
                                 style="@style/HeaderTextStyle" />
 
                         <TextView
-                                android:id="@+id/destinationStantion"
+                                android:id="@+id/destinationStation"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="введите станцию"
@@ -151,9 +151,8 @@
 
                 </LinearLayout>
 
-
                 <Button
-                        android:id="@+id/searchStantionButton"
+                        android:id="@+id/searchStationButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Найти"

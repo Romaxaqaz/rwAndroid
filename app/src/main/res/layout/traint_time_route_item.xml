@@ -120,12 +120,12 @@
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:text="@string/destinationStantion"
+                            android:text="@string/departureStation"
                             android:gravity="center"
                             style="@style/HeaderTextView" />
 
                     <TextView
-                            android:id="@+id/destinationStantion"
+                            android:id="@+id/destinationStation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             style="@style/BodyTextView" />
@@ -149,7 +149,7 @@
 
                     <TextView
                             android:layout_width="match_parent"
-                            android:text="@string/departureStation"
+                            android:text="@string/destinationStation"
                             android:layout_height="30dp"
                             android:gravity="center"
                             style="@style/HeaderTextView" />

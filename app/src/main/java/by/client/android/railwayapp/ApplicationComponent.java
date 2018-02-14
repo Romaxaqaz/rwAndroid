@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment;
 import by.client.android.railwayapp.ui.trainroute.TrainRouteActivity;
 import by.client.android.railwayapp.ui.traintimetable.PlaceInfoActivity;
-import by.client.android.railwayapp.ui.traintimetable.SearchStantionActivity;
+import by.client.android.railwayapp.ui.traintimetable.SearchStationActivity;
 import by.client.android.railwayapp.ui.traintimetable.TrainRoutesActivity;
 import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity;
 import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryFragment;
@@ -28,7 +28,7 @@ public interface ApplicationComponent {
 
     void inject(TrainRouteActivity trainRouteActivity);
 
-    void inject(SearchStantionActivity searchStantionActivity);
+    void inject(SearchStationActivity searchStationActivity);
 
     void inject(PlaceInfoActivity placeInfoActivity);
 
