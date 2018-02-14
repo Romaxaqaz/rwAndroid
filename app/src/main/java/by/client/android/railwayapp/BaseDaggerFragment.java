@@ -8,7 +8,7 @@ import android.view.View;
 /**
  * Базовый фрагмент для реализации привязки к Dagger
  *
- * @autor PRV
+ * @author PRV
  */
 public abstract class BaseDaggerFragment extends Fragment {
 

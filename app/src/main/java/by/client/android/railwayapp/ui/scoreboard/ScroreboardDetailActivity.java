@@ -20,7 +20,7 @@ import by.client.android.railwayapp.ui.utils.PushNotification;
 /**
  * Страница для отображения детальной информации поезда со страницы "Виртуально табло"
  *
- * @author ROMAN PANTELEEV
+ * @author PRV
  */
 @EActivity(R.layout.activity_scroreboard_detail)
 public class ScroreboardDetailActivity extends AppCompatActivity {
@@ -93,7 +93,7 @@ public class ScroreboardDetailActivity extends AppCompatActivity {
     }
 
     private String getPushContent() {
-        return String.format("Путь: %s, Платформа: %s, Маршрут: %s",
+        return String.format(getString(R.string.push_content),
             train.getWay(), train.getPlatform(), train.getPath());
     }
 }

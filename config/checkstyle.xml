@@ -133,7 +133,7 @@
 		<module name="JavadocType">
 			<property name="tokens" value="INTERFACE_DEF, CLASS_DEF" />
 			<property name="scope" value="protected" />
-			<property name="authorFormat" value="[A-Z]-[A-Z][A-Z][A-Z]" />
+			<property name="authorFormat" value="[A-Z][A-Z][A-Z]" />
 
 			<!-- TODO: change to false-->
 			<property name="allowMissingParamTags" value="true" />

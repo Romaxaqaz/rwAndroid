@@ -8,9 +8,10 @@ package by.client.android.railwayapp.support;
 public interface Client {
 
     /**
-     * Загружает данные
+     * Выполняет запрос с помощью загрузчика
      *
      * @param loader загрузчик данных
+     * @param registerLoader callback загрузки данных
      */
-    void load(Loader loader);
+    void send(Loader loader, RegisterLoader registerLoader);
 }

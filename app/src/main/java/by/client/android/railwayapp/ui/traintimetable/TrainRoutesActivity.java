@@ -31,7 +31,9 @@ import by.client.android.railwayapp.support.BaseLoaderListener;
 import by.client.android.railwayapp.support.Client;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 import by.client.android.railwayapp.ui.trainroute.TrainRouteActivity;
+import by.client.android.railwayapp.ui.utils.Dialogs;
 import by.client.android.railwayapp.ui.utils.UiUtils;
+import by.client.android.railwayapp.ui.utils.Utils;
 import by.client.android.railwayapp.ui.view.TrainPlaceView;
 
 /**
@@ -115,7 +117,8 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
     }
 
     private void loadData(SearchTrain trainRoute) {
-        client.load(new TrainTimeLoader(railwayApi, trainRoute, new TrainTimeLoadListener(this)));
+        client.send(new TrainTimeLoader(railwayApi, trainRoute),
+            new TrainTimeLoadListener(this));
     }
 
     private static class TrainTimeLoadListener extends BaseLoaderListener<TrainRoutesActivity, List<TrainRoute>> {
@@ -154,7 +157,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
     private class TrainRouteClickListener implements TrainRoutesRecyclerAdapter.RecyclerViewClickListener {
 
         @Override
-        public void recyclerViewListClicked(View v, int position) {
+        public void recyclerViewListClicked(View view, int position) {
             TrainRoute trainRoute = trainRoutesAdapter.getItem(position);
             TrainRouteActivity.start(TrainRoutesActivity.this, trainRoute, TRAIN_ROUTE_ACTIVITY_CODE);
         }
@@ -164,7 +167,11 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
 
         @Override
         public void selectedStantion(Place place) {
-            PlaceInfoActivity.start(TrainRoutesActivity.this, place, TRAIN_ROUTE_ACTIVITY_CODE);
+            if (Utils.isBlank(place.getFreePlaces())) {
+                Dialogs.showToast(getApplicationContext(), R.string.error_detalization_places);
+            } else {
+                PlaceInfoActivity.start(TrainRoutesActivity.this, place, TRAIN_ROUTE_ACTIVITY_CODE);
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Created by PanteleevRV on 06.02.2018.
  *
- * @autor PRV
+ * @author PRV
  */
 
 public class Tariff {

@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  *
  * @author RPV
  */
-public class RailwayService {
+public class RailwayRetrofitService {
 
     private static final String BASE_URL = "http://rasp.rw.by/";
 

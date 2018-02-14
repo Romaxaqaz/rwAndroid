@@ -20,11 +20,11 @@ import by.client.android.railwayapp.ApplicationComponent;
 import by.client.android.railwayapp.BaseDaggerFragment;
 import by.client.android.railwayapp.GlobalExceptionHandler;
 import by.client.android.railwayapp.R;
-import by.client.android.railwayapp.support.BaseLoaderListener;
-import by.client.android.railwayapp.support.Client;
 import by.client.android.railwayapp.api.ScoreboardStantion;
 import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.model.Train;
+import by.client.android.railwayapp.support.BaseLoaderListener;
+import by.client.android.railwayapp.support.Client;
 import by.client.android.railwayapp.ui.settings.SettingsService;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 
@@ -77,6 +77,7 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
         swipeRefreshLayout.setOnRefreshListener(this);
         stantionAdapter = new StantionAdapter(getActivity());
         stantionAdapter.setData(scoreboardStantions);
+
         stantions.setAdapter(stantionAdapter);
         stantions.setOnItemSelectedListener(new StantionClickListener());
         stantions.setSelection(scoreboardStantions.indexOf(settingsService.getScoreboardStantion()));
@@ -93,11 +94,12 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
 
     @Override
     public void onRefresh() {
-        loadData((ScoreboardStantion) stantions.getSelectedItem());
+        loadData(UiUtils.<ScoreboardStantion>getSpinnerSelected(stantions));
     }
 
     private void loadData(ScoreboardStantion scoreboardStantion) {
-        client.load(new ScoreboardLoader(railwayApi, scoreboardStantion, new ScoreboardLoadListener(this)));
+        client.send(new ScoreboardLoader(railwayApi, scoreboardStantion),
+            new ScoreboardLoadListener(this));
         settingsService.saveScoreboardStantion(scoreboardStantion);
     }
 
@@ -109,8 +111,7 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            ScroreboardDetailActivity.start(getActivity(), trainsAdapter.getItem(position),
-                SCOREBOARD_ACTIVITY_CODE);
+            ScroreboardDetailActivity.start(getActivity(), trainsAdapter.getItem(position), SCOREBOARD_ACTIVITY_CODE);
         }
     }
 
@@ -150,7 +151,7 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
         @Override
         protected void onFinish(ScoreboardActivityFragment reference, boolean success) {
             reference.swipeRefreshLayout.setRefreshing(false);
-            UiUtils.setVisibility(reference.trainsAdapter.getCount() == 0, reference.emptyView);
+            UiUtils.setVisibility(reference.trainsAdapter.isEmpty(), reference.emptyView);
         }
     }
 }

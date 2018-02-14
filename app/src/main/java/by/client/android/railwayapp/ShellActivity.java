@@ -26,18 +26,18 @@ public class ShellActivity extends BaseDaggerActivity {
     @ViewById(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
 
-    private static final Map<Integer, Fragment> fragmentMap = new HashMap<>();
-    private static final Map<Integer, String> fragmentHeader = new HashMap<>();
+    private static final Map<Integer, Fragment> FRAGMENT_HASH_MAP = new HashMap<>();
+    private static final Map<Integer, String> FRAGMENT_HEADER_MAP = new HashMap<>();
 
     @AfterViews
     void initView() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new ButtomMenuListener());
 
-        fragmentMap.put(R.id.action_favorites, new ScoreboardActivityFragment_());
-        fragmentMap.put(R.id.action_schedules, new TrainTimeTableActivity_());
+        FRAGMENT_HASH_MAP.put(R.id.action_favorites, new ScoreboardActivityFragment_());
+        FRAGMENT_HASH_MAP.put(R.id.action_schedules, new TrainTimeTableActivity_());
 
-        fragmentHeader.put(R.id.action_favorites, "Виртуальное табло");
-        fragmentHeader.put(R.id.action_schedules, "Поиск маршрута");
+        FRAGMENT_HEADER_MAP.put(R.id.action_favorites, "Виртуальное табло");
+        FRAGMENT_HEADER_MAP.put(R.id.action_schedules, "Поиск маршрута");
 
         bottomNavigationView.setSelectedItemId(R.id.action_schedules);
     }
@@ -57,8 +57,8 @@ public class ShellActivity extends BaseDaggerActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             int menuId = item.getItemId();
-            if (fragmentMap.containsKey(menuId)) {
-                navigate(fragmentMap.get(menuId));
+            if (FRAGMENT_HASH_MAP.containsKey(menuId)) {
+                navigate(FRAGMENT_HASH_MAP.get(menuId));
                 changeHeader(menuId);
                 return true;
             }
@@ -67,6 +67,6 @@ public class ShellActivity extends BaseDaggerActivity {
     }
 
     private void changeHeader(int menuId) {
-        getSupportActionBar().setTitle(fragmentHeader.containsKey(menuId) ? fragmentHeader.get(menuId) : "");
+        getSupportActionBar().setTitle(FRAGMENT_HEADER_MAP.containsKey(menuId) ? FRAGMENT_HEADER_MAP.get(menuId) : "");
     }
 }

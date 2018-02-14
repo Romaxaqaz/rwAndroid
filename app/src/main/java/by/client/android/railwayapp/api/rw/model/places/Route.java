@@ -3,7 +3,7 @@ package by.client.android.railwayapp.api.rw.model.places;
 /**
  * Created by PanteleevRV on 06.02.2018.
  *
- * @autor PRV
+ * @author PRV
  */
 
 public class Route {

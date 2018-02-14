@@ -2,12 +2,11 @@ package by.client.android.railwayapp.ui.trainroute;
 
 import java.util.List;
 
-import by.client.android.railwayapp.support.Loader;
-import by.client.android.railwayapp.support.RegisterLoader;
-import by.client.android.railwayapp.support.SafeRegistrationSendListener;
 import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.model.RouteItem;
-import by.client.android.railwayapp.ui.BaseAsyncTask;
+import by.client.android.railwayapp.support.Loader;
+import by.client.android.railwayapp.support.RegisterLoader;
+import by.client.android.railwayapp.ui.BaseLoader;
 
 class TrainRouteLoader implements Loader {
 
@@ -15,50 +14,26 @@ class TrainRouteLoader implements Loader {
 
     private RailwayApi railwayApi;
     private String trainNumber;
-    private RegisterLoader registerLoader;
 
-    TrainRouteLoader(RailwayApi railwayApi, String trainNumber, RegisterLoader registerLoader) {
+    TrainRouteLoader(RailwayApi railwayApi, String trainNumber) {
         this.railwayApi = railwayApi;
         this.trainNumber = trainNumber;
-        this.registerLoader = new SafeRegistrationSendListener(registerLoader);
     }
 
     @Override
-    public void load() {
+    public void load(RegisterLoader registerLoader) {
         new LoadTrainRouteAsync(registerLoader).execute(trainNumber);
     }
 
-    private class LoadTrainRouteAsync extends BaseAsyncTask<String, List<RouteItem>> {
-
-        private RegisterLoader registerLoader;
+    private class LoadTrainRouteAsync extends BaseLoader<String, List<RouteItem>> {
 
         LoadTrainRouteAsync(RegisterLoader registerLoader) {
-            this.registerLoader = registerLoader;
+            super(registerLoader);
         }
 
         @Override
-        protected void onStart() {
-            registerLoader.onStart();
-        }
-
-        @Override
-        protected void onCompleted(List<RouteItem> trains) {
-            registerLoader.onSuccess(trains);
-        }
-
-        @Override
-        protected void onFinish(boolean successful) {
-            registerLoader.onFinish(successful);
-        }
-
-        @Override
-        protected void onError(Exception exception) {
-            registerLoader.onError(exception);
-        }
-
-        @Override
-        protected List<RouteItem> runTask(String... param) throws Exception {
-            String page = railwayApi.getTrainRoutePage(trainNumber, DEFAULT_DATE).execute().body().string();
+        protected List<RouteItem> call(String param) throws Exception {
+            String page = railwayApi.getTrainRoutePage(param, DEFAULT_DATE).execute().body().string();
             return new TrainRouteParsing(page).pars();
         }
     }

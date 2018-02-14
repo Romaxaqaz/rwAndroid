@@ -3,10 +3,7 @@ package by.client.android.railwayapp.ui.scoreboard;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import by.client.android.railwayapp.R;
-
 
 /**
  * Класс конвертер для преобразования строки типа поезда в иконку

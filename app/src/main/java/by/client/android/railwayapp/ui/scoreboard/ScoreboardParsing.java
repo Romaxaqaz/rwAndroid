@@ -10,7 +10,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import by.client.android.railwayapp.api.ScoreboardStantion;
 import by.client.android.railwayapp.model.Train;
 import by.client.android.railwayapp.ui.BaseParsing;
 

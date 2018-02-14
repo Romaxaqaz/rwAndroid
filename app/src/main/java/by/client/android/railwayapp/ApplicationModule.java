@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import android.app.Application;
 import by.client.android.railwayapp.api.rw.RailwayApi;
-import by.client.android.railwayapp.api.rw.RailwayService;
+import by.client.android.railwayapp.api.rw.RailwayRetrofitService;
 import by.client.android.railwayapp.support.Client;
 import by.client.android.railwayapp.support.RailwayClient;
 import by.client.android.railwayapp.ui.settings.SettingsService;
@@ -46,6 +46,6 @@ class ApplicationModule {
     @Provides
     @Singleton
     RailwayApi getRailwayApi() {
-        return new RailwayService().getRailwayApi();
+        return new RailwayRetrofitService().getRailwayApi();
     }
 }

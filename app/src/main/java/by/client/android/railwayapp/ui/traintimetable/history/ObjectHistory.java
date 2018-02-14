@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Интерфейс для реализации хранилища объектоа
  *
- * @autor PRV
+ * @author  PRV
  */
 public interface ObjectHistory<T> {
 

@@ -19,11 +19,11 @@ import by.client.android.railwayapp.ApplicationComponent;
 import by.client.android.railwayapp.BaseDaggerActivity;
 import by.client.android.railwayapp.GlobalExceptionHandler;
 import by.client.android.railwayapp.R;
-import by.client.android.railwayapp.support.BaseLoaderListener;
-import by.client.android.railwayapp.support.Client;
 import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.model.RouteItem;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
+import by.client.android.railwayapp.support.BaseLoaderListener;
+import by.client.android.railwayapp.support.Client;
 import by.client.android.railwayapp.ui.scoreboard.TrainTypeToImage;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 
@@ -99,7 +99,8 @@ public class TrainRouteActivity extends BaseDaggerActivity {
     }
 
     private void loadData() {
-        client.load(new TrainRouteLoader(railwayApi, train.getId(), new TrainRouteLoadListener(this)));
+        client.send(new TrainRouteLoader(railwayApi, train.getId()),
+            new TrainRouteLoadListener(this));
     }
 
     private static class TrainRouteLoadListener extends BaseLoaderListener<TrainRouteActivity, List<RouteItem>> {

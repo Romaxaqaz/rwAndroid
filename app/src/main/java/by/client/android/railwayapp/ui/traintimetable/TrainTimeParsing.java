@@ -78,8 +78,8 @@ class TrainTimeParsing extends BaseParsing<TrainRoute, String> {
                 String cost = place.getElementsByClass("denom_after").text();
 
                 Element countPlace = place.getElementsByClass("train_seats lnk").first();
-                String count = countPlace.text();
-                String link = countPlace.attr("data-get");
+                String count = checkEmpty(countPlace);
+                String link = countPlace == null ? "" : countPlace.attr("data-get");
 
                 places.add(new Place(name, count, link, cost));
             }

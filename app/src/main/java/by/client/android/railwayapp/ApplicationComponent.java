@@ -14,7 +14,7 @@ import dagger.Component;
 /**
  * Основной компонент приложения
  *
- * @autor PRV
+ * @author PRV
  */
 @Singleton
 @Component(modules = {ApplicationModule.class, ApplicationCacheModule.class})

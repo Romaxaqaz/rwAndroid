@@ -11,7 +11,7 @@ import by.client.android.railwayapp.ui.BaseListAdapter;
 /**
  * Адаптер для отображения элементов списка истории запросов
  *
- * @autor PRV
+ * @author PRV
  */
 class RouteHistoryAdapter extends BaseListAdapter<SearchTrain, BaseHolder<SearchTrain>> {
 

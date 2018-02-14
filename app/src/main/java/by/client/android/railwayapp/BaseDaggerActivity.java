@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 /**
  * Базовая активити для реализации привязки к Dagger
  *
- * @autor PRV
+ * @author PRV
  */
 public abstract class BaseDaggerActivity extends AppCompatActivity {
 

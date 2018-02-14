@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import android.content.Context;
 import by.client.android.railwayapp.model.SearchTrain;
@@ -14,9 +16,13 @@ import by.client.android.railwayapp.model.SearchTrain;
 /**
  * Класс для сохранения истории поиска поездоа
  *
- * @autor PRV
+ * <p>Сохраняет уникальный запрос поезда {@link SearchTrain}</p>
+ *
+ * @author PRV
  */
 public class RoutesHistory implements ObjectHistory<SearchTrain> {
+
+    private static Logger logger = Logger.getLogger(RoutesHistory.class.getName());
 
     private static final String ROUTES_KEY = "ROUTES_KEY";
 
@@ -25,14 +31,14 @@ public class RoutesHistory implements ObjectHistory<SearchTrain> {
 
     public RoutesHistory(Context context) {
         this.context = context;
-        routeHistory = readObject();
+        routeHistory = readCache();
     }
 
     @Override
     public synchronized void add(SearchTrain searchTrain) {
         if (!isContain(searchTrain)) {
             routeHistory.add(searchTrain);
-            writeObject(routeHistory);
+            saveState();
         }
     }
 
@@ -44,7 +50,7 @@ public class RoutesHistory implements ObjectHistory<SearchTrain> {
     @Override
     public synchronized void clear() {
         routeHistory = new ArrayList<>();
-        writeObject(routeHistory);
+        saveState();
     }
 
     private Boolean isContain(SearchTrain searchTrain) {
@@ -56,28 +62,28 @@ public class RoutesHistory implements ObjectHistory<SearchTrain> {
         return false;
     }
 
-    private void writeObject(List<SearchTrain> searchTrains) {
+    private void saveState() {
         FileOutputStream fileOutputStream;
         try {
             fileOutputStream = context.openFileOutput(ROUTES_KEY, Context.MODE_PRIVATE);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(searchTrains);
+            objectOutputStream.writeObject(routeHistory);
             objectOutputStream.close();
             fileOutputStream.close();
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        catch (IOException exception) {
+            logger.log(Level.WARNING, "Error while saving query history cache", exception);
         }
     }
 
-    private List<SearchTrain> readObject() {
+    private List<SearchTrain> readCache() {
         try {
             FileInputStream fileInputStream = context.openFileInput(ROUTES_KEY);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             return (List<SearchTrain>) objectInputStream.readObject();
         }
-        catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+        catch (ClassNotFoundException | IOException exception) {
+            logger.log(Level.WARNING, "Error while reading query history cache", exception);
         }
         return new ArrayList<>();
     }

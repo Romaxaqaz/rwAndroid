@@ -11,7 +11,7 @@ import by.client.android.railwayapp.ui.Validator;
 /**
  * Валидатор модели {@link SearchTrain}
  *
- * @author ROMAN PANTELEEV
+ * @author PRV
  */
 class SearchTrainValidator extends Validator {
 
@@ -21,10 +21,10 @@ class SearchTrainValidator extends Validator {
 
     SearchTrain validate(SearchStantion departure, SearchStantion destination, Calendar date) {
 
-        SearchStantion dep = checkNullOrEmpty(departure, R.string.error_required_departure);
-        SearchStantion des = checkNullOrEmpty(destination, R.string.error_required_destination);
-        Calendar dat = checkNullOrEmpty(date, R.string.error_required_date);
+        SearchStantion departureStantion = checkNullOrEmpty(departure, R.string.error_required_departure);
+        SearchStantion destinationStantion = checkNullOrEmpty(destination, R.string.error_required_destination);
+        Calendar calendar = checkNullOrEmpty(date, R.string.error_required_date);
 
-        return isValid() ? new SearchTrain(dep, des, dat.getTime()) : null;
+        return isValid() ? new SearchTrain(departureStantion, destinationStantion, calendar.getTime()) : null;
     }
 }

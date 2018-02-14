@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by PanteleevRV on 06.02.2018.
+ * Модель для описания свододных мест поезда
  *
- * @autor PRV
+ * @author PRV
  */
-
 public class TrainPlaceInfo {
 
     private Boolean isSimplePopup;
@@ -129,4 +128,39 @@ public class TrainPlaceInfo {
         this.tariffs = tariffs;
     }
 
+    /**
+     * Возвращает путь поезда
+     *
+     * @return Станцию отправлени и станцию назначения
+     */
+    public String getPath() {
+        return getFrom() + " - " + getTo();
+    }
+
+    /**
+     * Возвращает путь поезда для юзера
+     *
+     * @return Станцию отправлени и станцию назначения для пользователя
+     */
+    public String getUserRoute() {
+        return getRoute().getFrom() + " - " + getRoute().getTo();
+    }
+
+    /**
+     * Возвращает дату отправления
+     *
+     * @return дату и время отправления
+     */
+    public String getRouteStartDate() {
+        return getRoute().getStartDate() + " " + getRoute().getStartTime();
+    }
+
+    /**
+     * Возвращает дату прибытия
+     *
+     * @return дату и время прибытия
+     */
+    public String getRouteEndDate() {
+        return getRoute().getEndDate() + " " + getRoute().getEndTime();
+    }
 }

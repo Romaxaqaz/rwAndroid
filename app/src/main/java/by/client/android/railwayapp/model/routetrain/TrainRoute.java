@@ -123,7 +123,6 @@ public class TrainRoute implements Serializable {
         return travelTime;
     }
 
-
     public List<Place> getPlaces() {
         return places;
     }

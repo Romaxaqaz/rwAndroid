@@ -28,14 +28,12 @@ class RouteAdapter extends BaseListAdapter<RouteItem, BaseHolder<RouteItem>> {
         private TextView route;
         private TextView arrival;
         private TextView arrived;
-        private TextView travelTime;
         private TextView stay;
 
         ViewHolder(View view) {
             route = view.findViewById(R.id.route);
             arrival = view.findViewById(R.id.departureStation);
             arrived = view.findViewById(R.id.destinationStantion);
-            travelTime = view.findViewById(R.id.travelTime);
             stay = view.findViewById(R.id.stay);
         }
 
@@ -44,7 +42,6 @@ class RouteAdapter extends BaseListAdapter<RouteItem, BaseHolder<RouteItem>> {
             route.setText(routeItem.getStantion());
             arrival.setText(routeItem.getArrival());
             arrived.setText(routeItem.getArrived());
-            travelTime.setText(routeItem.getTravelTime());
             stay.setText(routeItem.getStay());
         }
     }

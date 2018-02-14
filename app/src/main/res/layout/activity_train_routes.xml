@@ -43,7 +43,7 @@
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/arrival_marker"
+                                app:srcCompat="@drawable/arrival_marker"
                                 android:tint="@color/witeText"
                                 android:layout_gravity="center"
                                 android:layout_margin="8dp" />
@@ -82,7 +82,7 @@
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/destination_marker"
+                                app:srcCompat="@drawable/destination_marker"
                                 android:tint="@color/witeText"
                                 android:layout_gravity="center"
                                 android:layout_margin="8dp" />
@@ -119,7 +119,7 @@
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/calendar"
+                                app:srcCompat="@drawable/calendar"
                                 android:tint="@color/witeText"
                                 android:layout_gravity="center"
                                 android:layout_margin="8dp" />

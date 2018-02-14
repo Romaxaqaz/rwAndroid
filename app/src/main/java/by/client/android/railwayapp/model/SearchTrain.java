@@ -18,7 +18,7 @@ public class SearchTrain implements Serializable {
     private SearchStantion departureStation;
 
     /**
-     * Куда
+     * Станция назначения
      */
     private SearchStantion destinationStantion;
 
@@ -56,7 +56,6 @@ public class SearchTrain implements Serializable {
 
         SearchTrain that = (SearchTrain) o;
         return departureStation.equals(that.departureStation) && destinationStantion.equals(that.destinationStantion);
-
     }
 
     @Override

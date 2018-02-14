@@ -58,7 +58,6 @@ public class SearchStantionActivity extends DialogFragment implements SearchView
     void onCreateView() {
         AndroidApplication.getApp().getApplicationComponent().inject(this);
 
-
         resultListView.setTextFilterEnabled(true);
         stantionAdapter = new StantionAdapter(getActivity());
         resultListView.setAdapter(stantionAdapter);
@@ -92,7 +91,7 @@ public class SearchStantionActivity extends DialogFragment implements SearchView
 
     @Override
     public boolean onQueryTextChange(final String newText) {
-        railwayApi.searchStantion(newText, "50", "0").enqueue(new SearchResultListener());
+        railwayApi.searchStation(newText, "50", "0").enqueue(new SearchResultListener());
         return true;
     }
 
@@ -143,6 +142,9 @@ public class SearchStantionActivity extends DialogFragment implements SearchView
         }
     }
 
+    /**
+     * Callback выбора станции
+     */
     public interface ChooseStantionDialogListener {
 
         void selectedStantion(SearchStantion stantion);

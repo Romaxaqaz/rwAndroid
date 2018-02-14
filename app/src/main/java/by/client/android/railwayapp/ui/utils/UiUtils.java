@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 /**
  * Утилитный класс для работы с UI
@@ -78,5 +79,12 @@ public class UiUtils {
         int width = ViewGroup.LayoutParams.MATCH_PARENT;
         int height = ViewGroup.LayoutParams.MATCH_PARENT;
         dialog.getWindow().setLayout(width, height);
+    }
+
+    public static <T> T getSpinnerSelected(Spinner spinner) {
+        if (spinner == null) {
+            throw new NullPointerException("Spinner can not be null");
+        }
+        return (T) spinner.getSelectedItem();
     }
 }

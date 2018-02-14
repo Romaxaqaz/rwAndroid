@@ -7,13 +7,17 @@ import android.content.Context;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import static android.text.TextUtils.join;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.model.places.Car;
 import by.client.android.railwayapp.api.rw.model.places.Tariff;
+import by.client.android.railwayapp.ui.utils.UiUtils;
+import by.client.android.railwayapp.ui.utils.Utils;
 
 /**
  * Адаптер для элемента списка информации по вагону
@@ -48,18 +52,23 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
         CarsRecyclerAdapter carsRecyclerAdapter = new CarsRecyclerAdapter();
         carsRecyclerAdapter.setData(tariff.getCars());
         carsRecyclerAdapter.setItemClickListener(new CarItemClickListener(tariff, holder));
-        holder.carriageRecyclerView.setAdapter(carsRecyclerAdapter);
 
+        holder.carriageRecyclerView.setAdapter(carsRecyclerAdapter);
         holder.tariffTextView.setText(tariff.getPriceByn());
         holder.itemView.setTag(tariff);
     }
 
     private void updateCarInfo(ViewHolder viewHolder, Car car) {
-        viewHolder.totalPlaceTextView.setText(car.getEmptyPlaces().toString());
-        viewHolder.upperPlaceTextView.setText(car.getUpperPlaces());
-        viewHolder.downPlaceTextView.setText(car.getLowerPlaces());
-        viewHolder.upperBPlaceTextView.setText(car.getUpperSidePlaces());
-        viewHolder.downBPlaceTextView.setText(car.getLowerSidePlaces());
+        viewHolder.totalPlaceTextView.setText(join(", ", car.getEmptyPlaces()));
+        hideView(car.getLowerPlaces(), viewHolder.downPlaceView, viewHolder.downPlaceTextView);
+        hideView(car.getUpperPlaces(), viewHolder.upperPlaceView, viewHolder.upperPlaceTextView);
+        hideView(car.getUpperSidePlaces(), viewHolder.upperBPlaceView, viewHolder.upperBPlaceTextView);
+        hideView(car.getLowerSidePlaces(), viewHolder.downBPlaceView, viewHolder.downBPlaceTextView);
+    }
+
+    private void hideView(String content, LinearLayout linearLayout, TextView textView) {
+        textView.setText(content);
+        UiUtils.setVisibility(!Utils.isBlank(content), linearLayout);
     }
 
     @Override
@@ -78,6 +87,11 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
         private TextView downBPlaceTextView;
         private TextView tariffTextView;
 
+        private LinearLayout downPlaceView;
+        private LinearLayout upperPlaceView;
+        private LinearLayout upperBPlaceView;
+        private LinearLayout downBPlaceView;
+
         ViewHolder(View view) {
             super(view);
             tariffTypeTextView = view.findViewById(R.id.tariffTypeTextView);
@@ -90,6 +104,12 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
             upperBPlaceTextView = view.findViewById(R.id.upperBPlaceTextView);
             downBPlaceTextView = view.findViewById(R.id.downBPlaceTextView);
             tariffTextView = view.findViewById(R.id.tariffTextView);
+
+            downPlaceView = view.findViewById(R.id.downPlaceView);
+            upperPlaceView = view.findViewById(R.id.upperPlaceView);
+            upperBPlaceView = view.findViewById(R.id.upperBPlaceView);
+            downBPlaceView = view.findViewById(R.id.downBPlaceView);
+
         }
     }
 
@@ -104,7 +124,7 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
         }
 
         @Override
-        public void onItemClick(View v, int position) {
+        public void onItemClick(View view, int position) {
             updateCarInfo(viewHolder, tariff.getCars().get(position));
         }
     }

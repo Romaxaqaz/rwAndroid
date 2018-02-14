@@ -31,12 +31,6 @@ public class PushNotification {
         notificationManager.notify(getNotificationId(), notification);
     }
 
-    public static void send(Context context, String message, PendingIntent pendingIntent, Integer id) {
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = getNotification(context, message, pendingIntent);
-        notificationManager.notify(id, notification);
-    }
-
     private static Notification getNotification(Context context, String message, PendingIntent pendingintent) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, DEFAULT_NOTIFICATION_CHANNEL)
             .setSmallIcon(R.mipmap.ic_launcher)

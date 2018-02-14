@@ -1,176 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/content_place_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_place_info"
-        tools:context="by.client.android.railwayapp.ui.traintimetable.PlaceInfoActivity">
+        tools:context="by.client.android.railwayapp.ui.traintimetable.PlaceInfoActivity"
+        android:fitsSystemWindows="true">
 
-    <RelativeLayout
+    <android.support.design.widget.AppBarLayout
+            android:id="@+id/main.appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <LinearLayout
-                android:id="@+id/headerLayout"
+        <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/main.collapsing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:layout_scrollFlags="scroll|snap"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginStart="48dp"
+                app:expandedTitleMarginEnd="64dp">
 
-            <LinearLayout
+            <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="2dp">
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_gravity="center"
-                        android:layout_weight="7">
-
-                    <ImageView
-                            android:id="@+id/icon"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:textAlignment="center"
-                            android:layout_gravity="center"
-                            android:layout_margin="2dp" />
-
-                    <TextView
-                            android:id="@+id/id"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:textSize="@dimen/text_size_micro" />
-                </LinearLayout>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="4dp">
-
-                    <TextView
-                            android:id="@+id/path"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_size_medium" />
-
-                    <TextView
-                            android:id="@+id/type"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_size_micro" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="4dp">
-
-                <TextView
-                        android:text="Маршрут следования пассажира"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"/>
-
-                <TextView
-                        android:id="@+id/passengerRoute"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="22sp"
-                        android:layout_marginLeft="4dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_margin="4dp">
 
                 <LinearLayout
+                        android:id="@+id/headerLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:background="@color/colorPrimary"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp">
 
-                    <TextView
-                            android:text="@string/departure"
+                    <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/HeaderTextView" />
+                            android:orientation="horizontal"
+                            android:layout_margin="2dp">
 
-                    <TextView
-                            android:id="@+id/departureTextView"
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_gravity="center"
+                                android:layout_weight="7">
+
+                            <ImageView
+                                    android:id="@+id/icon"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:textAlignment="center"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp" />
+
+                            <TextView
+                                    android:id="@+id/id"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:textSize="@dimen/text_size_micro"
+                                    android:textColor="@color/tint_default"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="4dp">
+
+                            <TextView
+                                    android:id="@+id/path"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/text_size_medium"
+                                    android:textColor="@color/witeText"/>
+
+                            <TextView
+                                    android:id="@+id/type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/text_size_micro"
+                                    android:textColor="@color/tint_default"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center" />
+                            android:orientation="vertical"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginBottom="24dp">
+
+                        <TextView
+                                android:text="Маршрут следования пассажира"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="4dp"
+                                android:textSize="@dimen/text_size_micro"
+                                android:textAlignment="center"
+                                android:textColor="@color/tint_default"/>
+
+                        <TextView
+                                android:id="@+id/passengerRoute"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="22sp"
+                                android:layout_marginLeft="4dp"
+                                android:textAlignment="center"
+                                android:textColor="@color/witeText"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="4dp">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="1">
+
+                            <TextView
+                                    android:text="@string/departure"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    style="@style/HeaderTextView"
+                                    android:textColor="@color/tint_default"/>
+
+                            <TextView
+                                    android:id="@+id/departureTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/witeText"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="1">
+
+                            <TextView
+                                    android:text="@string/arrival"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    style="@style/HeaderTextView"
+                                    android:textColor="@color/tint_default"/>
+
+                            <TextView
+                                    android:id="@+id/arrivalTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/witeText"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="1">
+
+                            <TextView
+                                    android:text="@string/travelTime"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    style="@style/HeaderTextView"
+                                    android:textColor="@color/tint_default"/>
+
+                            <TextView
+                                    android:id="@+id/travelTimeTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/witeText"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+            </FrameLayout>
 
-                    <TextView
-                            android:text="@string/arrival"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            style="@style/HeaderTextView" />
+        </android.support.design.widget.CollapsingToolbarLayout>
 
-                    <TextView
-                            android:id="@+id/arrivalTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center" />
+    </android.support.design.widget.AppBarLayout>
 
-                </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/tariffsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-
-                    <TextView
-                            android:text="@string/travelTime"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            style="@style/HeaderTextView" />
-
-                    <TextView
-                            android:id="@+id/travelTimeTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/tariffsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:scrollbars="vertical"
-                android:layout_below="@+id/headerLayout" />
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

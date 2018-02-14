@@ -25,7 +25,6 @@
     <string name="tab_2">Red</string>
     <string name="tab_3">Blue</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="error_required_departure">Станция отправления обязательна для заполнения</string>
     <string name="error_required_destination">Станция назначения обязательна для заполнения</string>
@@ -40,4 +39,7 @@
     <string name="train_route">Маршрут поезда</string>
     <string name="clear_history">очистить историю</string>
     <string name="route_list_history_empty">Список истории запросов пуст</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="error_detalization_places">Информация по детализации мест недоступна для этого поезда.</string>
+    <string name="push_content">Путь: %1$s, Платформа: %2$s, Маршрут: %3$s</string>
 </resources>

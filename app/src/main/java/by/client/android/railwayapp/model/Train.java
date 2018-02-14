@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Описание сущности "Поезд"
+ *
+ * @author PRV
  */
 public class Train implements Serializable {
 

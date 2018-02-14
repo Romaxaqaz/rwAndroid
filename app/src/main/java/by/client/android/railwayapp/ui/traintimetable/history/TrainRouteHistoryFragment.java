@@ -20,6 +20,11 @@ import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 
+/**
+ * Отображает историю запросов
+ *
+ * @author PRV
+ */
 @EFragment(R.layout.fragment_train_route_history)
 public class TrainRouteHistoryFragment extends DialogFragment {
 
@@ -79,8 +84,8 @@ public class TrainRouteHistoryFragment extends DialogFragment {
     private class RouteItemClickListener implements AdapterView.OnItemClickListener {
 
         @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            chooseRouteDialogListener.onSelectedStantion(routeHistoryAdapter.getItem(i));
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            chooseRouteDialogListener.onSelectedStantion(routeHistoryAdapter.getItem(position));
             dismiss();
         }
     }
@@ -95,6 +100,10 @@ public class TrainRouteHistoryFragment extends DialogFragment {
         }
     }
 
+
+    /**
+     * Callback выбора маршрута
+     */
     public interface ChooseRouteDialogListener {
 
         void onSelectedStantion(SearchTrain searchTrain);

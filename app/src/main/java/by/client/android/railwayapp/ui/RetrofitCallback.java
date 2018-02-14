@@ -15,8 +15,7 @@ import retrofit2.Response;
  *     <li>{@link RetrofitCallback#onFinish()} - вызывается при завершении загрузки</li>
  * </ul>
  *
- * @param T дип возвращаемого значения
- * @autor PRV
+ * @author PRV
  */
 public abstract class RetrofitCallback<T> implements Callback<T> {
 

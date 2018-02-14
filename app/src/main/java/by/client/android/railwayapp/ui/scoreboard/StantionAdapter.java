@@ -11,7 +11,7 @@ import by.client.android.railwayapp.ui.BaseListAdapter;
 /**
  * Адаптер для отображения станций в выпадающем списке
  *
- * @author ROMAN PANTELEEV
+ * @author PRV
  */
 class StantionAdapter extends BaseListAdapter<ScoreboardStantion, BaseHolder<ScoreboardStantion>> {
 

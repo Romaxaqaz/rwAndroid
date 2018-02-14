@@ -2,13 +2,12 @@ package by.client.android.railwayapp.ui.traintimetable;
 
 import java.util.List;
 
-import by.client.android.railwayapp.support.Loader;
-import by.client.android.railwayapp.support.RegisterLoader;
-import by.client.android.railwayapp.support.SafeRegistrationSendListener;
 import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
-import by.client.android.railwayapp.ui.BaseAsyncTask;
+import by.client.android.railwayapp.support.Loader;
+import by.client.android.railwayapp.support.RegisterLoader;
+import by.client.android.railwayapp.ui.BaseLoader;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 
 /**
@@ -20,43 +19,25 @@ class TrainTimeLoader implements Loader {
 
     private RailwayApi railwayApi;
     private SearchTrain searchTrain;
-    private RegisterLoader registerLoader;
 
-    TrainTimeLoader(RailwayApi railwayApi, SearchTrain searchTrain, RegisterLoader registerLoader) {
+    TrainTimeLoader(RailwayApi railwayApi, SearchTrain searchTrain) {
         this.railwayApi = railwayApi;
         this.searchTrain = searchTrain;
-        this.registerLoader = new SafeRegistrationSendListener(registerLoader);
     }
 
     @Override
-    public void load() {
-        new LoadTrainTimeAsync().execute(searchTrain);
+    public void load(RegisterLoader registerLoader) {
+        new LoadTrainTimeAsync(registerLoader).execute(searchTrain);
     }
 
-    private class LoadTrainTimeAsync extends BaseAsyncTask<SearchTrain, List<TrainRoute>> {
+    private class LoadTrainTimeAsync extends BaseLoader<SearchTrain, List<TrainRoute>> {
 
-        @Override
-        protected void onStart() {
-            registerLoader.onStart();
+        LoadTrainTimeAsync(RegisterLoader registerLoader) {
+            super(registerLoader);
         }
 
         @Override
-        protected void onCompleted(List<TrainRoute> trains) {
-            registerLoader.onSuccess(trains);
-        }
-
-        @Override
-        protected void onFinish(boolean successful) {
-            registerLoader.onFinish(successful);
-        }
-
-        @Override
-        protected void onError(Exception exception) {
-            registerLoader.onError(exception);
-        }
-
-        @Override
-        protected List<TrainRoute> runTask(SearchTrain... param) throws Exception {
+        protected List<TrainRoute> call(SearchTrain searchTrain) throws Exception {
 
             String page = railwayApi.getTrainRoutes(
                 searchTrain.getDestinationStantion().getValue(),

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
 import by.client.android.railwayapp.ui.scoreboard.TrainTypeToImage;
+import by.client.android.railwayapp.ui.utils.UiUtils;
 import by.client.android.railwayapp.ui.view.TrainPlaceView;
 
 /**
@@ -53,6 +54,10 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
         holder.travelTime.setText(train.getTravelTime());
         holder.placesTest.initPlaces(train.getPlaces());
 
+        UiUtils.setVisibility(train.getParameters().getElectronicRegistration(), holder.ectronicRegistration);
+        UiUtils.setVisibility(train.getParameters().getCorporateTrain(), holder.corporateTrain);
+        UiUtils.setVisibility(train.getParameters().getExpressTrain(), holder.expressTrain);
+
         holder.itemView.setTag(train);
     }
 
@@ -80,6 +85,9 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
         private TextView arrived;
         private TextView travelTime;
         private TrainPlaceView placesTest;
+        private TextView ectronicRegistration;
+        private TextView corporateTrain;
+        private TextView expressTrain;
 
         ViewHolder(View view) {
             super(view);
@@ -92,6 +100,10 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
             travelTime = view.findViewById(R.id.travelTime);
             placesTest = view.findViewById(R.id.placesTest);
             placesTest.setClickListener(onPlaceItemClickListener);
+
+            ectronicRegistration = view.findViewById(R.id.ectronicRegistration);
+            corporateTrain = view.findViewById(R.id.corporateTrain);
+            expressTrain = view.findViewById(R.id.expressTrain);
         }
     }
 

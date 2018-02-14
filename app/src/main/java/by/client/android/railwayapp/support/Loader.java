@@ -10,5 +10,5 @@ public interface Loader {
     /**
      * Загружает реобходимые данные
      */
-    void load();
+    void load(RegisterLoader registerLoader);
 }

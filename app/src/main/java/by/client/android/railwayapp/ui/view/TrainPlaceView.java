@@ -15,7 +15,7 @@ import by.client.android.railwayapp.ui.traintimetable.TrainPlaceAdapter;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 
 /**
- * Created by PanteleevRV on 30.01.2018.
+ * View для отображения доступных мест поезда
  *
  * @author ROMAN PANTELEEV
  */
@@ -67,6 +67,9 @@ public class TrainPlaceView extends FrameLayout {
         this.onPlaceItemClickListener = onPlaceItemClickListener;
     }
 
+    /**
+     * Callback выбора категории мест для отображения
+     */
     public interface OnPlaceItemClickListener {
 
         void selectedStantion(Place place);

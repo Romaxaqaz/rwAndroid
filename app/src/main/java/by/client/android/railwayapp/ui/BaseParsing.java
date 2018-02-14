@@ -4,6 +4,12 @@ import java.util.List;
 
 import org.jsoup.nodes.Element;
 
+
+/**
+ * Базовый класс парсинга страниц
+ *
+ * @author PRV
+ */
 public abstract class BaseParsing<Result, Param> {
 
     protected static final String EMPTY_STRING = "";

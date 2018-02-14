@@ -10,7 +10,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Модулб для работы с кэш приложения
+ * МодулЬ для работы с кэшем приложения
  *
  * @autor PRV
  */
