@@ -25,7 +25,7 @@ class StationAdapter extends BaseListAdapter<ScoreboardStation, BaseHolder<Score
         private TextView statusName;
 
         ViewHolder(View view) {
-            statusName = view.findViewById(R.id.stationNane);
+            statusName = view.findViewById(R.id.stationName);
         }
 
         @Override

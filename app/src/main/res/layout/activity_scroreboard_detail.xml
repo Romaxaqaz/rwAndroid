@@ -26,7 +26,7 @@
                     android:layout_weight="7">
 
                 <ImageView
-                        android:id="@+id/icon"
+                        android:id="@+id/icoImageView"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:textAlignment="center"
@@ -34,7 +34,7 @@
                         android:layout_margin="2dp" />
 
                 <TextView
-                        android:id="@+id/id"
+                        android:id="@+id/trainIdTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -46,16 +46,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:layout_marginLeft="4dp">
+                    android:layout_marginStart="4dp">
 
                 <TextView
-                        android:id="@+id/path"
+                        android:id="@+id/pathTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_size_medium" />
 
                 <TextView
-                        android:id="@+id/type"
+                        android:id="@+id/trainTypeTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_size_micro" />
@@ -86,7 +86,7 @@
                         android:textSize="@dimen/text_size_small" />
 
                 <TextView
-                        android:id="@+id/way"
+                        android:id="@+id/wayTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -109,7 +109,7 @@
                         android:textSize="@dimen/text_size_small" />
 
                 <TextView
-                        android:id="@+id/trainPlatform"
+                        android:id="@+id/platformTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -141,7 +141,7 @@
                         android:textSize="@dimen/text_size_small" />
 
                 <TextView
-                        android:id="@+id/startTime"
+                        android:id="@+id/startTimeTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -164,7 +164,7 @@
                         android:textSize="@dimen/text_size_small" />
 
                 <TextView
-                        android:id="@+id/endTime"
+                        android:id="@+id/endTimeTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"

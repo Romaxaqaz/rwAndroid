@@ -109,7 +109,6 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
             upperPlaceView = view.findViewById(R.id.upperPlaceView);
             upperBPlaceView = view.findViewById(R.id.upperBPlaceView);
             downBPlaceView = view.findViewById(R.id.downBPlaceView);
-
         }
     }
 

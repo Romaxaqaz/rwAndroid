@@ -19,7 +19,7 @@
                 android:background="@color/colorPrimary">
 
             <Spinner
-                    android:id="@+id/planets_spinner"
+                    android:id="@+id/stationsSpinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:popupBackground="@color/colorPrimary" />

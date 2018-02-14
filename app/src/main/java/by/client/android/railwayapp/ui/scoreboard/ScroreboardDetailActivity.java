@@ -27,29 +27,29 @@ public class ScroreboardDetailActivity extends AppCompatActivity {
 
     private static final String TRAIN_KEY = "TRAIN_KEY";
 
-    @ViewById(R.id.icon)
-    ImageView ico;
+    @ViewById(R.id.icoImageView)
+    ImageView icoImageView;
 
-    @ViewById(R.id.id)
-    TextView id;
+    @ViewById(R.id.trainIdTextView)
+    TextView trainIdTextView;
 
-    @ViewById(R.id.way)
-    TextView way;
+    @ViewById(R.id.wayTextView)
+    TextView wayTextView;
 
-    @ViewById(R.id.path)
-    TextView path;
+    @ViewById(R.id.pathTextView)
+    TextView pathTextView;
 
-    @ViewById(R.id.type)
-    TextView type;
+    @ViewById(R.id.trainTypeTextView)
+    TextView trainTypeTextView;
 
-    @ViewById(R.id.trainPlatform)
-    TextView trainPlatform;
+    @ViewById(R.id.platformTextView)
+    TextView platformTextView;
 
-    @ViewById(R.id.startTime)
-    TextView startTime;
+    @ViewById(R.id.startTimeTextView)
+    TextView startTimeTextView;
 
-    @ViewById(R.id.endTime)
-    TextView endTime;
+    @ViewById(R.id.endTimeTextView)
+    TextView endTimeTextView;
 
     @Extra(TRAIN_KEY)
     Train train;
@@ -64,14 +64,14 @@ public class ScroreboardDetailActivity extends AppCompatActivity {
     void initActivity() {
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        id.setText(train.getId());
-        ico.setBackgroundResource(new TrainTypeToImage().convert(train.getPathType()));
-        type.setText(train.getTrainType());
-        path.setText(train.getPath());
-        way.setText(train.getWay());
-        trainPlatform.setText(train.getPlatform());
-        startTime.setText(train.getStart());
-        endTime.setText(train.getEnd());
+        trainIdTextView.setText(train.getId());
+        icoImageView.setBackgroundResource(new TrainTypeToImage().convert(train.getPathType()));
+        trainTypeTextView.setText(train.getTrainType());
+        pathTextView.setText(train.getPath());
+        wayTextView.setText(train.getWay());
+        platformTextView.setText(train.getPlatform());
+        startTimeTextView.setText(train.getStart());
+        endTimeTextView.setText(train.getEnd());
     }
 
     @Click(R.id.sendPush)

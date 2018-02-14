@@ -18,7 +18,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/main.collapsing"
                 android:layout_width="match_parent"
-                android:layout_height="260dp"
+                android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|snap"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
@@ -44,54 +44,43 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:srcCompat="@drawable/arrival_marker"
-                                android:tint="@color/witeText"
-                                android:layout_gravity="center"
-                                android:layout_margin="8dp" />
+                                style="@style/ImageViewHeader" />
 
                         <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginStart="6dp">
+                                style="@style/InputTextContainerStyle">
 
                             <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Станция отправления"
-                                    android:layout_marginTop="4dp" />
+                                    android:text="Станция отправления" />
 
                             <TextView
                                     android:id="@+id/startTextView"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="regular"
-                                    android:textSize="22sp"
-                                    android:textColor="@color/witeText" />
+                                    style="@style/InputTextViewStyle" />
 
                         </LinearLayout>
-
 
                     </LinearLayout>
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="8dp">
+                            android:orientation="horizontal">
 
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:srcCompat="@drawable/destination_marker"
-                                android:tint="@color/witeText"
-                                android:layout_gravity="center"
-                                android:layout_margin="8dp" />
+                                style="@style/ImageViewHeader" />
 
                         <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginStart="6dp">
+                                style="@style/InputTextContainerStyle">
 
                             <TextView
                                     android:layout_width="match_parent"
@@ -102,33 +91,27 @@
                                     android:id="@+id/endTextView"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textSize="22sp"
-                                    android:textColor="@color/witeText" />
+                                    style="@style/InputTextViewStyle" />
 
                         </LinearLayout>
-
 
                     </LinearLayout>
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="8dp">
+                            android:orientation="horizontal">
 
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:srcCompat="@drawable/calendar"
-                                android:tint="@color/witeText"
-                                android:layout_gravity="center"
-                                android:layout_margin="8dp" />
+                                style="@style/ImageViewHeader" />
 
                         <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginStart="6dp">
+                                style="@style/InputTextContainerStyle">
 
                             <TextView
                                     android:layout_width="match_parent"
@@ -139,8 +122,7 @@
                                     android:id="@+id/dateTextView"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textSize="22sp"
-                                    android:textColor="@color/witeText" />
+                                    style="@style/InputTextViewStyle" />
 
                         </LinearLayout>
 

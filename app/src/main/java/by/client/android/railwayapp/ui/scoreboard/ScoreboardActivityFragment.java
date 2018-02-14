@@ -61,11 +61,11 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
     @ViewById(R.id.toolBar)
     Toolbar toolbar;
 
-    @ViewById(R.id.trains)
+    @ViewById(R.id.trainsListView)
     ListView trainsListView;
 
-    @ViewById(R.id.planets_spinner)
-    Spinner stations;
+    @ViewById(R.id.stationsSpinner)
+    Spinner stationsSpinner;
 
     private TrainAdapter trainsAdapter;
     private StationAdapter stationAdapter;
@@ -77,9 +77,9 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
         swipeRefreshLayout.setOnRefreshListener(this);
         stationAdapter = new StationAdapter(getActivity());
         stationAdapter.setData(scoreboardStations);
-        stations.setAdapter(stationAdapter);
-        stations.setOnItemSelectedListener(new StationClickListener());
-        stations.setSelection(scoreboardStations.indexOf(settingsService.getScoreboardStation()));
+        stationsSpinner.setAdapter(stationAdapter);
+        stationsSpinner.setOnItemSelectedListener(new StationClickListener());
+        stationsSpinner.setSelection(scoreboardStations.indexOf(settingsService.getScoreboardStation()));
 
         trainsAdapter = new TrainAdapter(getActivity());
         trainsListView.setOnItemClickListener(new TrainClickListener());
@@ -93,7 +93,7 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
 
     @Override
     public void onRefresh() {
-        loadData(UiUtils.<ScoreboardStation>getSpinnerSelected(stations));
+        loadData(UiUtils.<ScoreboardStation>getSpinnerSelected(stationsSpinner));
     }
 
     private void loadData(ScoreboardStation scoreboardStation) {

@@ -47,7 +47,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
     TextView arrivalEditText;
 
     @ViewById(R.id.date)
-    TextView date;
+    TextView dateTextView;
 
     @ViewById(R.id.searchStationButton)
     Button searchStationButton;
@@ -60,7 +60,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
     void initView() {
         arriveEditText.setOnClickListener(new OpenSearchStation(new StationArriveSelected()));
         arrivalEditText.setOnClickListener(new OpenSearchStation(new StationArrivalSelected()));
-        date.setOnClickListener(new OnDatePickerClickListener());
+        dateTextView.setOnClickListener(new OnDatePickerClickListener());
         searchStationButton.setOnClickListener(new SearchClickListenr());
     }
 
@@ -160,7 +160,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
             currentDate.set(Calendar.YEAR, year);
             currentDate.set(Calendar.MONTH, monthOfYear);
             currentDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            date.setText(new DateToStringConverter().convert(currentDate.getTime()));
+            dateTextView.setText(new DateToStringConverter().convert(currentDate.getTime()));
         }
     }
 }

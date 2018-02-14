@@ -82,7 +82,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textSize="@dimen/text_size_medium"
-                                    android:textColor="@color/witeText"/>
+                                    android:textColor="@color/white_text"/>
 
                             <TextView
                                     android:id="@+id/type"
@@ -120,7 +120,7 @@
                                 android:textSize="22sp"
                                 android:layout_marginLeft="4dp"
                                 android:textAlignment="center"
-                                android:textColor="@color/witeText"/>
+                                android:textColor="@color/white_text"/>
 
                     </LinearLayout>
 
@@ -148,7 +148,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textAlignment="center"
-                                    android:textColor="@color/witeText"/>
+                                    android:textColor="@color/white_text"/>
 
                         </LinearLayout>
 
@@ -170,7 +170,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textAlignment="center"
-                                    android:textColor="@color/witeText"/>
+                                    android:textColor="@color/white_text"/>
 
                         </LinearLayout>
 
@@ -199,7 +199,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textAlignment="center"
-                                    android:textColor="@color/witeText"/>
+                                    android:textColor="@color/white_text"/>
 
                         </LinearLayout>
 

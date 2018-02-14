@@ -10,7 +10,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:layout_marginStart="8dp">
+            android:layout_marginStart="@dimen/content_margin_start"
+            android:layout_marginEnd="@dimen/content_margin_end">
 
         <TextView
                 android:id="@+id/departureStation"
@@ -33,9 +34,10 @@
             android:layout_gravity="center">
 
         <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/image_size_large"
+                android:layout_height="@dimen/image_size_large"
                 app:srcCompat="@drawable/chevron_right" />
+
     </FrameLayout>
 
 </LinearLayout>

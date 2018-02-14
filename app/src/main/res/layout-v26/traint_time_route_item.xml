@@ -75,17 +75,20 @@
                         <TextView
                                 android:id="@+id/electronicRegistration"
                                 android:text="@string/e_r"
-                                style="@style/TextIconStyle" />
+                                android:tooltipText="Возможность элекстронной регистрации"
+                                style="@style/TextIconStyle"/>
 
                         <TextView
                                 android:id="@+id/corporateTrain"
                                 android:text="@string/c_t"
-                                style="@style/TextIconStyle" />
+                                android:tooltipText="Фирменный поезд"
+                                style="@style/TextIconStyle"/>
 
                         <TextView
                                 android:id="@+id/expressTrain"
                                 android:text="@string/f_t"
-                                style="@style/TextIconStyle" />
+                                android:tooltipText="Скорый поезд"
+                                style="@style/TextIconStyle"/>
 
                     </LinearLayout>
 

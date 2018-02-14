@@ -46,20 +46,20 @@ public class TrainRouteActivity extends BaseDaggerActivity {
     @Inject
     GlobalExceptionHandler globalExceptionHandler;
 
-    @ViewById(R.id.icon)
-    ImageView ico;
+    @ViewById(R.id.iconImageView)
+    ImageView iconImageView;
 
-    @ViewById(R.id.id)
-    TextView id;
+    @ViewById(R.id.idTextView)
+    TextView idTextView;
 
-    @ViewById(R.id.path)
-    TextView path;
+    @ViewById(R.id.pathTextView)
+    TextView pathTextView;
 
-    @ViewById(R.id.type)
-    TextView type;
+    @ViewById(R.id.typeTextView)
+    TextView typeTextView;
 
-    @ViewById(R.id.trainRoute)
-    ListView trainRoute;
+    @ViewById(R.id.trainRouteListView)
+    ListView trainRouteListView;
 
     @ViewById(R.id.progressBar)
     ProgressBar progressBar;
@@ -80,7 +80,7 @@ public class TrainRouteActivity extends BaseDaggerActivity {
         getSupportActionBar().setTitle(R.string.train_route);
 
         routeAdapter = new RouteAdapter(this);
-        trainRoute.setAdapter(routeAdapter);
+        trainRouteListView.setAdapter(routeAdapter);
 
         loadData();
         initHeader();
@@ -92,10 +92,10 @@ public class TrainRouteActivity extends BaseDaggerActivity {
     }
 
     private void initHeader() {
-        id.setText(train.getId());
-        ico.setBackgroundResource(new TrainTypeToImage().convert(train.getIco()));
-        type.setText(train.getTrainType());
-        path.setText(train.getPath());
+        idTextView.setText(train.getId());
+        iconImageView.setBackgroundResource(new TrainTypeToImage().convert(train.getIco()));
+        typeTextView.setText(train.getTrainType());
+        pathTextView.setText(train.getPath());
     }
 
     private void loadData() {

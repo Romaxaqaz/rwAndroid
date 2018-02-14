@@ -15,7 +15,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/clear_history"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_margin="8dp" />
 
         <include layout="@layout/default_divider" />
@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@android:color/transparent"
-                android:dividerHeight="10.0sp"/>
+                android:dividerHeight="10.0sp" />
 
     </LinearLayout>
 

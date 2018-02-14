@@ -6,10 +6,10 @@
         android:padding="8dp">
 
     <TextView
-            android:id="@+id/stationNane"
+            android:id="@+id/stationName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/witeText"
+            android:textColor="@color/white_text"
             android:textSize="@dimen/text_size_medium" />
 
 </LinearLayout>

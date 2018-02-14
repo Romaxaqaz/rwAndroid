@@ -47,20 +47,20 @@ public class PlaceInfoActivity extends BaseDaggerActivity {
     @Extra(PLACE_KEY)
     Place place;
 
-    @ViewById(R.id.icon)
-    ImageView icon;
+    @ViewById(R.id.iconImageView)
+    ImageView iconImageView;
 
-    @ViewById(R.id.id)
-    TextView id;
+    @ViewById(R.id.trainIdTextView)
+    TextView trainIdTextView;
 
-    @ViewById(R.id.path)
-    TextView trainPath;
+    @ViewById(R.id.pathTextView)
+    TextView pathTextView;
 
-    @ViewById(R.id.type)
-    TextView trainType;
+    @ViewById(R.id.typeTextView)
+    TextView typeTextView;
 
-    @ViewById(R.id.passengerRoute)
-    TextView passengerRoute;
+    @ViewById(R.id.passengerRouteTextView)
+    TextView passengerRouteTextView;
 
     @ViewById(R.id.departureTextView)
     TextView departureTextView;
@@ -101,11 +101,11 @@ public class PlaceInfoActivity extends BaseDaggerActivity {
     }
 
     private void bind(TrainPlaceInfo trainPlaceInfo) {
-        id.setText(trainPlaceInfo.getTrainNumber());
-        icon.setBackgroundResource(new TrainTypeToImage().convertIfContain(trainPlaceInfo.getTrainType()));
-        trainPath.setText(trainPlaceInfo.getPath());
-        trainType.setText(trainPlaceInfo.getTrainType());
-        passengerRoute.setText(trainPlaceInfo.getUserRoute());
+        trainIdTextView.setText(trainPlaceInfo.getTrainNumber());
+        iconImageView.setBackgroundResource(new TrainTypeToImage().convertIfContain(trainPlaceInfo.getTrainType()));
+        pathTextView.setText(trainPlaceInfo.getPath());
+        typeTextView.setText(trainPlaceInfo.getTrainType());
+        passengerRouteTextView.setText(trainPlaceInfo.getUserRoute());
         departureTextView.setText(trainPlaceInfo.getRouteStartDate());
         arrivalTextView.setText(trainPlaceInfo.getRouteEndDate());
         travelTimeTextView.setText(trainPlaceInfo.getRoute().getTimeInWay());

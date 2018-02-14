@@ -101,7 +101,7 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
             placesTest = view.findViewById(R.id.placesTest);
             placesTest.setClickListener(onPlaceItemClickListener);
 
-            ectronicRegistration = view.findViewById(R.id.ectronicRegistration);
+            ectronicRegistration = view.findViewById(R.id.electronicRegistration);
             corporateTrain = view.findViewById(R.id.corporateTrain);
             expressTrain = view.findViewById(R.id.expressTrain);
         }

@@ -16,10 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:clickable="true"
             app:itemBackground="@color/colorPrimary"
             app:itemIconTint="@color/bottom_tab_color"
             app:itemTextColor="@color/bottom_tab_color"
-            android:clickable="true"
             app:menu="@menu/buttom_menu" />
 
 </RelativeLayout>

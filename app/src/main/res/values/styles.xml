@@ -1,8 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -40,6 +38,95 @@
         <item name="android:layout_height">48dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="EmptyTextViewIndicator">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="PageHeaderStyle">
+        <item name="android:paddingStart">@dimen/header_padding_left</item>
+        <item name="android:paddingEnd">@dimen/header_padding_right</item>
+        <item name="android:paddingTop">@dimen/header_padding_top</item>
+        <item name="android:paddingBottom">@dimen/header_padding_bottom</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="ImageHeader">
+        <item name="android:layout_width">@dimen/image_size_medium</item>
+        <item name="android:layout_height">@dimen/image_size_medium</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">@dimen/image_margin_small</item>
+    </style>
+
+    <style name="ImageViewHeader">
+        <item name="android:tint">@color/white_text</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">@dimen/image_margin_large</item>
+    </style>
+
+    <style name="TextHeader">
+        <item name="android:textSize">@dimen/text_size_micro</item>
+        <item name="android:textColor">@color/white_text</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="TextViewHeader">
+        <item name="android:textSize">@dimen/text_size_micro</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/tint_default</item>
+    </style>
+
+    <style name="TextViewBody">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/white_text</item>
+    </style>
+
+    <style name="InputTextViewStyle">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/white_text</item>
+        <item name="android:fontFamily">regular</item>
+    </style>
+
+    <style name="InputTextContainerStyle">
+        <item name="android:layout_marginStart">@dimen/content_margin_start</item>
+        <item name="android:layout_marginEnd">@dimen/content_margin_end</item>
+        <item name="android:layout_marginTop">@dimen/content_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/content_margin_bottom</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="InputEditTextStyle">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:fontFamily">regular</item>
+    </style>
+
+    <style name="InputEditTextContainerStyle">
+        <item name="android:layout_marginStart">@dimen/content_margin_start</item>
+        <item name="android:layout_marginEnd">@dimen/content_margin_end</item>
+        <item name="android:layout_marginTop">@dimen/content_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/content_margin_bottom</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="ListItemTextViewStyle">
+        <item name="android:layout_height">@dimen/child_text_view_height</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="TextIconStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:textSize">@dimen/text_size_micro</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

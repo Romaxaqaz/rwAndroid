@@ -10,7 +10,7 @@
             android:layout_height="wrap_content"
             android:height="50dp"
             android:background="@color/colorPrimary"
-            android:textColor="@color/witeText"
+            android:textColor="@color/white_text"
             android:textAlignment="center"
             android:gravity="center"
             android:textSize="22sp" />

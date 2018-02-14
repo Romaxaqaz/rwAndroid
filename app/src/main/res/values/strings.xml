@@ -42,4 +42,10 @@
     <string name="title_activity_settings">Settings</string>
     <string name="error_detalization_places">Информация по детализации мест недоступна для этого поезда.</string>
     <string name="push_content">Путь: %1$s, Платформа: %2$s, Маршрут: %3$s</string>
+    <string name="list_empty">список пуст</string>
+    <string name="passenger_route">Маршрут следования пассажира</string>
+    <string name="ticket_not">Билетов нет</string>
+    <string name="e_r">ЭР</string>
+    <string name="c_t">ФП</string>
+    <string name="f_t">СП</string>
 </resources>

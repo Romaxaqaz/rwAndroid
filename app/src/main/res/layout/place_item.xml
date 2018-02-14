@@ -8,28 +8,20 @@
     <TextView
             android:id="@+id/placeName"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
             android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center_vertical" />
+            style="@style/ListItemTextViewStyle" />
 
     <TextView
             android:id="@+id/placeCount"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
             android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textAlignment="center" />
+            style="@style/ListItemTextViewStyle"/>
 
     <TextView
             android:id="@+id/placeCost"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
             android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textAlignment="center" />
+            style="@style/ListItemTextViewStyle"/>
 
     <ImageView
             android:layout_width="wrap_content"
