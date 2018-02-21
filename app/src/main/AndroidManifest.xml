@@ -18,11 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.scoreboard.ScroreboardDetailActivity_" />
+        <activity
+                android:name=".ui.scoreboard.ScroreboardDetailActivity_"
+                android:configChanges="screenSize|screenLayout|orientation" />
         <activity android:name=".ui.traintimetable.TrainRoutesActivity_" />
         <activity android:name=".ui.trainroute.TrainRouteActivity_" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.traintimetable.PlaceInfoActivity_" />
+        <activity android:name=".ui.news.NewsActivity_"></activity>
     </application>
 
 </manifest>

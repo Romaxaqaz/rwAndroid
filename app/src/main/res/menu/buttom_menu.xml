@@ -14,10 +14,10 @@
             android:title="поиск"
             app:showAsAction="ifRoom" />
     <item
-            android:id="@+id/action_music"
+            android:id="@+id/action_news"
             android:enabled="true"
             android:icon="@drawable/info"
-            android:title="инфо"
+            android:title="новости"
             app:showAsAction="ifRoom" />
 
     <!--<item-->

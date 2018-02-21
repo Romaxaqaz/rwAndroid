@@ -80,4 +80,7 @@ public interface RailwayApi {
     Call<ResponseBody> getTrainRoutes(@Query("from") String from, @Query("to") String to, @Query("date") String date,
         @Query("from_exp") String fromExp, @Query("from_esr") String fromEsr, @Query("to_exp") String toExp,
         @Query("to_esr") String toEsr);
+
+    @GET("/rss/")
+    Call<ResponseBody> getNews();
 }

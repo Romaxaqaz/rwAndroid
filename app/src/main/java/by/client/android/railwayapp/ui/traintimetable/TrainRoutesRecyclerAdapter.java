@@ -1,16 +1,12 @@
 package by.client.android.railwayapp.ui.traintimetable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
+import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
 import by.client.android.railwayapp.ui.scoreboard.TrainTypeToImage;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 import by.client.android.railwayapp.ui.view.TrainPlaceView;
@@ -18,32 +14,24 @@ import by.client.android.railwayapp.ui.view.TrainPlaceView;
 /**
  * Адаптер для отображения элемента списка поездов
  *
- * <ul>
- *     <li>{@link TrainRoutesRecyclerAdapter#setItemClickListener(RecyclerViewClickListener)}
- *     - устанавливет слушатель нажатия на элемент списка поездов</li>
- *     <li>{@link TrainRoutesRecyclerAdapter#setPlaceItemClickListener(TrainPlaceView.OnPlaceItemClickListener)} -
- *     устанавливает слушатель нажатия на элемент списка мест поезда</li>
- * </ul>
- *
  * @author PRV
  */
-class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecyclerAdapter.ViewHolder> {
+class TrainRoutesRecyclerAdapter extends ModifiableRecyclerAdapter<TrainRoutesRecyclerAdapter.ViewHolder, TrainRoute> {
 
-    private List<TrainRoute> items = new ArrayList<>();
     private TrainPlaceView.OnPlaceItemClickListener onPlaceItemClickListener;
-    private RecyclerViewClickListener recyclerViewClickListener;
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.traint_time_route_item, parent, false);
-        final ViewHolder mViewHolder = new ViewHolder(view);
-        view.setOnClickListener(new OnTrainItemClickListener(mViewHolder));
-        return mViewHolder;
+    TrainRoutesRecyclerAdapter() {
+        super(R.layout.traint_time_route_item);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        TrainRoute train = items.get(position);
+    public ViewHolder createHolder(View view) {
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void bind(ViewHolder holder, int position) {
+        TrainRoute train = getItems().get(position);
 
         holder.icon.setBackgroundResource(new TrainTypeToImage().convert(train.getIco()));
         holder.id.setText(train.getId());
@@ -59,20 +47,6 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
         UiUtils.setVisibility(train.getParameters().getExpressTrain(), holder.expressTrain);
 
         holder.itemView.setTag(train);
-    }
-
-    @Override
-    public int getItemCount() {
-        return items.size();
-    }
-
-    public void setData(List<TrainRoute> list) {
-        items = new ArrayList<>(list);
-        notifyDataSetChanged();
-    }
-
-    TrainRoute getItem(int index) {
-        return items.get(index);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -107,30 +81,7 @@ class TrainRoutesRecyclerAdapter extends RecyclerView.Adapter<TrainRoutesRecycle
         }
     }
 
-    private class OnTrainItemClickListener implements View.OnClickListener {
-
-        private ViewHolder viewHolder;
-
-        OnTrainItemClickListener(ViewHolder viewHolder) {
-            this.viewHolder = viewHolder;
-        }
-
-        @Override
-        public void onClick(View view) {
-            recyclerViewClickListener.recyclerViewListClicked(view, viewHolder.getLayoutPosition());
-        }
-    }
-
     void setPlaceItemClickListener(TrainPlaceView.OnPlaceItemClickListener onPlaceItemClickListener) {
         this.onPlaceItemClickListener = onPlaceItemClickListener;
-    }
-
-    void setItemClickListener(RecyclerViewClickListener recyclerViewClickListener) {
-        this.recyclerViewClickListener = recyclerViewClickListener;
-    }
-
-    interface RecyclerViewClickListener {
-
-        void recyclerViewListClicked(View v, int position);
     }
 }

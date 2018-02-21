@@ -12,6 +12,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.view.Window;
@@ -34,7 +35,9 @@ import retrofit2.Response;
  * @author PRV
  */
 @EFragment(R.layout.activity_search_station)
-public class SearchStationActivity extends DialogFragment implements SearchView.OnQueryTextListener {
+public class SearchStationDialog extends DialogFragment implements SearchView.OnQueryTextListener {
+
+    private static final String TAG = SearchStationDialog.class.getSimpleName();
 
     @Inject
     RailwayApi railwayApi;
@@ -53,6 +56,14 @@ public class SearchStationActivity extends DialogFragment implements SearchView.
 
     private StationAdapter stationAdapter;
     private ChooseStationDialogListener stationDialogListener;
+
+    public static SearchStationDialog show(FragmentManager fragmentManager,
+        ChooseStationDialogListener chooseRouteDialogListener) {
+        SearchStationDialog searchStationDialog = new SearchStationDialog_();
+        searchStationDialog.setClickListener(chooseRouteDialogListener);
+        searchStationDialog.show(fragmentManager, TAG);
+        return searchStationDialog;
+    }
 
     @AfterViews
     void onCreateView() {

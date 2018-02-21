@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -26,10 +27,12 @@ import by.client.android.railwayapp.ui.utils.UiUtils;
  * @author PRV
  */
 @EFragment(R.layout.fragment_train_route_history)
-public class TrainRouteHistoryFragment extends DialogFragment {
+public class TrainRouteHistoryDialog extends DialogFragment {
+
+    private static final String TAG = TrainRouteHistoryDialog.class.getSimpleName();
 
     @Inject
-    ObjectHistory<SearchTrain> trainRouteHistory;
+    ObjectListHistory<SearchTrain> trainRouteHistory;
 
     @ViewById(R.id.resultListView)
     ListView resultListView;
@@ -42,6 +45,14 @@ public class TrainRouteHistoryFragment extends DialogFragment {
 
     private ChooseRouteDialogListener chooseRouteDialogListener;
     private RouteHistoryAdapter routeHistoryAdapter;
+
+    public static TrainRouteHistoryDialog show(FragmentManager fragmentManager,
+        ChooseRouteDialogListener chooseRouteDialogListener) {
+        TrainRouteHistoryDialog trainRouteHistoryDialog = new TrainRouteHistoryDialog_();
+        trainRouteHistoryDialog.setClickListener(chooseRouteDialogListener);
+        trainRouteHistoryDialog.show(fragmentManager, TAG);
+        return trainRouteHistoryDialog;
+    }
 
     @AfterViews
     void onCreateView() {

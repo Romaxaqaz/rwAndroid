@@ -3,7 +3,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryFragment">
+        tools:context="by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryDialog">
 
     <LinearLayout
             android:layout_width="match_parent"

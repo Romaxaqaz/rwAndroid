@@ -85,6 +85,11 @@ public class PlaceInfoActivity extends BaseDaggerActivity {
         activity.startActivityForResult(intent, requestCode);
     }
 
+    @Override
+    public void injectActivity(ApplicationComponent component) {
+        component.inject(this);
+    }
+
     @AfterViews
     void initActivity() {
         initView();
@@ -113,15 +118,10 @@ public class PlaceInfoActivity extends BaseDaggerActivity {
     }
 
     private void loadPlaceInfo() {
-        railwayApi.getPlacesInfo(place.getLink()).enqueue(new PlaceLoadeListener());
+        railwayApi.getPlacesInfo(place.getLink()).enqueue(new PlaceLoaderListener());
     }
 
-    @Override
-    public void injectActivity(ApplicationComponent component) {
-        component.inject(this);
-    }
-
-    private class PlaceLoadeListener extends RetrofitCallback<TrainPlaceInfo> {
+    private class PlaceLoaderListener extends RetrofitCallback<TrainPlaceInfo> {
 
         @Override
         public void onStart() {

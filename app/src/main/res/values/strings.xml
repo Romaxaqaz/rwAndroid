@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">RailwayApp</string>
+    <string name="app_name">БЖД билеты</string>
     <string name="title_activity_scoreboard">ScoreboardActivity</string>
     <string name="scoreboard_header">Онлайн табло</string>
     <string name="path">Путь</string>
-    <string name="paltform">Платформа</string>
+    <string name="platform">Платформа</string>
     <string name="destinationStation">Прибытие</string>
     <string name="departureStation">Отправление</string>
     <string name="scoreboard_detail_title">Scoreboard detail</string>
@@ -48,4 +48,5 @@
     <string name="e_r">ЭР</string>
     <string name="c_t">ФП</string>
     <string name="f_t">СП</string>
+    <string name="news">Новости</string>
 </resources>

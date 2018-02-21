@@ -12,6 +12,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.MenuItem;
+import by.client.android.railwayapp.ui.news.NewsActivity;
 import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment_;
 import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity_;
 
@@ -57,7 +58,11 @@ public class ShellActivity extends BaseDaggerActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             int menuId = item.getItemId();
-            if (FRAGMENT_HASH_MAP.containsKey(menuId)) {
+
+            if (menuId == R.id.action_news) {
+                NewsActivity.start(ShellActivity.this, 12);
+
+            } else if (FRAGMENT_HASH_MAP.containsKey(menuId)) {
                 navigate(FRAGMENT_HASH_MAP.get(menuId));
                 changeHeader(menuId);
                 return true;

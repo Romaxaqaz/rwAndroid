@@ -4,7 +4,7 @@
         android:id="@+id/activity_search_station"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="by.client.android.railwayapp.ui.traintimetable.SearchStationActivity">
+        tools:context="by.client.android.railwayapp.ui.traintimetable.SearchStationDialog">
 
     <android.support.v7.widget.SearchView
             android:id="@+id/searchView"

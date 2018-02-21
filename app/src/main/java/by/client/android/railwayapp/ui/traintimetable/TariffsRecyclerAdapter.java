@@ -16,6 +16,7 @@ import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.model.places.Car;
 import by.client.android.railwayapp.api.rw.model.places.Tariff;
+import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 import by.client.android.railwayapp.ui.utils.Utils;
 
@@ -112,7 +113,7 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
         }
     }
 
-    private class CarItemClickListener implements CarsRecyclerAdapter.CarViewClickListener {
+    private class CarItemClickListener implements ModifiableRecyclerAdapter.RecyclerItemsClickListener {
 
         private Tariff tariff;
         private ViewHolder viewHolder;
@@ -123,7 +124,7 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
         }
 
         @Override
-        public void onItemClick(View view, int position) {
+        public void itemClick(View v, int position) {
             updateCarInfo(viewHolder, tariff.getCars().get(position));
         }
     }

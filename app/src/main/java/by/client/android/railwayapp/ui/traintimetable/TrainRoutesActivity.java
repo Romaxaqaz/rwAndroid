@@ -29,6 +29,7 @@ import by.client.android.railwayapp.model.routetrain.Place;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
 import by.client.android.railwayapp.support.BaseLoaderListener;
 import by.client.android.railwayapp.support.Client;
+import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 import by.client.android.railwayapp.ui.trainroute.TrainRouteActivity;
 import by.client.android.railwayapp.ui.utils.Dialogs;
@@ -153,10 +154,10 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
         }
     }
 
-    private class TrainRouteClickListener implements TrainRoutesRecyclerAdapter.RecyclerViewClickListener {
+    private class TrainRouteClickListener implements ModifiableRecyclerAdapter.RecyclerItemsClickListener {
 
         @Override
-        public void recyclerViewListClicked(View view, int position) {
+        public void itemClick(View view, int position) {
             TrainRoute trainRoute = trainRoutesAdapter.getItem(position);
             TrainRouteActivity.start(TrainRoutesActivity.this, trainRoute, TRAIN_ROUTE_ACTIVITY_CODE);
         }

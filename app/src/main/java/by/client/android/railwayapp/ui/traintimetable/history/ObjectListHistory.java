@@ -3,11 +3,11 @@ package by.client.android.railwayapp.ui.traintimetable.history;
 import java.util.List;
 
 /**
- * Интерфейс для реализации хранилища объектоа
+ * Интерфейс для реализации хранилища списка объектоа
  *
- * @author  PRV
+ * @author PRV
  */
-public interface ObjectHistory<T> {
+public interface ObjectListHistory<T> {
 
     /**
      * Добавляет объект в историюю

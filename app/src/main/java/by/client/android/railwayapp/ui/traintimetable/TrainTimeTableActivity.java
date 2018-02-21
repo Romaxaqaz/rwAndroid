@@ -22,9 +22,8 @@ import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.model.SearchStation;
 import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
-import by.client.android.railwayapp.ui.traintimetable.history.ObjectHistory;
-import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryFragment;
-import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryFragment_;
+import by.client.android.railwayapp.ui.traintimetable.history.ObjectListHistory;
+import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryDialog;
 
 /**
  * Страница ввода данных для поиска поездов
@@ -35,10 +34,9 @@ import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryF
 public class TrainTimeTableActivity extends BaseDaggerFragment {
 
     private static final int TRAIN_ROUTE_ACTIVITY_CODE = 2;
-    private static final String TAG = TrainTimeTableActivity.class.getSimpleName();
 
     @Inject
-    ObjectHistory<SearchTrain> trainRouteHistory;
+    ObjectListHistory<SearchTrain> trainRouteHistory;
 
     @ViewById(R.id.departureStation)
     TextView arriveEditText;
@@ -71,35 +69,24 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
 
     @Click(R.id.history)
     void showHistory() {
-        TrainRouteHistoryFragment trainRouteHistoryFragment = new TrainRouteHistoryFragment_();
-        trainRouteHistoryFragment.setClickListener(new TrainRouteHistoryFragment.ChooseRouteDialogListener() {
-            @Override
-            public void onSelectedStation(SearchTrain searchTrain) {
-                setArrive(searchTrain.getDepartureStation());
-                setArrival(searchTrain.getDestinationStation());
-            }
-        });
-        trainRouteHistoryFragment.show(getFragmentManager(), TAG);
+        TrainRouteHistoryDialog.show(getFragmentManager(), new TrainHistorySelectedListener());
     }
-
 
     private class OpenSearchStation implements View.OnClickListener {
 
-        private SearchStationActivity.ChooseStationDialogListener listener;
+        private SearchStationDialog.ChooseStationDialogListener listener;
 
-        private OpenSearchStation(SearchStationActivity.ChooseStationDialogListener listener) {
+        private OpenSearchStation(SearchStationDialog.ChooseStationDialogListener listener) {
             this.listener = listener;
         }
 
         @Override
         public void onClick(View view) {
-            SearchStationActivity searchStationActivity = new SearchStationActivity_();
-            searchStationActivity.setClickListener(listener);
-            searchStationActivity.show(getFragmentManager(), TAG);
+            SearchStationDialog.show(getFragmentManager(), listener);
         }
     }
 
-    private class StationArriveSelected implements SearchStationActivity.ChooseStationDialogListener {
+    private class StationArriveSelected implements SearchStationDialog.ChooseStationDialogListener {
 
         @Override
         public void selectedStation(SearchStation station) {
@@ -107,7 +94,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
         }
     }
 
-    private class StationArrivalSelected implements SearchStationActivity.ChooseStationDialogListener {
+    private class StationArrivalSelected implements SearchStationDialog.ChooseStationDialogListener {
 
         @Override
         public void selectedStation(SearchStation station) {
@@ -161,6 +148,15 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
             currentDate.set(Calendar.MONTH, monthOfYear);
             currentDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             dateTextView.setText(new DateToStringConverter().convert(currentDate.getTime()));
+        }
+    }
+
+    private class TrainHistorySelectedListener implements TrainRouteHistoryDialog.ChooseRouteDialogListener {
+
+        @Override
+        public void onSelectedStation(SearchTrain searchTrain) {
+            setArrive(searchTrain.getDepartureStation());
+            setArrival(searchTrain.getDestinationStation());
         }
     }
 }

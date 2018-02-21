@@ -1,6 +1,10 @@
 package by.client.android.railwayapp.ui.utils;
 
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
@@ -86,5 +90,20 @@ public class UiUtils {
             throw new NullPointerException("Spinner can not be null");
         }
         return (T) spinner.getSelectedItem();
+    }
+
+    public static void openExternalLink(Context context, String url) {
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setPackage("com.android.chrome");
+        try {
+            context.startActivity(i);
+        }
+        catch (ActivityNotFoundException e) {
+            // Chrome is probably not installed
+            // Try with the default browser
+            i.setPackage(null);
+            context.startActivity(i);
+        }
     }
 }
