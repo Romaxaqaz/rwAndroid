@@ -10,10 +10,12 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import by.client.android.railwayapp.ApplicationComponent;
@@ -25,6 +27,7 @@ import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.model.Train;
 import by.client.android.railwayapp.support.BaseLoaderListener;
 import by.client.android.railwayapp.support.Client;
+import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
 import by.client.android.railwayapp.ui.settings.SettingsService;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 
@@ -62,7 +65,7 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
     Toolbar toolbar;
 
     @ViewById(R.id.trainsListView)
-    ListView trainsListView;
+    RecyclerView trainsListView;
 
     @ViewById(R.id.stationsSpinner)
     Spinner stationsSpinner;
@@ -75,14 +78,18 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
         List<ScoreboardStation> scoreboardStations = Arrays.asList(ScoreboardStation.values());
 
         swipeRefreshLayout.setOnRefreshListener(this);
+
+        trainsListView.setLayoutManager(new LinearLayoutManager(getContext()));
+        trainsListView.setItemAnimator(new DefaultItemAnimator());
+
         stationAdapter = new StationAdapter(getActivity());
         stationAdapter.setData(scoreboardStations);
         stationsSpinner.setAdapter(stationAdapter);
         stationsSpinner.setOnItemSelectedListener(new StationClickListener());
         stationsSpinner.setSelection(scoreboardStations.indexOf(settingsService.getScoreboardStation()));
 
-        trainsAdapter = new TrainAdapter(getActivity());
-        trainsListView.setOnItemClickListener(new TrainClickListener());
+        trainsAdapter = new TrainAdapter();
+        trainsAdapter.setItemClickListener(new TrainClickListener());
         trainsListView.setAdapter(trainsAdapter);
     }
 
@@ -106,10 +113,10 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
         trainsAdapter.setData(trains);
     }
 
-    private class TrainClickListener implements AdapterView.OnItemClickListener {
+    private class TrainClickListener implements ModifiableRecyclerAdapter.RecyclerItemsClickListener {
 
         @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        public void itemClick(View v, int position) {
             ScroreboardDetailActivity.start(getActivity(), trainsAdapter.getItem(position), SCOREBOARD_ACTIVITY_CODE);
         }
     }
@@ -150,7 +157,7 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
         @Override
         protected void onFinish(ScoreboardActivityFragment reference, boolean success) {
             reference.swipeRefreshLayout.setRefreshing(false);
-            UiUtils.setVisibility(reference.trainsAdapter.isEmpty(), reference.emptyView);
+            UiUtils.setVisibility(reference.trainsAdapter.getItemCount() > 0, reference.emptyView);
         }
     }
 }

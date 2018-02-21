@@ -12,7 +12,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.MenuItem;
-import by.client.android.railwayapp.ui.news.NewsActivity;
+import by.client.android.railwayapp.ui.news.NewsActivityFragment_;
 import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment_;
 import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity_;
 
@@ -36,9 +36,11 @@ public class ShellActivity extends BaseDaggerActivity {
 
         FRAGMENT_HASH_MAP.put(R.id.action_favorites, new ScoreboardActivityFragment_());
         FRAGMENT_HASH_MAP.put(R.id.action_schedules, new TrainTimeTableActivity_());
+        FRAGMENT_HASH_MAP.put(R.id.action_news, new NewsActivityFragment_());
 
         FRAGMENT_HEADER_MAP.put(R.id.action_favorites, "Виртуальное табло");
         FRAGMENT_HEADER_MAP.put(R.id.action_schedules, "Поиск маршрута");
+        FRAGMENT_HEADER_MAP.put(R.id.action_news, "Новости");
 
         bottomNavigationView.setSelectedItemId(R.id.action_schedules);
     }
@@ -58,16 +60,9 @@ public class ShellActivity extends BaseDaggerActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             int menuId = item.getItemId();
-
-            if (menuId == R.id.action_news) {
-                NewsActivity.start(ShellActivity.this, 12);
-
-            } else if (FRAGMENT_HASH_MAP.containsKey(menuId)) {
-                navigate(FRAGMENT_HASH_MAP.get(menuId));
-                changeHeader(menuId);
-                return true;
-            }
-            return false;
+            navigate(FRAGMENT_HASH_MAP.get(menuId));
+            changeHeader(menuId);
+            return true;
         }
     }
 

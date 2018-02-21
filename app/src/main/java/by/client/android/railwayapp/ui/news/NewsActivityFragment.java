@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import android.app.Activity;
@@ -16,7 +16,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import by.client.android.railwayapp.ApplicationComponent;
-import by.client.android.railwayapp.BaseDaggerActivity;
+import by.client.android.railwayapp.BaseDaggerFragment;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.support.BaseLoaderListener;
 import by.client.android.railwayapp.support.Client;
@@ -29,8 +29,8 @@ import by.client.android.railwayapp.ui.utils.UiUtils;
  *
  * @author Q-RPA
  */
-@EActivity(R.layout.activity_news)
-public class NewsActivity extends BaseDaggerActivity implements SwipeRefreshLayout.OnRefreshListener {
+@EFragment(R.layout.activity_news)
+public class NewsActivityFragment extends BaseDaggerFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     Client client;
@@ -44,7 +44,7 @@ public class NewsActivity extends BaseDaggerActivity implements SwipeRefreshLayo
     private NewsAdapter newsAdapter;
 
     public static void start(Activity activity, int requestCode) {
-        Intent intent = new Intent(activity, NewsActivity_.class);
+        Intent intent = new Intent(activity, NewsActivityFragment_.class);
         activity.startActivityForResult(intent, requestCode);
     }
 
@@ -55,21 +55,14 @@ public class NewsActivity extends BaseDaggerActivity implements SwipeRefreshLayo
         loadNews();
     }
 
-    @Override
-    public void injectActivity(ApplicationComponent component) {
-        component.inject(this);
-    }
-
     private void initView() {
-        getSupportActionBar().setTitle(R.string.news);
-
         swipeRefreshLayout.setOnRefreshListener(this);
 
         newsAdapter = new NewsAdapter();
         newsAdapter.setItemClickListener(new NewsItemClickListener());
 
         newsRecyclerView.setAdapter(newsAdapter);
-        newsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        newsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         newsRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
@@ -86,25 +79,30 @@ public class NewsActivity extends BaseDaggerActivity implements SwipeRefreshLayo
         loadNews();
     }
 
-    private static class NewsLoadListener extends BaseLoaderListener<NewsActivity, List<Article>> {
+    @Override
+    public void injectFragment(ApplicationComponent component) {
+        component.inject(this);
+    }
 
-        NewsLoadListener(NewsActivity newsActivity) {
-            super(newsActivity);
+    private static class NewsLoadListener extends BaseLoaderListener<NewsActivityFragment, List<Article>> {
+
+        NewsLoadListener(NewsActivityFragment newsActivityFragment) {
+            super(newsActivityFragment);
         }
 
         @Override
-        protected void onSuccess(NewsActivity newsActivity, List<Article> articles) {
-            newsActivity.initNews(articles);
+        protected void onSuccess(NewsActivityFragment newsActivityFragment, List<Article> articles) {
+            newsActivityFragment.initNews(articles);
         }
 
         @Override
-        protected void onStart(NewsActivity newsActivity) {
-            newsActivity.swipeRefreshLayout.setRefreshing(true);
+        protected void onStart(NewsActivityFragment newsActivityFragment) {
+            newsActivityFragment.swipeRefreshLayout.setRefreshing(true);
         }
 
         @Override
-        protected void onFinish(NewsActivity newsActivity, boolean success) {
-            newsActivity.swipeRefreshLayout.setRefreshing(false);
+        protected void onFinish(NewsActivityFragment newsActivityFragment, boolean success) {
+            newsActivityFragment.swipeRefreshLayout.setRefreshing(false);
         }
     }
 
@@ -112,7 +110,7 @@ public class NewsActivity extends BaseDaggerActivity implements SwipeRefreshLayo
 
         @Override
         public void itemClick(View view, int position) {
-            UiUtils.openExternalLink(getApplicationContext(), newsAdapter.getItem(position).getLink());
+            UiUtils.openExternalLink(getContext(), newsAdapter.getItem(position).getLink());
         }
     }
 }

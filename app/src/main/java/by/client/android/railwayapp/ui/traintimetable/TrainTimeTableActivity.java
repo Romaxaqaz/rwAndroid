@@ -59,7 +59,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
         arriveEditText.setOnClickListener(new OpenSearchStation(new StationArriveSelected()));
         arrivalEditText.setOnClickListener(new OpenSearchStation(new StationArrivalSelected()));
         dateTextView.setOnClickListener(new OnDatePickerClickListener());
-        searchStationButton.setOnClickListener(new SearchClickListenr());
+        searchStationButton.setOnClickListener(new SearchClickListener());
     }
 
     @Override
@@ -124,7 +124,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
         }
     }
 
-    private class SearchClickListenr implements View.OnClickListener {
+    private class SearchClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {

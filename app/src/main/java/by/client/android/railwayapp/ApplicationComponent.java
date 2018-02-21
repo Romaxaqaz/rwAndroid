@@ -2,7 +2,7 @@ package by.client.android.railwayapp;
 
 import javax.inject.Singleton;
 
-import by.client.android.railwayapp.ui.news.NewsActivity;
+import by.client.android.railwayapp.ui.news.NewsActivityFragment;
 import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment;
 import by.client.android.railwayapp.ui.trainroute.TrainRouteActivity;
 import by.client.android.railwayapp.ui.traintimetable.PlaceInfoActivity;
@@ -39,5 +39,5 @@ public interface ApplicationComponent {
 
     void inject(TrainRouteHistoryDialog trainRouteHistoryDialog);
 
-    void inject(NewsActivity newsActivity);
+    void inject(NewsActivityFragment newsActivityFragment);
 }

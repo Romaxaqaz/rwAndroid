@@ -1,32 +1,44 @@
 package by.client.android.railwayapp.ui.scoreboard;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.Train;
-import by.client.android.railwayapp.ui.BaseHolder;
-import by.client.android.railwayapp.ui.BaseListAdapter;
+import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
 
 /**
  * Адаптер для отображения элемента списка поездов
  *
  * @author ROMAN PANTELEEV
  */
-class TrainAdapter extends BaseListAdapter<Train, BaseHolder<Train>> {
+class TrainAdapter extends ModifiableRecyclerAdapter<TrainAdapter.ViewHolder, Train> {
 
-    TrainAdapter(Context context) {
-        super(context);
-        setItemLayout(R.layout.train_item);
+    TrainAdapter() {
+        super(R.layout.train_item);
     }
 
     @Override
-    protected TrainAdapter.ViewHolder createHolder(View view) {
-        return new TrainAdapter.ViewHolder(view);
+    public ViewHolder createHolder(View view) {
+        return new ViewHolder(view);
     }
 
-    private static class ViewHolder implements BaseHolder<Train> {
+    @Override
+    public void bind(ViewHolder holder, int position) {
+        Train train = getItems().get(position);
+
+        holder.icon.setBackgroundResource(new TrainTypeToImage().convert(train.getPathType()));
+        holder.id.setText(train.getId());
+        holder.path.setText(train.getPath());
+        holder.type.setText(train.getTrainType());
+        holder.way.setText(train.getWay());
+        holder.platform.setText(train.getPlatform());
+        holder.start.setText(train.getStart());
+        holder.end.setText(train.getEnd());
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView icon;
         private TextView id;
@@ -38,6 +50,8 @@ class TrainAdapter extends BaseListAdapter<Train, BaseHolder<Train>> {
         private TextView end;
 
         ViewHolder(View view) {
+            super(view);
+
             icon = view.findViewById(R.id.icon);
             id = view.findViewById(R.id.id);
             path = view.findViewById(R.id.path);
@@ -48,16 +62,5 @@ class TrainAdapter extends BaseListAdapter<Train, BaseHolder<Train>> {
             end = view.findViewById(R.id.end);
         }
 
-        @Override
-        public void bind(Train train) {
-            icon.setBackgroundResource(new TrainTypeToImage().convert(train.getPathType()));
-            id.setText(train.getId());
-            path.setText(train.getPath());
-            type.setText(train.getTrainType());
-            way.setText(train.getWay());
-            platform.setText(train.getPlatform());
-            start.setText(train.getStart());
-            end.setText(train.getEnd());
-        }
     }
 }

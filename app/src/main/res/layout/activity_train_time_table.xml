@@ -1,169 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/activity_train_time_table"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/accent_activity_background"
-        tools:context="by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity">
+        tools:context="by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity"
+        android:orientation="vertical">
 
-    <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/slide1"
-            android:scaleType="centerCrop"
-            android:layout_gravity="top" />
-
-    <android.support.v7.widget.CardView
+    <android.support.design.widget.AppBarLayout
+            android:id="@+id/main.appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginTop="100dp"
-            android:layout_marginStart="@dimen/content_margin_start"
-            android:layout_marginEnd="@dimen/content_margin_end"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="6dp">
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_scrollFlags="scroll|enterAlways" />
 
-        <FrameLayout
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/slide1"
+                android:scaleType="centerCrop"
+                android:layout_gravity="top" />
+
+        <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="6dp">
+                android:layout_gravity="top"
+                android:layout_marginTop="100dp"
+                android:layout_marginStart="@dimen/content_margin_start"
+                android:layout_marginEnd="@dimen/content_margin_end"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="6dp">
 
-            <LinearLayout
+            <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="6dp">
 
                 <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/content_margin_top">
-
-                    <ImageView
-                            android:layout_width="@dimen/image_size_large"
-                            android:layout_height="@dimen/image_size_large"
-                            app:srcCompat="@drawable/arrival_marker"
-                            android:tint="@color/tint_default"
-                            style="@style/ImageViewHeader" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/InputEditTextContainerStyle">
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/content_margin_top">
 
-                        <TextView
+                        <ImageView
+                                android:layout_width="@dimen/image_size_large"
+                                android:layout_height="@dimen/image_size_large"
+                                app:srcCompat="@drawable/arrival_marker"
+                                android:tint="@color/tint_default"
+                                style="@style/ImageViewHeader" />
+
+                        <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Откуда"
-                                style="@style/HeaderTextStyle" />
+                                style="@style/InputEditTextContainerStyle">
 
-                        <TextView
-                                android:id="@+id/departureStation"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="введите станцию"
-                                style="@style/InputEditTextStyle" />
+                            <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Откуда"
+                                    style="@style/HeaderTextStyle" />
+
+                            <TextView
+                                    android:id="@+id/departureStation"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="введите станцию"
+                                    style="@style/InputEditTextStyle" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/content_margin_top">
-
-                    <ImageView
-                            android:layout_width="@dimen/image_size_large"
-                            android:layout_height="@dimen/image_size_large"
-                            app:srcCompat="@drawable/destination_marker"
-                            android:tint="@color/tint_default"
-                            style="@style/ImageViewHeader" />
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="4dp">
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/content_margin_top">
 
-                        <TextView
+                        <ImageView
+                                android:layout_width="@dimen/image_size_large"
+                                android:layout_height="@dimen/image_size_large"
+                                app:srcCompat="@drawable/destination_marker"
+                                android:tint="@color/tint_default"
+                                style="@style/ImageViewHeader" />
+
+                        <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Куда"
-                                style="@style/HeaderTextStyle" />
+                                android:orientation="vertical"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="4dp">
 
-                        <TextView
-                                android:id="@+id/destinationStation"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="введите станцию"
-                                style="@style/InputEditTextStyle" />
+                            <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Куда"
+                                    style="@style/HeaderTextStyle" />
+
+                            <TextView
+                                    android:id="@+id/destinationStation"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="введите станцию"
+                                    style="@style/InputEditTextStyle" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/content_margin_top">
-
-                    <ImageView
-                            android:layout_width="@dimen/image_size_large"
-                            android:layout_height="@dimen/image_size_large"
-                            app:srcCompat="@drawable/calendar"
-                            android:tint="@color/tint_default"
-                            style="@style/ImageViewHeader" />
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="4dp">
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/content_margin_top">
 
-                        <TextView
+                        <ImageView
+                                android:layout_width="@dimen/image_size_large"
+                                android:layout_height="@dimen/image_size_large"
+                                app:srcCompat="@drawable/calendar"
+                                android:tint="@color/tint_default"
+                                style="@style/ImageViewHeader" />
+
+                        <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Дата поездки"
-                                style="@style/HeaderTextStyle" />
+                                android:orientation="vertical"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="4dp">
 
-                        <TextView
-                                android:id="@+id/date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="выберите дату"
-                                style="@style/InputEditTextStyle" />
+                            <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Дата поездки"
+                                    style="@style/HeaderTextStyle" />
+
+                            <TextView
+                                    android:id="@+id/date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="выберите дату"
+                                    style="@style/InputEditTextStyle" />
+
+                        </LinearLayout>
+
 
                     </LinearLayout>
 
+                    <Button
+                            android:id="@+id/searchStationButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Найти"
+                            android:layout_marginTop="12dp" />
+
+                    <Button
+                            android:id="@+id/history"
+                            android:text="История запросов"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp" />
 
                 </LinearLayout>
 
-                <Button
-                        android:id="@+id/searchStationButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Найти"
-                        android:layout_marginTop="12dp" />
+            </FrameLayout>
 
-                <Button
-                        android:id="@+id/history"
-                        android:text="История запросов"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp" />
+        </android.support.v7.widget.CardView>
 
-            </LinearLayout>
+    </FrameLayout>
 
-        </FrameLayout>
-
-    </android.support.v7.widget.CardView>
-
-</FrameLayout>
+</LinearLayout>

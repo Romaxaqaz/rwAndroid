@@ -19,11 +19,4 @@
             android:icon="@drawable/info"
             android:title="новости"
             app:showAsAction="ifRoom" />
-
-    <!--<item-->
-    <!--android:id="@+id/action_setting"-->
-    <!--android:enabled="true"-->
-    <!--android:icon="@drawable/ic_menu_manage"-->
-    <!--android:title="тест3"-->
-    <!--app:showAsAction="ifRoom" />-->
 </menu>

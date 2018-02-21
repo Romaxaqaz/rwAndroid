@@ -13,8 +13,9 @@ import by.client.android.railwayapp.ui.converters.DateToStringConverter;
  *
  * @author PRV
  */
-
 class NewsAdapter extends ModifiableRecyclerAdapter<NewsAdapter.ViewHolder, Article> {
+
+    private static final String NEWS_DATE_FORMAT = "HH:mm dd.MM.yyyy";
 
     NewsAdapter() {
         super(R.layout.news_item);
@@ -30,7 +31,7 @@ class NewsAdapter extends ModifiableRecyclerAdapter<NewsAdapter.ViewHolder, Arti
         Article article = getItems().get(position);
         holder.newsTitle.setText(article.getTitle());
         holder.newsCategory.setText(article.getCategories());
-        holder.newsDate.setText(new DateToStringConverter("HH:mm dd.MM.yyyy").convert(article.getPubDate()));
+        holder.newsDate.setText(new DateToStringConverter(NEWS_DATE_FORMAT).convert(article.getPubDate()));
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
