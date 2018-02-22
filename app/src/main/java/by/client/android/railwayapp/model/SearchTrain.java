@@ -27,6 +27,10 @@ public class SearchTrain implements Serializable {
      */
     private Date departureDate;
 
+    public SearchTrain() {
+
+    }
+
     public SearchTrain(SearchStation departureStation, SearchStation destinationStation, Date departureDate) {
         this.departureStation = departureStation;
         this.destinationStation = destinationStation;

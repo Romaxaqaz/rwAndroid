@@ -18,11 +18,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.scoreboard.ScroreboardDetailActivity_" />
-        <activity android:name=".ui.traintimetable.TrainRoutesActivity_" />
+        <activity android:name=".ui.scoreboard.ScoreboardDetailActivity_" />
+        <activity
+                android:name=".ui.traintimetable.TrainRoutesActivity_"
+                android:parentActivityName=".ShellActivity_" />
         <activity android:name=".ui.trainroute.TrainRouteActivity_" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.traintimetable.PlaceInfoActivity_" />
+
+        <receiver android:name=".ui.widget.NewsWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/news_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

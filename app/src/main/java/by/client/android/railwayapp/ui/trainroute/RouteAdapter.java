@@ -1,29 +1,47 @@
 package by.client.android.railwayapp.ui.trainroute;
 
-import android.content.Context;
+import java.util.Date;
+
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.RouteItem;
-import by.client.android.railwayapp.ui.BaseHolder;
-import by.client.android.railwayapp.ui.BaseListAdapter;
+import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
+import by.client.android.railwayapp.ui.converters.DateToStringConverter;
+import by.client.android.railwayapp.ui.utils.DateUtils;
 
 /**
  * Адаптер элементов списка маршрута поезда
  */
-class RouteAdapter extends BaseListAdapter<RouteItem, BaseHolder<RouteItem>> {
+class RouteAdapter extends ModifiableRecyclerAdapter<RouteAdapter.ViewHolder, RouteItem> {
 
-    RouteAdapter(Context context) {
-        super(context);
-        setItemLayout(R.layout.route_item);
+    private static final String EMPTY_FIELD_VALUE = "-";
+
+    RouteAdapter() {
+        super(R.layout.route_item);
     }
 
     @Override
-    protected BaseHolder<RouteItem> createHolder(View view) {
-        return new RouteAdapter.ViewHolder(view);
+    public ViewHolder createHolder(View view) {
+        return new ViewHolder(view);
     }
 
-    private static class ViewHolder implements BaseHolder<RouteItem> {
+    @Override
+    public void bind(ViewHolder holder, int position) {
+        RouteItem item = getItems().get(position);
+
+        holder.route.setText(item.getStation());
+        holder.arrival.setText(getDateString(item.getArrival()));
+        holder.arrived.setText(getDateString(item.getArrived()));
+        holder.stay.setText(item.getStay());
+    }
+
+    private String getDateString(Date date) {
+        return date != null ? new DateToStringConverter(DateUtils.SHORT_TIME_FORMAT).convert(date) : EMPTY_FIELD_VALUE;
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView route;
         private TextView arrival;
@@ -31,18 +49,11 @@ class RouteAdapter extends BaseListAdapter<RouteItem, BaseHolder<RouteItem>> {
         private TextView stay;
 
         ViewHolder(View view) {
+            super(view);
             route = view.findViewById(R.id.route);
             arrival = view.findViewById(R.id.departureStation);
             arrived = view.findViewById(R.id.destinationStation);
             stay = view.findViewById(R.id.stay);
-        }
-
-        @Override
-        public void bind(RouteItem routeItem) {
-            route.setText(routeItem.getStation());
-            arrival.setText(routeItem.getArrival());
-            arrived.setText(routeItem.getArrived());
-            stay.setText(routeItem.getStay());
         }
     }
 }

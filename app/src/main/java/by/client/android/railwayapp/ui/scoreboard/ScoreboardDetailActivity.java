@@ -5,8 +5,10 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
+import org.jetbrains.annotations.NotNull;
 
 import android.app.Activity;
+import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -15,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.Train;
-import by.client.android.railwayapp.ui.utils.PushNotification;
+import by.client.android.railwayapp.ui.widget.NewsWidget;
 
 /**
  * Страница для отображения детальной информации поезда со страницы "Виртуально табло"
@@ -23,7 +25,7 @@ import by.client.android.railwayapp.ui.utils.PushNotification;
  * @author PRV
  */
 @EActivity(R.layout.activity_scroreboard_detail)
-public class ScroreboardDetailActivity extends AppCompatActivity {
+public class ScoreboardDetailActivity extends AppCompatActivity {
 
     private static final String TRAIN_KEY = "TRAIN_KEY";
 
@@ -54,9 +56,9 @@ public class ScroreboardDetailActivity extends AppCompatActivity {
     @Extra(TRAIN_KEY)
     Train train;
 
-    public static void start(Activity activity, Train train, int requestCode) {
-        Intent intent = new Intent(activity, ScroreboardDetailActivity_.class);
-        intent.putExtra(ScroreboardDetailActivity.TRAIN_KEY, train);
+    public static void start(@NotNull Activity activity, @NotNull Train train, int requestCode) {
+        Intent intent = new Intent(activity, ScoreboardDetailActivity_.class);
+        intent.putExtra(ScoreboardDetailActivity.TRAIN_KEY, train);
         activity.startActivityForResult(intent, requestCode);
     }
 
@@ -77,7 +79,7 @@ public class ScroreboardDetailActivity extends AppCompatActivity {
     @Click(R.id.sendPush)
     void submitButton(View view) {
         if (view.getId() == R.id.sendPush) {
-            PushNotification.send(this, getPushContent(), null);
+            updateWidget();
         }
     }
 
@@ -95,5 +97,13 @@ public class ScroreboardDetailActivity extends AppCompatActivity {
     private String getPushContent() {
         return String.format(getString(R.string.push_content),
             train.getWay(), train.getPlatform(), train.getPath());
+    }
+
+    private void updateWidget() {
+        Intent intent = new Intent(this, NewsWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+
+        intent.putExtra("TRAIN_ID", train);
+        sendBroadcast(intent);
     }
 }

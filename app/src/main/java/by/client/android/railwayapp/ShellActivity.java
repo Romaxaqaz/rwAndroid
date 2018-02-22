@@ -47,7 +47,10 @@ public class ShellActivity extends BaseDaggerActivity {
 
     private void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+        fragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(fragment.getClass().getName())
+            .commit();
     }
 
     @Override

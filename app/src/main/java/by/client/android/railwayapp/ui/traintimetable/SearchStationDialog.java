@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.jetbrains.annotations.NotNull;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -57,7 +58,7 @@ public class SearchStationDialog extends DialogFragment implements SearchView.On
     private StationAdapter stationAdapter;
     private ChooseStationDialogListener stationDialogListener;
 
-    public static SearchStationDialog show(FragmentManager fragmentManager,
+    public static SearchStationDialog show(@NotNull FragmentManager fragmentManager,
         ChooseStationDialogListener chooseRouteDialogListener) {
         SearchStationDialog searchStationDialog = new SearchStationDialog_();
         searchStationDialog.setClickListener(chooseRouteDialogListener);

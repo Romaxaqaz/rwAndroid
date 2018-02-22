@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 import by.client.android.railwayapp.ApplicationComponent;
 import by.client.android.railwayapp.BaseDaggerFragment;
 import by.client.android.railwayapp.R;
@@ -24,6 +23,7 @@ import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 import by.client.android.railwayapp.ui.traintimetable.history.ObjectListHistory;
 import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryDialog;
+import by.client.android.railwayapp.ui.utils.Dialogs;
 
 /**
  * Страница ввода данных для поиска поездов
@@ -134,7 +134,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
                 trainRouteHistory.add(searchTrain);
                 TrainRoutesActivity.start(getActivity(), TRAIN_ROUTE_ACTIVITY_CODE, searchTrain);
             } else {
-                Toast.makeText(getContext(), join("\n", trainValidator.getErrors()), Toast.LENGTH_LONG).show();
+                Dialogs.showToast(getContext(), join("\n", trainValidator.getErrors()));
             }
         }
     }

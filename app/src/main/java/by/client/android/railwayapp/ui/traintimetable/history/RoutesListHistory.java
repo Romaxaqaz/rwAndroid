@@ -18,8 +18,15 @@ public class RoutesListHistory implements ObjectListHistory<SearchTrain> {
     private List<SearchTrain> routeHistory = new ArrayList<>();
 
     public RoutesListHistory(ObjectCache<List<SearchTrain>> objectCache) {
+        routeHistory = new ArrayList<>();
         this.objectCache = objectCache;
-        routeHistory = this.objectCache.read();
+        updateRoutes(objectCache);
+    }
+
+    private void updateRoutes(ObjectCache<List<SearchTrain>> objectCache) {
+        if (objectCache.read() != null) {
+            routeHistory = objectCache.read();
+        }
     }
 
     @Override

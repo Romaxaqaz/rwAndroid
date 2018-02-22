@@ -71,7 +71,9 @@ public abstract class ModifiableRecyclerAdapter<T extends RecyclerView.ViewHolde
 
         @Override
         public void onClick(View view) {
-            itemClickListener.itemClick(view, viewHolder.getLayoutPosition());
+            if (itemClickListener != null) {
+                itemClickListener.itemClick(view, viewHolder.getLayoutPosition());
+            }
         }
     }
 
@@ -79,6 +81,9 @@ public abstract class ModifiableRecyclerAdapter<T extends RecyclerView.ViewHolde
         this.itemClickListener = itemClickListener;
     }
 
+    /**
+     * Callback нажатия на элемент списка
+     */
     public interface RecyclerItemsClickListener {
 
         void itemClick(View v, int position);

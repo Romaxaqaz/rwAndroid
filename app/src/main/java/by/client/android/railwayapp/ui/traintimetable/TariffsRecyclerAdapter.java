@@ -55,7 +55,7 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
         carsRecyclerAdapter.setItemClickListener(new CarItemClickListener(tariff, holder));
 
         holder.carriageRecyclerView.setAdapter(carsRecyclerAdapter);
-        holder.tariffTextView.setText(tariff.getPriceByn());
+        holder.tariffTextView.setText(tariff.getPrice());
         holder.itemView.setTag(tariff);
     }
 

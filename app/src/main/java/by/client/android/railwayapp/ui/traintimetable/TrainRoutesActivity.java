@@ -8,6 +8,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
+import org.jetbrains.annotations.NotNull;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -80,7 +81,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
 
     private TrainRoutesRecyclerAdapter trainRoutesAdapter;
 
-    public static void start(Activity activity, int requestCode, SearchTrain trainRoute) {
+    public static void start(@NotNull Activity activity, @NotNull int requestCode, SearchTrain trainRoute) {
         Intent intent = new Intent(activity, TrainRoutesActivity_.class);
         intent.putExtra(TrainRoutesActivity.TRAIN_ROUTE_ID, trainRoute);
         activity.startActivityForResult(intent, requestCode);

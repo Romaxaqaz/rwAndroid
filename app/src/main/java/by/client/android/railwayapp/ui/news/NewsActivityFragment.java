@@ -8,8 +8,6 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,11 +40,6 @@ public class NewsActivityFragment extends BaseDaggerFragment implements SwipeRef
     SwipeRefreshLayout swipeRefreshLayout;
 
     private NewsAdapter newsAdapter;
-
-    public static void start(Activity activity, int requestCode) {
-        Intent intent = new Intent(activity, NewsActivityFragment_.class);
-        activity.startActivityForResult(intent, requestCode);
-    }
 
     @AfterViews
     protected void onCreate() {

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import android.nfc.FormatException;
+import by.client.android.railwayapp.ui.utils.Utils;
 
 /**
  * Класс конвертер для преобразования даты в строку и наоборт.
@@ -49,6 +50,10 @@ public class DateToStringConverter {
      * @throws FormatException в случае невозможности преобразования строки в тип {@link Date}.
      */
     public Date convertBack(String date) throws FormatException {
+        if (Utils.isBlank(date)) {
+            return null;
+        }
+
         Date parsedDate;
         try {
             DateFormat dateFormat = getFormat(stringDateFormat);

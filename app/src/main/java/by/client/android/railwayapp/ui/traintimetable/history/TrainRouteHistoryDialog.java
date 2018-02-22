@@ -46,7 +46,7 @@ public class TrainRouteHistoryDialog extends DialogFragment {
     private ChooseRouteDialogListener chooseRouteDialogListener;
     private RouteHistoryAdapter routeHistoryAdapter;
 
-    public static TrainRouteHistoryDialog show(FragmentManager fragmentManager,
+    public static TrainRouteHistoryDialog show(@NonNull FragmentManager fragmentManager,
         ChooseRouteDialogListener chooseRouteDialogListener) {
         TrainRouteHistoryDialog trainRouteHistoryDialog = new TrainRouteHistoryDialog_();
         trainRouteHistoryDialog.setClickListener(chooseRouteDialogListener);
@@ -83,7 +83,7 @@ public class TrainRouteHistoryDialog extends DialogFragment {
     }
 
     private void updateEmptyView() {
-        boolean isEmpty = trainRouteHistory.getAll().size() == 0;
+        boolean isEmpty = trainRouteHistory.getAll().isEmpty();
         UiUtils.setVisibility(isEmpty, emptyView);
         UiUtils.setVisibility(!isEmpty, clearHistory);
     }

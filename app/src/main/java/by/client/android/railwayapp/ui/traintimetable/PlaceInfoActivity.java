@@ -6,6 +6,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
+import org.jetbrains.annotations.NotNull;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -79,7 +80,7 @@ public class PlaceInfoActivity extends BaseDaggerActivity {
 
     private TariffsRecyclerAdapter tariffsRecyclerAdapter;
 
-    public static void start(Activity activity, Place place, int requestCode) {
+    public static void start(@NotNull Activity activity, @NotNull Place place, int requestCode) {
         Intent intent = new Intent(activity, PlaceInfoActivity_.class);
         intent.putExtra(PLACE_KEY, place);
         activity.startActivityForResult(intent, requestCode);
@@ -97,7 +98,7 @@ public class PlaceInfoActivity extends BaseDaggerActivity {
     }
 
     private void initView() {
-        getSupportActionBar().setTitle("Свободные места");
+        getSupportActionBar().setTitle(R.string.free_places);
 
         tariffsRecyclerAdapter = new TariffsRecyclerAdapter(this);
         tariffsRecyclerView.setAdapter(tariffsRecyclerAdapter);

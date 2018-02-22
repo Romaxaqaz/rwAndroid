@@ -65,7 +65,7 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
     Toolbar toolbar;
 
     @ViewById(R.id.trainsListView)
-    RecyclerView trainsListView;
+    RecyclerView trainsRecyclerView;
 
     @ViewById(R.id.stationsSpinner)
     Spinner stationsSpinner;
@@ -79,8 +79,9 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
 
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        trainsListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        trainsListView.setItemAnimator(new DefaultItemAnimator());
+        trainsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        trainsRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        trainsRecyclerView.setHasFixedSize(true);
 
         stationAdapter = new StationAdapter(getActivity());
         stationAdapter.setData(scoreboardStations);
@@ -90,7 +91,7 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
 
         trainsAdapter = new TrainAdapter();
         trainsAdapter.setItemClickListener(new TrainClickListener());
-        trainsListView.setAdapter(trainsAdapter);
+        trainsRecyclerView.setAdapter(trainsAdapter);
     }
 
     @Override
@@ -104,8 +105,7 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
     }
 
     private void loadData(ScoreboardStation scoreboardStation) {
-        client.send(new ScoreboardLoader(railwayApi, scoreboardStation),
-            new ScoreboardLoadListener(this));
+        client.send(new ScoreboardLoader(railwayApi, scoreboardStation), new ScoreboardLoadListener(this));
         settingsService.saveScoreboardStation(scoreboardStation);
     }
 
@@ -116,8 +116,8 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
     private class TrainClickListener implements ModifiableRecyclerAdapter.RecyclerItemsClickListener {
 
         @Override
-        public void itemClick(View v, int position) {
-            ScroreboardDetailActivity.start(getActivity(), trainsAdapter.getItem(position), SCOREBOARD_ACTIVITY_CODE);
+        public void itemClick(View view, int position) {
+            ScoreboardDetailActivity.start(getActivity(), trainsAdapter.getItem(position), SCOREBOARD_ACTIVITY_CODE);
         }
     }
 

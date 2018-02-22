@@ -21,6 +21,8 @@ public class Tariff {
     private String typeAbbrInt;
     private String description;
     private String sign;
+
+    @JsonProperty("is_car_for_disabled")
     private Boolean isCarForDisabled;
 
     @JsonProperty("price_byn")
@@ -100,10 +102,12 @@ public class Tariff {
         this.isCarForDisabled = isCarForDisabled;
     }
 
+    @JsonProperty("price_byn")
     public String getPriceByn() {
         return priceByn;
     }
 
+    @JsonProperty("price_byn")
     public void setPriceByn(String priceByn) {
         this.priceByn = priceByn;
     }

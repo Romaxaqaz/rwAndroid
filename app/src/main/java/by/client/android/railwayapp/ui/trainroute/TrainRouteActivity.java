@@ -8,11 +8,15 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
+import org.jetbrains.annotations.NotNull;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import by.client.android.railwayapp.ApplicationComponent;
@@ -59,7 +63,7 @@ public class TrainRouteActivity extends BaseDaggerActivity {
     TextView typeTextView;
 
     @ViewById(R.id.trainRouteListView)
-    ListView trainRouteListView;
+    RecyclerView trainRouteRecyclerView;
 
     @ViewById(R.id.progressBar)
     ProgressBar progressBar;
@@ -69,7 +73,7 @@ public class TrainRouteActivity extends BaseDaggerActivity {
 
     private RouteAdapter routeAdapter;
 
-    public static void start(Activity activity, TrainRoute train, int requestCode) {
+    public static void start(@NotNull Activity activity, @NotNull TrainRoute train, int requestCode) {
         Intent intent = new Intent(activity, TrainRouteActivity_.class);
         intent.putExtra(TRAIN_KEY, train);
         activity.startActivityForResult(intent, requestCode);
@@ -78,9 +82,12 @@ public class TrainRouteActivity extends BaseDaggerActivity {
     @AfterViews
     void initActivity() {
         getSupportActionBar().setTitle(R.string.train_route);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        routeAdapter = new RouteAdapter(this);
-        trainRouteListView.setAdapter(routeAdapter);
+        routeAdapter = new RouteAdapter();
+        trainRouteRecyclerView.setAdapter(routeAdapter);
+        trainRouteRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        trainRouteRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         loadData();
         initHeader();
@@ -89,6 +96,17 @@ public class TrainRouteActivity extends BaseDaggerActivity {
     @Override
     public void injectActivity(ApplicationComponent component) {
         component.inject(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void initHeader() {
