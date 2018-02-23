@@ -31,7 +31,7 @@ public class ShellActivity extends BaseDaggerActivity {
     private static final Map<Integer, String> FRAGMENT_HEADER_MAP = new HashMap<>();
 
     @AfterViews
-    void initView() {
+    void initActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new ButtomMenuListener());
 
         FRAGMENT_HASH_MAP.put(R.id.action_favorites, new ScoreboardActivityFragment_());
@@ -58,6 +58,24 @@ public class ShellActivity extends BaseDaggerActivity {
         component.inject(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            appExit();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    private void changeHeader(int menuId) {
+        getSupportActionBar().setTitle(FRAGMENT_HEADER_MAP.containsKey(menuId) ? FRAGMENT_HEADER_MAP.get(menuId) : "");
+    }
+
+    private void appExit() {
+        this.finish();
+        System.exit(0);
+    }
+
     private class ButtomMenuListener implements BottomNavigationView.OnNavigationItemSelectedListener {
 
         @Override
@@ -67,9 +85,6 @@ public class ShellActivity extends BaseDaggerActivity {
             changeHeader(menuId);
             return true;
         }
-    }
 
-    private void changeHeader(int menuId) {
-        getSupportActionBar().setTitle(FRAGMENT_HEADER_MAP.containsKey(menuId) ? FRAGMENT_HEADER_MAP.get(menuId) : "");
     }
 }
