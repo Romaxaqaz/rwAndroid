@@ -1,5 +1,6 @@
 package by.client.android.railwayapp.ui.scoreboard;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.Train;
 import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
+import by.client.android.railwayapp.ui.utils.AnimationUtils;
 
 /**
  * Адаптер для отображения элемента списка поездов
@@ -15,12 +17,16 @@ import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
  */
 class TrainAdapter extends ModifiableRecyclerAdapter<TrainAdapter.ViewHolder, Train> {
 
-    TrainAdapter() {
+    private Context context;
+
+    TrainAdapter(Context context) {
         super(R.layout.train_item);
+        this.context = context;
     }
 
     @Override
     public ViewHolder createHolder(View view) {
+        AnimationUtils.setAnimation(context, view, R.anim.cardview_item_animation);
         return new ViewHolder(view);
     }
 

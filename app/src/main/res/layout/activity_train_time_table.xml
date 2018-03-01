@@ -17,17 +17,21 @@
             app:layout_scrollFlags="scroll|enterAlways" />
 
     <FrameLayout
+            android:id="@+id/root"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         <ImageView
+                android:id="@+id/imageHeader"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:src="@drawable/slide1"
                 android:scaleType="centerCrop"
-                android:layout_gravity="top" />
+                android:layout_gravity="top"
+                android:visibility="gone"/>
 
         <android.support.v7.widget.CardView
+                android:id="@+id/inputCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
@@ -35,7 +39,8 @@
                 android:layout_marginStart="@dimen/content_margin_start"
                 android:layout_marginEnd="@dimen/content_margin_end"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="6dp">
+                app:cardElevation="6dp"
+                android:visibility="gone">
 
             <FrameLayout
                     android:layout_width="match_parent"
@@ -179,7 +184,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/fab_margin"
-                android:src="@android:drawable/ic_menu_recent_history" />
+                android:src="@android:drawable/ic_menu_recent_history"
+                android:visibility="gone"/>
 
     </FrameLayout>
 

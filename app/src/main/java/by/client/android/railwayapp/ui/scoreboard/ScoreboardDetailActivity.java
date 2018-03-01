@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.Train;
+import by.client.android.railwayapp.support.common.StartActivityBuilder;
 import by.client.android.railwayapp.ui.widget.NewsWidget;
 
 /**
@@ -57,9 +58,9 @@ public class ScoreboardDetailActivity extends AppCompatActivity {
     Train train;
 
     public static void start(@NotNull Activity activity, @NotNull Train train, int requestCode) {
-        Intent intent = new Intent(activity, ScoreboardDetailActivity_.class);
-        intent.putExtra(ScoreboardDetailActivity.TRAIN_KEY, train);
-        activity.startActivityForResult(intent, requestCode);
+        StartActivityBuilder.create(activity, ScoreboardDetailActivity_.class)
+            .param(ScoreboardDetailActivity.TRAIN_KEY, train)
+            .startForResult(requestCode);
     }
 
     @AfterViews
@@ -92,11 +93,6 @@ public class ScoreboardDetailActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private String getPushContent() {
-        return String.format(getString(R.string.push_content),
-            train.getWay(), train.getPlatform(), train.getPath());
     }
 
     private void updateWidget() {

@@ -1,6 +1,5 @@
 package by.client.android.railwayapp;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.androidannotations.annotations.AfterViews;
@@ -12,9 +11,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.MenuItem;
-import by.client.android.railwayapp.ui.news.NewsActivityFragment_;
-import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment_;
-import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity_;
+import by.client.android.railwayapp.support.common.MapBuilder;
+import by.client.android.railwayapp.ui.news.NewsActivityFragment;
+import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment;
+import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity;
 
 /**
  * Главная страница приложения с отображением меню
@@ -27,27 +27,28 @@ public class ShellActivity extends BaseDaggerActivity {
     @ViewById(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
 
-    private static final Map<Integer, Fragment> FRAGMENT_HASH_MAP = new HashMap<>();
-    private static final Map<Integer, String> FRAGMENT_HEADER_MAP = new HashMap<>();
+    private static final Map<Integer, Fragment> FRAGMENT_HASH_MAP = new MapBuilder<Integer, Fragment>()
+        .put(R.id.action_favorites, ScoreboardActivityFragment.newInstance())
+        .put(R.id.action_schedules, TrainTimeTableActivity.newInstance())
+        .put(R.id.action_news, NewsActivityFragment.newInstance())
+        .build();
+
+    private static final Map<Integer, String> FRAGMENT_HEADER_MAP = new MapBuilder<Integer, String>()
+        .put(R.id.action_favorites, "Виртуальное табло")
+        .put(R.id.action_schedules, "Поиск маршрута")
+        .put(R.id.action_news, "Новости")
+        .build();
 
     @AfterViews
     void initActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new ButtomMenuListener());
-
-        FRAGMENT_HASH_MAP.put(R.id.action_favorites, new ScoreboardActivityFragment_());
-        FRAGMENT_HASH_MAP.put(R.id.action_schedules, new TrainTimeTableActivity_());
-        FRAGMENT_HASH_MAP.put(R.id.action_news, new NewsActivityFragment_());
-
-        FRAGMENT_HEADER_MAP.put(R.id.action_favorites, "Виртуальное табло");
-        FRAGMENT_HEADER_MAP.put(R.id.action_schedules, "Поиск маршрута");
-        FRAGMENT_HEADER_MAP.put(R.id.action_news, "Новости");
-
         bottomNavigationView.setSelectedItemId(R.id.action_schedules);
     }
 
     private void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
+            //.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_in_right)
             .replace(R.id.fragmentContainer, fragment)
             .addToBackStack(fragment.getClass().getName())
             .commit();
@@ -68,7 +69,9 @@ public class ShellActivity extends BaseDaggerActivity {
     }
 
     private void changeHeader(int menuId) {
-        getSupportActionBar().setTitle(FRAGMENT_HEADER_MAP.containsKey(menuId) ? FRAGMENT_HEADER_MAP.get(menuId) : "");
+        getSupportActionBar().setTitle(FRAGMENT_HEADER_MAP.containsKey(menuId)
+            ? FRAGMENT_HEADER_MAP.get(menuId)
+            : getResources().getString(R.string.app_name));
     }
 
     private void appExit() {
@@ -85,6 +88,5 @@ public class ShellActivity extends BaseDaggerActivity {
             changeHeader(menuId);
             return true;
         }
-
     }
 }

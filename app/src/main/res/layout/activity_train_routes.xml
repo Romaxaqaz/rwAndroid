@@ -8,7 +8,7 @@
         tools:context="by.client.android.railwayapp.ui.traintimetable.TrainRoutesActivity">
 
     <android.support.design.widget.AppBarLayout
-            android:id="@+id/main.appbar"
+            android:id="@+id/appbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
@@ -16,14 +16,15 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
         <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/main.collapsing"
+                android:id="@+id/collapsingInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
                 app:layout_scrollFlags="scroll|snap"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleMarginStart="48dp"
-                app:expandedTitleMarginEnd="64dp">
+                app:expandedTitleMarginEnd="64dp"
+                android:visibility="gone">
 
             <FrameLayout
                     android:layout_width="match_parent"

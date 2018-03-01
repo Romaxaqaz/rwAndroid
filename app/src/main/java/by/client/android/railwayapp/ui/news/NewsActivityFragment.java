@@ -41,6 +41,10 @@ public class NewsActivityFragment extends BaseDaggerFragment implements SwipeRef
 
     private NewsAdapter newsAdapter;
 
+    public static NewsActivityFragment newInstance() {
+        return new NewsActivityFragment_();
+    }
+
     @AfterViews
     protected void onCreate() {
         initView();

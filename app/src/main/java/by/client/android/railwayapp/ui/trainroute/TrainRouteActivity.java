@@ -11,7 +11,6 @@ import org.androidannotations.annotations.ViewById;
 import org.jetbrains.annotations.NotNull;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +27,7 @@ import by.client.android.railwayapp.model.RouteItem;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
 import by.client.android.railwayapp.support.BaseLoaderListener;
 import by.client.android.railwayapp.support.Client;
+import by.client.android.railwayapp.support.common.StartActivityBuilder;
 import by.client.android.railwayapp.ui.scoreboard.TrainTypeToImage;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 
@@ -74,9 +74,9 @@ public class TrainRouteActivity extends BaseDaggerActivity {
     private RouteAdapter routeAdapter;
 
     public static void start(@NotNull Activity activity, @NotNull TrainRoute train, int requestCode) {
-        Intent intent = new Intent(activity, TrainRouteActivity_.class);
-        intent.putExtra(TRAIN_KEY, train);
-        activity.startActivityForResult(intent, requestCode);
+        StartActivityBuilder.create(activity, TrainRouteActivity_.class)
+            .param(TRAIN_KEY, train)
+            .startForResult(requestCode);
     }
 
     @AfterViews

@@ -9,11 +9,19 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.ChangeBounds;
+import android.transition.Fade;
+import android.transition.TransitionManager;
+import android.transition.TransitionSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -70,8 +78,18 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
     @ViewById(R.id.stationsSpinner)
     Spinner stationsSpinner;
 
+    @ViewById(R.id.collapsingToolbarLayout)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+
+    @ViewById(R.id.appBar)
+    AppBarLayout appBarLayout;
+
     private TrainAdapter trainsAdapter;
     private StationAdapter stationAdapter;
+
+    public static ScoreboardActivityFragment newInstance() {
+        return new ScoreboardActivityFragment_();
+    }
 
     @AfterViews
     void initFragment() {
@@ -89,9 +107,16 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
         stationsSpinner.setOnItemSelectedListener(new StationClickListener());
         stationsSpinner.setSelection(scoreboardStations.indexOf(settingsService.getScoreboardStation()));
 
-        trainsAdapter = new TrainAdapter();
+        trainsAdapter = new TrainAdapter(getContext());
         trainsAdapter.setItemClickListener(new TrainClickListener());
         trainsRecyclerView.setAdapter(trainsAdapter);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                animate();
+            }
+        }, 500);
     }
 
     @Override
@@ -119,6 +144,17 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
         public void itemClick(View view, int position) {
             ScoreboardDetailActivity.start(getActivity(), trainsAdapter.getItem(position), SCOREBOARD_ACTIVITY_CODE);
         }
+    }
+
+    private void animate() {
+        TransitionManager.beginDelayedTransition(appBarLayout, new TransitionSet()
+            .addTransition(new Fade())
+            .addTransition(new ChangeBounds()
+                .setStartDelay(200)
+                .setDuration(400)
+                .setInterpolator(new FastOutSlowInInterpolator())));
+
+        UiUtils.setVisibility(true, collapsingToolbarLayout);
     }
 
     private class StationClickListener implements AdapterView.OnItemSelectedListener {

@@ -5,8 +5,10 @@
         android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
+            android:id="@+id/trainCardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:stateListAnimator="@anim/cardview_item_animation"
             style="@style/DefaultCardView">
 
         <LinearLayout
@@ -59,8 +61,7 @@
                             android:id="@+id/type"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_size_micro"
-                            />
+                            android:textSize="@dimen/text_size_micro" />
 
                 </LinearLayout>
 

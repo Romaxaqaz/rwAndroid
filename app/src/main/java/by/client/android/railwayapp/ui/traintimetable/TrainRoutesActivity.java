@@ -11,11 +11,18 @@ import org.androidannotations.annotations.ViewById;
 import org.jetbrains.annotations.NotNull;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.ChangeBounds;
+import android.transition.Fade;
+import android.transition.TransitionManager;
+import android.transition.TransitionSet;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -30,6 +37,7 @@ import by.client.android.railwayapp.model.routetrain.Place;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
 import by.client.android.railwayapp.support.BaseLoaderListener;
 import by.client.android.railwayapp.support.Client;
+import by.client.android.railwayapp.support.common.StartActivityBuilder;
 import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 import by.client.android.railwayapp.ui.trainroute.TrainRouteActivity;
@@ -76,15 +84,21 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
     @ViewById(R.id.emptyView)
     FrameLayout emptyView;
 
+    @ViewById(R.id.collapsingInfo)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+
+    @ViewById(R.id.appbarLayout)
+    AppBarLayout appBarLayout;
+
     @Extra(TRAIN_ROUTE_ID)
     SearchTrain searchTrain;
 
     private TrainRoutesRecyclerAdapter trainRoutesAdapter;
 
     public static void start(@NotNull Activity activity, @NotNull int requestCode, SearchTrain trainRoute) {
-        Intent intent = new Intent(activity, TrainRoutesActivity_.class);
-        intent.putExtra(TrainRoutesActivity.TRAIN_ROUTE_ID, trainRoute);
-        activity.startActivityForResult(intent, requestCode);
+        StartActivityBuilder.create(activity, TrainRoutesActivity_.class)
+            .param(TrainRoutesActivity.TRAIN_ROUTE_ID, trainRoute)
+            .startForResult(requestCode);
     }
 
     @AfterViews
@@ -101,6 +115,13 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
 
         loadData(searchTrain);
         initHeader();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                animate();
+            }
+        }, 500);
     }
 
     @Override
@@ -120,6 +141,17 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
 
     private void loadData(SearchTrain trainRoute) {
         client.send(new TrainTimeLoader(railwayApi, trainRoute), new TrainTimeLoadListener(this));
+    }
+
+    private void animate() {
+        TransitionManager.beginDelayedTransition(appBarLayout, new TransitionSet()
+            .addTransition(new Fade())
+            .addTransition(new ChangeBounds()
+                .setStartDelay(200)
+                .setDuration(400)
+                .setInterpolator(new FastOutSlowInInterpolator())));
+
+        UiUtils.setVisibility(true, collapsingToolbarLayout);
     }
 
     private static class TrainTimeLoadListener extends BaseLoaderListener<TrainRoutesActivity, List<TrainRoute>> {

@@ -9,7 +9,6 @@ import org.androidannotations.annotations.ViewById;
 import org.jetbrains.annotations.NotNull;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +22,7 @@ import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.api.rw.model.places.TrainPlaceInfo;
 import by.client.android.railwayapp.model.routetrain.Place;
+import by.client.android.railwayapp.support.common.StartActivityBuilder;
 import by.client.android.railwayapp.ui.RetrofitCallback;
 import by.client.android.railwayapp.ui.scoreboard.TrainTypeToImage;
 import by.client.android.railwayapp.ui.utils.UiUtils;
@@ -81,9 +81,9 @@ public class PlaceInfoActivity extends BaseDaggerActivity {
     private TariffsRecyclerAdapter tariffsRecyclerAdapter;
 
     public static void start(@NotNull Activity activity, @NotNull Place place, int requestCode) {
-        Intent intent = new Intent(activity, PlaceInfoActivity_.class);
-        intent.putExtra(PLACE_KEY, place);
-        activity.startActivityForResult(intent, requestCode);
+        StartActivityBuilder.create(activity, PlaceInfoActivity_.class)
+            .param(PLACE_KEY, place)
+            .startForResult(requestCode);
     }
 
     @Override
