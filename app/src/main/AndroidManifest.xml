@@ -3,6 +3,8 @@
         package="by.client.android.railwayapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
             android:name=".AndroidApplication"
@@ -11,15 +13,19 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ui.SplashActivity" android:screenOrientation="portrait" android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ShellActivity_" />
-
         <activity android:name=".ui.scoreboard.ScoreboardDetailActivity_" />
-        <activity
-                android:name=".ui.traintimetable.TrainRoutesActivity_"
-                android:parentActivityName=".ShellActivity_" />
+        <activity android:name=".ui.traintimetable.TrainRoutesActivity_" android:parentActivityName=".ShellActivity_" />
         <activity android:name=".ui.trainroute.TrainRouteActivity_" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.traintimetable.PlaceInfoActivity_" />
+        <activity android:name=".ui.news.NewsDetailActivity_"/>
 
         <receiver android:name=".ui.widget.NewsWidget">
             <intent-filter>
@@ -30,16 +36,6 @@
                     android:name="android.appwidget.provider"
                     android:resource="@xml/news_widget_info" />
         </receiver>
-
-        <activity android:name=".ui.SplashActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

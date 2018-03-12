@@ -9,7 +9,6 @@ import android.view.animation.Animation;
  *
  * @author PRV
  */
-
 public class AnimationUtils {
 
     public static void setAnimation(Context context, View view, int animId) {

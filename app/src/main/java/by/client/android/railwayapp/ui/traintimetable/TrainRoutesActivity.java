@@ -11,6 +11,7 @@ import org.androidannotations.annotations.ViewById;
 import org.jetbrains.annotations.NotNull;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
@@ -37,7 +38,6 @@ import by.client.android.railwayapp.model.routetrain.Place;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
 import by.client.android.railwayapp.support.BaseLoaderListener;
 import by.client.android.railwayapp.support.Client;
-import by.client.android.railwayapp.support.common.StartActivityBuilder;
 import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 import by.client.android.railwayapp.ui.trainroute.TrainRouteActivity;
@@ -56,6 +56,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
 
     private static final int TRAIN_ROUTE_ACTIVITY_CODE = 5;
     private static final String TRAIN_ROUTE_ID = "TRAIN_ROUTE_ID";
+    private static final String DATE_FORMAT = "dd MMMM yyyy";
 
     @Inject
     Client client;
@@ -95,10 +96,11 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
 
     private TrainRoutesRecyclerAdapter trainRoutesAdapter;
 
-    public static void start(@NotNull Activity activity, @NotNull int requestCode, SearchTrain trainRoute) {
-        StartActivityBuilder.create(activity, TrainRoutesActivity_.class)
-            .param(TrainRoutesActivity.TRAIN_ROUTE_ID, trainRoute)
-            .startForResult(requestCode);
+    public static void start(@NotNull Activity activity, int requestCode, @NotNull SearchTrain trainRoute) {
+
+        Intent intent = new Intent(activity, TrainRoutesActivity_.class);
+        intent.putExtra(TrainRoutesActivity.TRAIN_ROUTE_ID, trainRoute);
+        activity.startActivity(intent);
     }
 
     @AfterViews
@@ -132,7 +134,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
     private void initHeader() {
         startTextView.setText(searchTrain.getDepartureStation().getValue());
         endTextView.setText(searchTrain.getDestinationStation().getValue());
-        dateTextView.setText(new DateToStringConverter("dd MMMM yyyy").convert(searchTrain.getDepartureDate()));
+        dateTextView.setText(new DateToStringConverter(DATE_FORMAT).convert(searchTrain.getDepartureDate()));
     }
 
     private void initTrains(List<TrainRoute> trainRoutes) {

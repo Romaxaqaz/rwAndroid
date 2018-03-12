@@ -15,6 +15,7 @@ class StationToNameConverter {
     private static final Map<ScoreboardStation, String> STATION_STRING_MAP = new MapBuilder<ScoreboardStation, String>()
         .put(ScoreboardStation.MINSK, "Минск-Пассажирский")
         .put(ScoreboardStation.ORSHA, "Орша-Центральная")
+        .put(ScoreboardStation.BREST, "Брест-Центральный")
         .build();
 
     String convert(ScoreboardStation scoreboardStation) {

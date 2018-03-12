@@ -30,6 +30,8 @@ import by.client.android.railwayapp.ui.utils.UiUtils;
 @EFragment(R.layout.activity_news)
 public class NewsActivityFragment extends BaseDaggerFragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    public static final String NEWS_URL_KEY = "NEWS_URL_KEY";
+
     @Inject
     Client client;
 
@@ -107,6 +109,7 @@ public class NewsActivityFragment extends BaseDaggerFragment implements SwipeRef
 
         @Override
         public void itemClick(View view, int position) {
+            //NewsDetailActivity.start(getActivity(), newsAdapter.getItem(position).getLink(), 123);
             UiUtils.openExternalLink(getContext(), newsAdapter.getItem(position).getLink());
         }
     }

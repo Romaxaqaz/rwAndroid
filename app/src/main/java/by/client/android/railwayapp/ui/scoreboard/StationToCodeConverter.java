@@ -15,6 +15,7 @@ class StationToCodeConverter {
     private static final Map<ScoreboardStation, String> STATION_STRING_MAP = new MapBuilder<ScoreboardStation, String>()
         .put(ScoreboardStation.MINSK, "2100000")
         .put(ScoreboardStation.ORSHA, "2100000")
+        .put(ScoreboardStation.BREST, "2100035")
         .build();
 
     String convert(ScoreboardStation scoreboardStation) {

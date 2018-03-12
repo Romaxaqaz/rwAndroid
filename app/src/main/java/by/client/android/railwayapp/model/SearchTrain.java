@@ -1,8 +1,9 @@
 package by.client.android.railwayapp.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import by.client.android.railwayapp.api.rw.model.SearchStation;
 
 /**
@@ -10,7 +11,7 @@ import by.client.android.railwayapp.api.rw.model.SearchStation;
  *
  * @author ROMAN PANTELEEV
  */
-public class SearchTrain implements Serializable {
+public class SearchTrain implements Parcelable {
 
     /**
      * Станция отправления
@@ -68,4 +69,34 @@ public class SearchTrain implements Serializable {
         result = 31 * result + destinationStation.hashCode();
         return result;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.departureStation, flags);
+        dest.writeParcelable(this.destinationStation, flags);
+        dest.writeLong(ParcelableUtils.getDateTime(departureDate));
+    }
+
+    private SearchTrain(Parcel in) {
+        this.departureStation = ParcelableUtils.readValue(in, SearchStation.class);
+        this.destinationStation = ParcelableUtils.readValue(in, SearchStation.class);
+        this.departureDate = ParcelableUtils.readDate(in);
+    }
+
+    public static final Parcelable.Creator<SearchTrain> CREATOR = new Parcelable.Creator<SearchTrain>() {
+        @Override
+        public SearchTrain createFromParcel(Parcel source) {
+            return new SearchTrain(source);
+        }
+
+        @Override
+        public SearchTrain[] newArray(int size) {
+            return new SearchTrain[size];
+        }
+    };
 }

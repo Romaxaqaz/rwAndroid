@@ -5,11 +5,15 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 /**
  * Утилитный класс для работы с UI
@@ -105,5 +109,24 @@ public class UiUtils {
             i.setPackage(null);
             context.startActivity(i);
         }
+    }
+
+    public static <T extends View> T inflate(Context context, int layoutId) {
+        return (T) LayoutInflater.from(context).inflate(layoutId, null);
+    }
+
+    public static <T extends View> T inflate(ViewGroup root, int layoutId) {
+        return (T) LayoutInflater.from(root.getContext()).inflate(layoutId, root, false);
+    }
+
+    public static boolean hideKeyboard(View decorView) {
+        InputMethodManager inputManager =
+            (InputMethodManager) decorView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        return inputManager.hideSoftInputFromWindow(decorView.getWindowToken(), 0);
+    }
+
+    public static void hideIfEmpty(TextView textView) {
+        setVisibility(!TextUtils.isEmpty(textView.getText()), textView);
     }
 }

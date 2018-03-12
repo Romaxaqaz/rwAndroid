@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import by.client.android.railwayapp.ui.utils.UiUtils;
 
 /**
  * Базовый адаптер для {@link RecyclerView} c обработкой нажатия на элемент списка.
@@ -32,7 +32,7 @@ public abstract class ModifiableRecyclerAdapter<T extends RecyclerView.ViewHolde
 
     @Override
     public T onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(itemResource, parent, false);
+        View view = UiUtils.inflate(parent, itemResource);
         final T mViewHolder = createHolder(view);
         view.setOnClickListener(new OnNewsItemClickListener(mViewHolder));
         return mViewHolder;

@@ -9,19 +9,10 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
-import android.os.Build;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.widget.CardView;
 import static android.text.TextUtils.join;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.TransitionManager;
-import android.transition.TransitionSet;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -36,8 +27,8 @@ import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 import by.client.android.railwayapp.ui.traintimetable.history.ObjectListHistory;
 import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryDialog;
+import by.client.android.railwayapp.ui.utils.DateUtils;
 import by.client.android.railwayapp.ui.utils.Dialogs;
-import by.client.android.railwayapp.ui.utils.UiUtils;
 
 /**
  * Страница ввода данных для поиска поездов
@@ -85,18 +76,15 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
     }
 
     @AfterViews
-    void initView() {
+    void initFragment() {
         arriveEditText.setOnClickListener(new OpenSearchStation(new StationArriveSelected()));
         arrivalEditText.setOnClickListener(new OpenSearchStation(new StationArrivalSelected()));
         dateTextView.setOnClickListener(new OnDatePickerClickListener());
         searchStationButton.setOnClickListener(new SearchClickListener());
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                animate();
-            }
-        }, 200);
+        setStation(arriveEditText, arrive);
+        setStation(arrivalEditText, arrival);
+        setDate(currentDate);
     }
 
     @Override
@@ -107,18 +95,6 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
     @Click(R.id.history)
     void showHistory() {
         TrainRouteHistoryDialog.show(getFragmentManager(), new TrainHistorySelectedListener());
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void animate() {
-        TransitionManager.beginDelayedTransition(root, new TransitionSet()
-            .addTransition(new Fade())
-            .addTransition(new Slide(Gravity.RIGHT).addTarget(floatingActionButton).setStartDelay(500))
-            .addTransition(new Slide(Gravity.LEFT).addTarget(inputCardView).setStartDelay(300))
-            .addTransition(new Slide(Gravity.RIGHT).addTarget(imageHeader).setStartDelay(100))
-            .setInterpolator(new FastOutSlowInInterpolator()));
-
-        UiUtils.setVisibility(true, imageHeader, floatingActionButton, inputCardView);
     }
 
     private class OpenSearchStation implements View.OnClickListener {
@@ -139,7 +115,8 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
 
         @Override
         public void selectedStation(SearchStation station) {
-            setArrive(station);
+            arrive = station;
+            setStation(arriveEditText, station);
         }
     }
 
@@ -147,28 +124,32 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
 
         @Override
         public void selectedStation(SearchStation station) {
-            setArrival(station);
+            arrival = station;
+            setStation(arrivalEditText, station);
         }
     }
 
-    private void setArrive(SearchStation selected) {
-        arrive = selected;
-        arriveEditText.setText(selected.getValue());
+    private void setStation(TextView textView, SearchStation selected) {
+        if (selected != null) {
+            textView.setText(selected.getValue());
+        }
     }
 
-    private void setArrival(SearchStation selected) {
-        arrival = selected;
-        arrivalEditText.setText(selected.getValue());
+    private void setDate(Calendar currentDate) {
+        if (currentDate != null) {
+            dateTextView.setText(new DateToStringConverter().convert(currentDate.getTime()));
+        }
     }
 
     private class OnDatePickerClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
-            Calendar dateAndTime = Calendar.getInstance();
-            new DatePickerDialog(getActivity(), new DateListener(), dateAndTime.get(Calendar.YEAR),
-                dateAndTime.get(Calendar.MONTH),
-                dateAndTime.get(Calendar.DAY_OF_MONTH))
+            DateUtils date = new DateUtils();
+            new DatePickerDialog(getActivity(), new DateListener(),
+                date.getYear(),
+                date.getMonth(),
+                date.getDayOfMonth())
                 .show();
         }
     }
@@ -192,10 +173,11 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
 
         @Override
         public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-            currentDate = Calendar.getInstance();
-            currentDate.set(Calendar.YEAR, year);
-            currentDate.set(Calendar.MONTH, monthOfYear);
-            currentDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            currentDate = DateUtils.createDate()
+                .setYear(year)
+                .setMonthOfYear(monthOfYear)
+                .setDayOfMonth(dayOfMonth)
+                .build();
             dateTextView.setText(new DateToStringConverter().convert(currentDate.getTime()));
         }
     }
@@ -204,8 +186,11 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
 
         @Override
         public void onSelectedStation(SearchTrain searchTrain) {
-            setArrive(searchTrain.getDepartureStation());
-            setArrival(searchTrain.getDestinationStation());
+            arrive = searchTrain.getDepartureStation();
+            setStation(arriveEditText, arrive);
+
+            arrival = searchTrain.getDestinationStation();
+            setStation(arrivalEditText, arrival);
         }
     }
 }

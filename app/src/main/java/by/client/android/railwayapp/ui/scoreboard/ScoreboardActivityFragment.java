@@ -138,14 +138,6 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
         trainsAdapter.setData(trains);
     }
 
-    private class TrainClickListener implements ModifiableRecyclerAdapter.RecyclerItemsClickListener {
-
-        @Override
-        public void itemClick(View view, int position) {
-            ScoreboardDetailActivity.start(getActivity(), trainsAdapter.getItem(position), SCOREBOARD_ACTIVITY_CODE);
-        }
-    }
-
     private void animate() {
         TransitionManager.beginDelayedTransition(appBarLayout, new TransitionSet()
             .addTransition(new Fade())
@@ -155,6 +147,14 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
                 .setInterpolator(new FastOutSlowInInterpolator())));
 
         UiUtils.setVisibility(true, collapsingToolbarLayout);
+    }
+
+    private class TrainClickListener implements ModifiableRecyclerAdapter.RecyclerItemsClickListener {
+
+        @Override
+        public void itemClick(View view, int position) {
+            ScoreboardDetailActivity.start(getActivity(), trainsAdapter.getItem(position), SCOREBOARD_ACTIVITY_CODE);
+        }
     }
 
     private class StationClickListener implements AdapterView.OnItemSelectedListener {

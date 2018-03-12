@@ -113,4 +113,6 @@ dependencies {
     apt 'org.androidannotations:androidannotations:4.4.0'
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'org.jetbrains:annotations-java5:15.0'
+
+    compile 'com.koushikdutta.ion:ion:2.+'
 }

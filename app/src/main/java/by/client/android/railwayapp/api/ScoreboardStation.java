@@ -8,12 +8,17 @@ package by.client.android.railwayapp.api;
 public enum ScoreboardStation {
 
     /**
-     * Станция Минск-Пассажирский
+     * Минск-Пассажирский
      */
     MINSK,
 
     /**
-     * Станция Орша-Центральная
+     * Орша-Центральная
      */
-    ORSHA
+    ORSHA,
+
+    /**
+     * Брест-Центральный
+     */
+    BREST
 }

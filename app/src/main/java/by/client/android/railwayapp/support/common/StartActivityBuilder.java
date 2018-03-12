@@ -5,6 +5,7 @@ import java.io.Serializable;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 
 /**
  * Билдер для построения и запуска Activity
@@ -16,8 +17,11 @@ public class StartActivityBuilder {
     private final Activity currentActivity;
     private final Class<? extends Activity> needActivity;
     private final Bundle rawIntentParams;
+    private Intent intent;
 
     private StartActivityBuilder(Activity currentActivity, Class<? extends Activity> needActivity) {
+        intent = new Intent(currentActivity, needActivity);
+
         this.currentActivity = currentActivity;
         this.needActivity = needActivity;
         rawIntentParams = new Bundle();
@@ -45,6 +49,11 @@ public class StartActivityBuilder {
         return this;
     }
 
+    public <T extends Parcelable> StartActivityBuilder param(String key, T param) {
+        intent.putExtra(key, param);
+        return this;
+    }
+
     /**
      * Формирует Intent и выполняет навигацию
      */
@@ -60,7 +69,6 @@ public class StartActivityBuilder {
     }
 
     private Intent createIntent() {
-        Intent intent = new Intent(currentActivity, needActivity);
         intent.putExtras(rawIntentParams);
         return intent;
     }

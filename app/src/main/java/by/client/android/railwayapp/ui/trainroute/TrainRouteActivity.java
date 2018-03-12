@@ -117,8 +117,7 @@ public class TrainRouteActivity extends BaseDaggerActivity {
     }
 
     private void loadData() {
-        client.send(new TrainRouteLoader(railwayApi, train.getId()),
-            new TrainRouteLoadListener(this));
+        client.send(new TrainRouteLoader(railwayApi, train.getId()), new TrainRouteLoadListener(this));
     }
 
     private static class TrainRouteLoadListener extends BaseLoaderListener<TrainRouteActivity, List<RouteItem>> {
