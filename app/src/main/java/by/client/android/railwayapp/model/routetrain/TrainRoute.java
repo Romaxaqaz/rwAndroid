@@ -156,9 +156,9 @@ public class TrainRoute implements Parcelable {
         this.ico = in.readString();
         this.path = in.readString();
         this.trainType = in.readString();
-        this.trainTime = ParcelableUtils.readValue(in, TrainTime.class);
+        this.trainTime = ParcelableUtils.readParcelable(in, TrainTime.class);
         this.travelTime = in.readString();
-        this.trainParameters = ParcelableUtils.readValue(in, TrainParameters.class);
+        this.trainParameters = ParcelableUtils.readParcelable(in, TrainParameters.class);
         this.places = in.createTypedArrayList(Place.CREATOR);
     }
 

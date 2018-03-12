@@ -42,7 +42,7 @@ class TrainRoutesRecyclerAdapter extends ModifiableRecyclerAdapter<TrainRoutesRe
         holder.travelTime.setText(train.getTravelTime());
         holder.placesTest.initPlaces(train.getPlaces());
 
-        UiUtils.setVisibility(train.getParameters().getElectronicRegistration(), holder.ectronicRegistration);
+        UiUtils.setVisibility(train.getParameters().getElectronicRegistration(), holder.electronicRegistration);
         UiUtils.setVisibility(train.getParameters().getCorporateTrain(), holder.corporateTrain);
         UiUtils.setVisibility(train.getParameters().getExpressTrain(), holder.expressTrain);
 
@@ -59,7 +59,7 @@ class TrainRoutesRecyclerAdapter extends ModifiableRecyclerAdapter<TrainRoutesRe
         private TextView arrived;
         private TextView travelTime;
         private TrainPlaceView placesTest;
-        private TextView ectronicRegistration;
+        private TextView electronicRegistration;
         private TextView corporateTrain;
         private TextView expressTrain;
 
@@ -75,7 +75,7 @@ class TrainRoutesRecyclerAdapter extends ModifiableRecyclerAdapter<TrainRoutesRe
             placesTest = view.findViewById(R.id.placesTest);
             placesTest.setClickListener(onPlaceItemClickListener);
 
-            ectronicRegistration = view.findViewById(R.id.electronicRegistration);
+            electronicRegistration = view.findViewById(R.id.electronicRegistration);
             corporateTrain = view.findViewById(R.id.corporateTrain);
             expressTrain = view.findViewById(R.id.expressTrain);
         }
