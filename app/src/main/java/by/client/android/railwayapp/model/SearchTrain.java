@@ -83,8 +83,8 @@ public class SearchTrain implements Parcelable {
     }
 
     private SearchTrain(Parcel in) {
-        this.departureStation = ParcelableUtils.readValue(in, SearchStation.class);
-        this.destinationStation = ParcelableUtils.readValue(in, SearchStation.class);
+        this.departureStation = ParcelableUtils.readParcelable(in, SearchStation.class);
+        this.destinationStation = ParcelableUtils.readParcelable(in, SearchStation.class);
         this.departureDate = ParcelableUtils.readDate(in);
     }
 

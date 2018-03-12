@@ -125,7 +125,7 @@ public class SearchStation implements Parcelable {
         dest.writeValue(this.otd);
     }
 
-    protected SearchStation(Parcel in) {
+    private SearchStation(Parcel in) {
         this.prefix = in.readString();
         this.label = in.readString();
         this.labelTail = in.readString();

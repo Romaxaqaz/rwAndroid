@@ -12,8 +12,12 @@ import android.os.Parcelable;
  */
 public class ParcelableUtils {
 
-    public static <T> T readValue(Parcel parcelable, Class object) {
-        return (T) parcelable.readValue(object.getClass().getClassLoader());
+    public static <T> T readValue(Parcel parcelable, Class clas) {
+        return (T) parcelable.readValue(clas.getClassLoader());
+    }
+
+    public static <T extends Parcelable> T readParcelable(Parcel parcelable, Class clas) {
+        return parcelable.readParcelable(clas.getClassLoader());
     }
 
     public static Date readDate(Parcel parcelable) {
