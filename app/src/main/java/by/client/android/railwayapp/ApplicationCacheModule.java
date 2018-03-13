@@ -1,14 +1,11 @@
 package by.client.android.railwayapp;
 
-import java.util.List;
-
 import javax.inject.Singleton;
 
 import android.app.Application;
 import by.client.android.railwayapp.model.SearchTrain;
-import by.client.android.railwayapp.ui.traintimetable.history.Cache;
-import by.client.android.railwayapp.ui.traintimetable.history.ObjectListHistory;
-import by.client.android.railwayapp.ui.traintimetable.history.RoutesListHistory;
+import by.client.android.railwayapp.support.database.DataBase;
+import by.client.android.railwayapp.ui.traintimetable.history.TrainHistoryDataBase;
 import dagger.Module;
 import dagger.Provides;
 
@@ -28,7 +25,7 @@ class ApplicationCacheModule {
 
     @Provides
     @Singleton
-    ObjectListHistory<SearchTrain> getRouteHistory() {
-        return new RoutesListHistory(new Cache<List<SearchTrain>>(application, "ROUTES_KEY"));
+    DataBase<SearchTrain> getTrainHistoryDb() {
+        return new TrainHistoryDataBase(application);
     }
 }

@@ -28,10 +28,6 @@ public class SearchTrain implements Parcelable {
      */
     private Date departureDate;
 
-    public SearchTrain() {
-
-    }
-
     public SearchTrain(SearchStation departureStation, SearchStation destinationStation, Date departureDate) {
         this.departureStation = departureStation;
         this.destinationStation = destinationStation;

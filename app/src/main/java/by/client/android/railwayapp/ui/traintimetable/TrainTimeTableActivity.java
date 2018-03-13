@@ -24,8 +24,8 @@ import by.client.android.railwayapp.BaseDaggerFragment;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.model.SearchStation;
 import by.client.android.railwayapp.model.SearchTrain;
+import by.client.android.railwayapp.support.database.DataBase;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
-import by.client.android.railwayapp.ui.traintimetable.history.ObjectListHistory;
 import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryDialog;
 import by.client.android.railwayapp.ui.utils.DateUtils;
 import by.client.android.railwayapp.ui.utils.Dialogs;
@@ -41,7 +41,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
     private static final int TRAIN_ROUTE_ACTIVITY_CODE = 2;
 
     @Inject
-    ObjectListHistory<SearchTrain> trainRouteHistory;
+    DataBase<SearchTrain> trainHistoryDb;
 
     @ViewById(R.id.departureStation)
     TextView arriveEditText;
@@ -161,7 +161,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
             SearchTrainValidator trainValidator = new SearchTrainValidator(getContext());
             SearchTrain searchTrain = trainValidator.validate(arrive, arrival, currentDate);
             if (searchTrain != null) {
-                trainRouteHistory.add(searchTrain);
+                trainHistoryDb.insert(searchTrain);
                 TrainRoutesActivity.start(getActivity(), TRAIN_ROUTE_ACTIVITY_CODE, searchTrain);
             } else {
                 Dialogs.showToast(getContext(), join("\n", trainValidator.getErrors()));
