@@ -6,6 +6,7 @@ import android.app.Application;
 import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.support.database.DataBase;
 import by.client.android.railwayapp.ui.traintimetable.history.TrainHistoryDataBase;
+import by.client.android.railwayapp.ui.traintimetable.history.TrainHistoryDbHelper;
 import dagger.Module;
 import dagger.Provides;
 
@@ -26,6 +27,6 @@ class ApplicationCacheModule {
     @Provides
     @Singleton
     DataBase<SearchTrain> getTrainHistoryDb() {
-        return new TrainHistoryDataBase(application);
+        return new TrainHistoryDataBase(new TrainHistoryDbHelper(application));
     }
 }

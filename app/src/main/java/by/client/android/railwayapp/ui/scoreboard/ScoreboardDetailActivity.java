@@ -19,6 +19,7 @@ import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.Train;
 import by.client.android.railwayapp.support.common.StartActivityBuilder;
 import by.client.android.railwayapp.ui.widget.NewsWidget;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Страница для отображения детальной информации поезда со страницы "Виртуально табло"
@@ -31,7 +32,7 @@ public class ScoreboardDetailActivity extends AppCompatActivity {
     private static final String TRAIN_KEY = "TRAIN_KEY";
 
     @ViewById(R.id.icoImageView)
-    ImageView icoImageView;
+    CircleImageView icoImageView;
 
     @ViewById(R.id.trainIdTextView)
     TextView trainIdTextView;
@@ -68,20 +69,13 @@ public class ScoreboardDetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         trainIdTextView.setText(train.getId());
-        icoImageView.setBackgroundResource(new TrainTypeToImage().convert(train.getPathType()));
+        icoImageView.setImageResource(new TrainTypeToImage().convert(train.getPathType()));
         trainTypeTextView.setText(train.getTrainType());
         pathTextView.setText(train.getPath());
         wayTextView.setText(train.getWay());
         platformTextView.setText(train.getPlatform());
         startTimeTextView.setText(train.getStart());
         endTimeTextView.setText(train.getEnd());
-    }
-
-    @Click(R.id.sendPush)
-    void submitButton(View view) {
-        if (view.getId() == R.id.sendPush) {
-            updateWidget();
-        }
     }
 
     @Override

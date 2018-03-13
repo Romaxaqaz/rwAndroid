@@ -6,9 +6,9 @@ import java.util.List;
 import com.google.gson.Gson;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.support.database.DataBase;
 import by.client.android.railwayapp.support.database.SqlRequestBuilder;
@@ -22,16 +22,17 @@ import static by.client.android.railwayapp.ui.traintimetable.history.TrainHistor
  */
 public class TrainHistoryDataBase implements DataBase<SearchTrain> {
 
-    private TrainHistoryDbHelper trainHistoryDbHelper;
+    private SQLiteOpenHelper sqLiteHelper;
     private Gson gson;
 
-    public TrainHistoryDataBase(Context context) {
-        trainHistoryDbHelper = new TrainHistoryDbHelper(context);
+    public TrainHistoryDataBase(SQLiteOpenHelper sqLiteHelper) {
+        this.sqLiteHelper = sqLiteHelper;
         gson = new Gson();
     }
 
+    @Override
     public void insert(SearchTrain searchTrain) {
-        SQLiteDatabase db = trainHistoryDbHelper.getWritableDatabase();
+        SQLiteDatabase db = sqLiteHelper.getWritableDatabase();
 
         if (!isContain(searchTrain)) {
             ContentValues values = new ContentValues();
@@ -44,8 +45,9 @@ public class TrainHistoryDataBase implements DataBase<SearchTrain> {
         }
     }
 
+    @Override
     public List<SearchTrain> getAll() {
-        SQLiteDatabase db = trainHistoryDbHelper.getReadableDatabase();
+        SQLiteDatabase db = sqLiteHelper.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(new SqlRequestBuilder()
             .select()
@@ -65,13 +67,14 @@ public class TrainHistoryDataBase implements DataBase<SearchTrain> {
         return searchTrains;
     }
 
+    @Override
     public void clear() {
-        SQLiteDatabase db = trainHistoryDbHelper.getWritableDatabase();
+        SQLiteDatabase db = sqLiteHelper.getWritableDatabase();
         db.delete(TrainEntry.TABLE_NAME, null, null);
     }
 
     private boolean isContain(SearchTrain searchTrain) {
-        SQLiteDatabase db = trainHistoryDbHelper.getReadableDatabase();
+        SQLiteDatabase db = sqLiteHelper.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(new SqlRequestBuilder()
             .select()

@@ -7,9 +7,11 @@ import javax.inject.Inject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
 
 import android.app.DatePickerDialog;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import static android.text.TextUtils.join;
@@ -38,8 +40,6 @@ import by.client.android.railwayapp.ui.utils.Dialogs;
 @EFragment(R.layout.activity_train_time_table)
 public class TrainTimeTableActivity extends BaseDaggerFragment {
 
-    private static final int TRAIN_ROUTE_ACTIVITY_CODE = 2;
-
     @Inject
     DataBase<SearchTrain> trainHistoryDb;
 
@@ -67,9 +67,14 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
     @ViewById(R.id.imageHeader)
     ImageView imageHeader;
 
-    private SearchStation arrive;
-    private SearchStation arrival;
-    private Calendar currentDate;
+    @InstanceState
+    SearchStation arrive;
+
+    @InstanceState
+    SearchStation arrival;
+
+    @InstanceState
+    Calendar currentDate;
 
     public static TrainTimeTableActivity newInstance() {
         return new TrainTimeTableActivity_();
@@ -85,6 +90,15 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
         setStation(arriveEditText, arrive);
         setStation(arrivalEditText, arrival);
         setDate(currentDate);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable("arrive", arrive);
+        outState.putParcelable("arrival", arrive);
+        outState.putSerializable("currentDate", currentDate);
     }
 
     @Override
@@ -162,7 +176,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
             SearchTrain searchTrain = trainValidator.validate(arrive, arrival, currentDate);
             if (searchTrain != null) {
                 trainHistoryDb.insert(searchTrain);
-                TrainRoutesActivity.start(getActivity(), TRAIN_ROUTE_ACTIVITY_CODE, searchTrain);
+                TrainRoutesActivity.start(getActivity(), searchTrain);
             } else {
                 Dialogs.showToast(getContext(), join("\n", trainValidator.getErrors()));
             }

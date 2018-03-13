@@ -2,7 +2,6 @@ package by.client.android.railwayapp.ui.traintimetable;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
@@ -10,6 +9,7 @@ import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
 import by.client.android.railwayapp.ui.scoreboard.TrainTypeToImage;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 import by.client.android.railwayapp.ui.view.TrainPlaceView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Адаптер для отображения элемента списка поездов
@@ -33,7 +33,7 @@ class TrainRoutesRecyclerAdapter extends ModifiableRecyclerAdapter<TrainRoutesRe
     public void bind(ViewHolder holder, int position) {
         TrainRoute train = getItems().get(position);
 
-        holder.icon.setBackgroundResource(new TrainTypeToImage().convert(train.getIco()));
+        holder.icon.setImageResource(new TrainTypeToImage().convert(train.getIco()));
         holder.id.setText(train.getId());
         holder.path.setText(train.getPath());
         holder.type.setText(train.getTrainType());
@@ -51,7 +51,7 @@ class TrainRoutesRecyclerAdapter extends ModifiableRecyclerAdapter<TrainRoutesRe
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView icon;
+        private CircleImageView icon;
         private TextView id;
         private TextView path;
         private TextView type;

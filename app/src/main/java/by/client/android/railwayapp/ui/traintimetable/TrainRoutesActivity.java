@@ -96,8 +96,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
 
     private TrainRoutesRecyclerAdapter trainRoutesAdapter;
 
-    public static void start(@NotNull Activity activity, int requestCode, @NotNull SearchTrain trainRoute) {
-
+    public static void start(@NotNull Activity activity, @NotNull SearchTrain trainRoute) {
         Intent intent = new Intent(activity, TrainRoutesActivity_.class);
         intent.putExtra(TrainRoutesActivity.TRAIN_ROUTE_ID, trainRoute);
         activity.startActivity(intent);
@@ -111,6 +110,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
         trainRoutesAdapter = new TrainRoutesRecyclerAdapter();
         trainRoutesAdapter.setPlaceItemClickListener(new TrainPlaceClickListener());
         trainRoutesAdapter.setItemClickListener(new TrainRouteClickListener());
+
         recyclerView.setAdapter(trainRoutesAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());

@@ -13,6 +13,7 @@ public class AnimationUtils {
 
     public static void setAnimation(Context context, View view, int animId) {
         Animation animation = android.view.animation.AnimationUtils.loadAnimation(context, animId);
+        animation.setStartOffset(100);
         view.startAnimation(animation);
     }
 }

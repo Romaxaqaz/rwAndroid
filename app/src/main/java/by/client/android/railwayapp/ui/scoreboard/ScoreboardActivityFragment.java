@@ -110,13 +110,6 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
         trainsAdapter = new TrainAdapter(getContext());
         trainsAdapter.setItemClickListener(new TrainClickListener());
         trainsRecyclerView.setAdapter(trainsAdapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                animate();
-            }
-        }, 500);
     }
 
     @Override
@@ -136,17 +129,6 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment implements Sw
 
     private void initTrains(List<Train> trains) {
         trainsAdapter.setData(trains);
-    }
-
-    private void animate() {
-        TransitionManager.beginDelayedTransition(appBarLayout, new TransitionSet()
-            .addTransition(new Fade())
-            .addTransition(new ChangeBounds()
-                .setStartDelay(200)
-                .setDuration(400)
-                .setInterpolator(new FastOutSlowInInterpolator())));
-
-        UiUtils.setVisibility(true, collapsingToolbarLayout);
     }
 
     private class TrainClickListener implements ModifiableRecyclerAdapter.RecyclerItemsClickListener {

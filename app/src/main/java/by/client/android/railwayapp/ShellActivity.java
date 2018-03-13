@@ -6,6 +6,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,10 @@ import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity;
 @EActivity(R.layout.activity_shell)
 public class ShellActivity extends BaseDaggerActivity {
 
+    private static final String SELECTED_FRAGMENT_ID = "SELECTED_FRAGMENT_ID";
+
+    private int selectedFragmentId;
+
     @ViewById(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
 
@@ -39,16 +44,29 @@ public class ShellActivity extends BaseDaggerActivity {
         .put(R.id.action_news, "Новости")
         .build();
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            selectedFragmentId = savedInstanceState.getInt(SELECTED_FRAGMENT_ID);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SELECTED_FRAGMENT_ID, bottomNavigationView.getSelectedItemId());
+    }
+
     @AfterViews
     void initActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new ButtomMenuListener());
-        bottomNavigationView.setSelectedItemId(R.id.action_schedules);
+        bottomNavigationView.setSelectedItemId(selectedFragmentId != 0 ? selectedFragmentId : R.id.action_schedules);
     }
 
     private void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-            //.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_in_right)
             .replace(R.id.fragmentContainer, fragment)
             .addToBackStack(fragment.getClass().getName())
             .commit();

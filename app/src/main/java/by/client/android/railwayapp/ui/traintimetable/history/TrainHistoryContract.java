@@ -9,10 +9,7 @@ import android.provider.BaseColumns;
  */
 final class TrainHistoryContract {
 
-    public TrainHistoryContract() {
-    }
-
-    static abstract class TrainEntry implements BaseColumns {
+    static class TrainEntry implements BaseColumns {
 
         static final String TABLE_NAME = "trains";
         static final String COLUMN_DEPARTURE = "departureStationName";

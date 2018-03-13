@@ -29,12 +29,11 @@
                         android:layout_weight="7"
                         android:layout_gravity="center">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/icon"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:textAlignment="center"
-                            android:layout_gravity="center" />
+                            android:layout_width="@dimen/image_size_large"
+                            android:layout_height="@dimen/image_size_large"
+                            style="@style/ImageHeader"/>
 
                     <TextView
                             android:id="@+id/id"

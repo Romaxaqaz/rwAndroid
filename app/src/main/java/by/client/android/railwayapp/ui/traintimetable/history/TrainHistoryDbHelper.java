@@ -10,7 +10,7 @@ import static by.client.android.railwayapp.ui.traintimetable.history.TrainHistor
  *
  * @author PRV
  */
-class TrainHistoryDbHelper extends SQLiteOpenHelper {
+public class TrainHistoryDbHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "TrainHistory.db";
@@ -19,16 +19,16 @@ class TrainHistoryDbHelper extends SQLiteOpenHelper {
     private static final String COMMA_SEP = ",";
 
     private static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + TrainEntry.TABLE_NAME + " (" +
-            TrainEntry._ID + " INTEGER PRIMARY KEY," +
-            TrainEntry.COLUMN_DEPARTURE + TEXT_TYPE + COMMA_SEP +
-            TrainEntry.COLUMN_DESTINATION + TEXT_TYPE + COMMA_SEP +
-            TrainEntry.COLUMN_DATE + TEXT_TYPE + COMMA_SEP +
-            TrainEntry.COLUMN_OBJECT + TEXT_TYPE + " )";
+        TrainEntry._ID + " INTEGER PRIMARY KEY," +
+        TrainEntry.COLUMN_DEPARTURE + TEXT_TYPE + COMMA_SEP +
+        TrainEntry.COLUMN_DESTINATION + TEXT_TYPE + COMMA_SEP +
+        TrainEntry.COLUMN_DATE + TEXT_TYPE + COMMA_SEP +
+        TrainEntry.COLUMN_OBJECT + TEXT_TYPE + " )";
 
     private static final String SQL_DELETE_ENTRIES =
         "DROP TABLE IF EXISTS " + TrainEntry.TABLE_NAME;
 
-    TrainHistoryDbHelper(Context context) {
+    public TrainHistoryDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

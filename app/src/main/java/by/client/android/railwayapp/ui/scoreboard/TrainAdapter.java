@@ -9,6 +9,7 @@ import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.Train;
 import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
 import by.client.android.railwayapp.ui.utils.AnimationUtils;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Адаптер для отображения элемента списка поездов
@@ -26,7 +27,6 @@ class TrainAdapter extends ModifiableRecyclerAdapter<TrainAdapter.ViewHolder, Tr
 
     @Override
     public ViewHolder createHolder(View view) {
-        AnimationUtils.setAnimation(context, view, R.anim.cardview_item_animation);
         return new ViewHolder(view);
     }
 
@@ -34,7 +34,7 @@ class TrainAdapter extends ModifiableRecyclerAdapter<TrainAdapter.ViewHolder, Tr
     public void bind(ViewHolder holder, int position) {
         Train train = getItems().get(position);
 
-        holder.icon.setBackgroundResource(new TrainTypeToImage().convert(train.getPathType()));
+        holder.icon.setImageResource(new TrainTypeToImage().convert(train.getPathType()));
         holder.id.setText(train.getId());
         holder.path.setText(train.getPath());
         holder.type.setText(train.getTrainType());
@@ -46,7 +46,7 @@ class TrainAdapter extends ModifiableRecyclerAdapter<TrainAdapter.ViewHolder, Tr
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView icon;
+        private CircleImageView icon;
         private TextView id;
         private TextView path;
         private TextView type;

@@ -1,13 +1,16 @@
 package by.client.android.railwayapp.ui.news;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,6 +34,7 @@ import by.client.android.railwayapp.ui.utils.UiUtils;
 public class NewsActivityFragment extends BaseDaggerFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     public static final String NEWS_URL_KEY = "NEWS_URL_KEY";
+    public static final String SAVE_NEWS_STATE = "saveNews";
 
     @Inject
     Client client;
@@ -41,7 +45,10 @@ public class NewsActivityFragment extends BaseDaggerFragment implements SwipeRef
     @ViewById(R.id.swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    private NewsAdapter newsAdapter;
+    @InstanceState
+    ArrayList<Article> saveNews = new ArrayList<>();
+
+    NewsAdapter newsAdapter;
 
     public static NewsActivityFragment newInstance() {
         return new NewsActivityFragment_();
@@ -51,13 +58,16 @@ public class NewsActivityFragment extends BaseDaggerFragment implements SwipeRef
     protected void onCreate() {
         initView();
 
-        loadNews();
+        if (saveNews.isEmpty()) {
+            loadNews();
+        }
     }
 
     private void initView() {
         swipeRefreshLayout.setOnRefreshListener(this);
 
         newsAdapter = new NewsAdapter();
+        newsAdapter.setData(saveNews);
         newsAdapter.setItemClickListener(new NewsItemClickListener());
 
         newsRecyclerView.setAdapter(newsAdapter);
@@ -65,11 +75,18 @@ public class NewsActivityFragment extends BaseDaggerFragment implements SwipeRef
         newsRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(SAVE_NEWS_STATE, saveNews);
+    }
+
     private void loadNews() {
         client.send(new NewsLoader(), new NewsLoadListener(this));
     }
 
     private void initNews(List<Article> news) {
+        saveNews = new ArrayList<>(news);
         newsAdapter.setData(news);
     }
 
@@ -109,7 +126,6 @@ public class NewsActivityFragment extends BaseDaggerFragment implements SwipeRef
 
         @Override
         public void itemClick(View view, int position) {
-            //NewsDetailActivity.start(getActivity(), newsAdapter.getItem(position).getLink(), 123);
             UiUtils.openExternalLink(getContext(), newsAdapter.getItem(position).getLink());
         }
     }

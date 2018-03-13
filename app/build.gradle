@@ -115,4 +115,5 @@ dependencies {
     compile 'org.jetbrains:annotations-java5:15.0'
 
     compile 'com.koushikdutta.ion:ion:2.+'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
 }

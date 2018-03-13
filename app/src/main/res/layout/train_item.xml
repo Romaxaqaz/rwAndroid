@@ -30,10 +30,11 @@
                         android:orientation="vertical"
                         android:layout_weight="7">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/icon"
-                            android:textAlignment="center"
-                            style="@style/ImageHeader" />
+                            android:layout_width="@dimen/image_size_large"
+                            android:layout_height="@dimen/image_size_large"
+                            style="@style/ImageHeader"/>
 
                     <TextView
                             android:id="@+id/id"

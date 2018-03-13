@@ -1,5 +1,7 @@
 package by.client.android.railwayapp.ui.traintimetable.history;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import org.androidannotations.annotations.AfterViews;
@@ -33,7 +35,7 @@ public class TrainRouteHistoryDialog extends DialogFragment {
     private static final String TAG = TrainRouteHistoryDialog.class.getSimpleName();
 
     @Inject
-    DataBase<SearchTrain> trainHistoryDb;
+    DataBase<SearchTrain> trainHistory;
 
     @ViewById(R.id.resultListView)
     ListView resultListView;
@@ -63,7 +65,7 @@ public class TrainRouteHistoryDialog extends DialogFragment {
         resultListView.setAdapter(routeHistoryAdapter);
         resultListView.setOnItemClickListener(new RouteItemClickListener());
 
-        routeHistoryAdapter.setData(trainHistoryDb.getAll());
+        routeHistoryAdapter.setData(trainHistory.getAll());
         clearHistory.setOnClickListener(new ClearHistoryListener());
 
         updateEmptyView();
@@ -106,8 +108,8 @@ public class TrainRouteHistoryDialog extends DialogFragment {
 
         @Override
         public void onClick(View view) {
-            trainHistoryDb.clear();
-            routeHistoryAdapter.setData(trainHistoryDb.getAll());
+            trainHistory.clear();
+            routeHistoryAdapter.setData(new ArrayList<SearchTrain>());
             updateEmptyView();
         }
     }
