@@ -111,38 +111,6 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
         TrainRouteHistoryDialog.show(getFragmentManager(), new TrainHistorySelectedListener());
     }
 
-    private class OpenSearchStation implements View.OnClickListener {
-
-        private SearchStationDialog.ChooseStationDialogListener listener;
-
-        private OpenSearchStation(SearchStationDialog.ChooseStationDialogListener listener) {
-            this.listener = listener;
-        }
-
-        @Override
-        public void onClick(View view) {
-            SearchStationDialog.show(getFragmentManager(), listener);
-        }
-    }
-
-    private class StationArriveSelected implements SearchStationDialog.ChooseStationDialogListener {
-
-        @Override
-        public void selectedStation(SearchStation station) {
-            arrive = station;
-            setStation(arriveEditText, station);
-        }
-    }
-
-    private class StationArrivalSelected implements SearchStationDialog.ChooseStationDialogListener {
-
-        @Override
-        public void selectedStation(SearchStation station) {
-            arrival = station;
-            setStation(arrivalEditText, station);
-        }
-    }
-
     private void setStation(TextView textView, SearchStation selected) {
         if (selected != null) {
             textView.setText(selected.getValue());
@@ -152,6 +120,38 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
     private void setDate(Calendar currentDate) {
         if (currentDate != null) {
             dateTextView.setText(new DateToStringConverter().convert(currentDate.getTime()));
+        }
+    }
+
+    private class OpenSearchStation implements View.OnClickListener {
+
+        private ChooseStationDialogListener listener;
+
+        private OpenSearchStation(ChooseStationDialogListener listener) {
+            this.listener = listener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            SearchStationDialog.show(getFragmentManager(), listener);
+        }
+    }
+
+    private class StationArriveSelected implements ChooseStationDialogListener {
+
+        @Override
+        public void selectedStation(SearchStation station) {
+            arrive = station;
+            setStation(arriveEditText, station);
+        }
+    }
+
+    private class StationArrivalSelected implements ChooseStationDialogListener {
+
+        @Override
+        public void selectedStation(SearchStation station) {
+            arrival = station;
+            setStation(arrivalEditText, station);
         }
     }
 
@@ -174,6 +174,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
         public void onClick(View view) {
             SearchTrainValidator trainValidator = new SearchTrainValidator(getContext());
             SearchTrain searchTrain = trainValidator.validate(arrive, arrival, currentDate);
+
             if (searchTrain != null) {
                 trainHistoryDb.insert(searchTrain);
                 TrainRoutesActivity.start(getActivity(), searchTrain);

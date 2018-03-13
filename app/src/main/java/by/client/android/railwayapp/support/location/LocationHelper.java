@@ -46,6 +46,7 @@ public class LocationHelper {
     private List<String> permissions = new ArrayList<>();
     private List<String> permissionsToRequest;
     private boolean isNetwork;
+    private boolean isGps;
 
     public LocationHelper(final Activity activity) {
         this.activity = activity;
@@ -56,6 +57,7 @@ public class LocationHelper {
     private void initLocationManager() {
         locationManager = (LocationManager) activity.getSystemService(Service.LOCATION_SERVICE);
         isNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        isGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
         permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -66,14 +68,7 @@ public class LocationHelper {
      * Опредедяет доступно ли определение местоположения
      */
     public boolean isPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!permissionsToRequest.isEmpty()) {
-                requestPermission();
-                return false;
-            }
-            return true;
-        }
-        return true;
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || permissionsToRequest.isEmpty();
     }
 
     /**
@@ -124,6 +119,10 @@ public class LocationHelper {
     }
 
     private Location getLocation() {
+        if (!isGps) {
+            showSettingsAlert();
+        }
+
         String provider = isNetwork ? LocationManager.NETWORK_PROVIDER : LocationManager.GPS_PROVIDER;
         try {
             return locationManager.getLastKnownLocation(provider);
@@ -131,6 +130,7 @@ public class LocationHelper {
         catch (SecurityException e) {
             logger.log(Level.SEVERE, "Can not receive current location", e);
         }
+
         return getDefaultLocation(provider);
     }
 
@@ -141,7 +141,7 @@ public class LocationHelper {
         return location;
     }
 
-    public void showSettingsAlert() {
+    private void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
         alertDialog.setTitle("GPS is not Enabled!");
         alertDialog.setMessage("Do you want to turn on GPS?");

@@ -28,7 +28,6 @@ import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.api.rw.model.SearchStation;
 import by.client.android.railwayapp.support.location.LocationHelper;
 import by.client.android.railwayapp.ui.RetrofitCallback;
-import by.client.android.railwayapp.ui.utils.Dialogs;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -88,7 +87,7 @@ public class SearchStationDialog extends DialogFragment implements SearchView.On
                 if (locationHelper.isPermission()) {
                     searchView.setQuery(locationHelper.getCity(), false);
                 } else {
-                    Dialogs.showToast(getContext(), "Разрешите доступ к определению геопозиции и повторите попытку");
+                    locationHelper.requestPermission();
                 }
             }
         });
@@ -169,14 +168,6 @@ public class SearchStationDialog extends DialogFragment implements SearchView.On
             stationDialogListener.selectedStation(stationAdapter.getItem(position));
             dismiss();
         }
-    }
-
-    /**
-     * Callback выбора станции
-     */
-    public interface ChooseStationDialogListener {
-
-        void selectedStation(SearchStation station);
     }
 }
 
