@@ -1,4 +1,4 @@
-package by.client.android.railwayapp.api.rw;
+  package by.client.android.railwayapp.api.rw;
 
 import java.util.List;
 
