@@ -1,11 +1,19 @@
 package by.client.android.railwayapp.ui.utils;
 
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 /**
  * Утилитный класс для работы с UI
@@ -86,5 +94,39 @@ public class UiUtils {
             throw new NullPointerException("Spinner can not be null");
         }
         return (T) spinner.getSelectedItem();
+    }
+
+    public static void openExternalLink(Context context, String url) {
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setPackage("com.android.chrome");
+        try {
+            context.startActivity(i);
+        }
+        catch (ActivityNotFoundException e) {
+            // Chrome is probably not installed
+            // Try with the default browser
+            i.setPackage(null);
+            context.startActivity(i);
+        }
+    }
+
+    public static <T extends View> T inflate(Context context, int layoutId) {
+        return (T) LayoutInflater.from(context).inflate(layoutId, null);
+    }
+
+    public static <T extends View> T inflate(ViewGroup root, int layoutId) {
+        return (T) LayoutInflater.from(root.getContext()).inflate(layoutId, root, false);
+    }
+
+    public static boolean hideKeyboard(View decorView) {
+        InputMethodManager inputManager =
+            (InputMethodManager) decorView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        return inputManager.hideSoftInputFromWindow(decorView.getWindowToken(), 0);
+    }
+
+    public static void hideIfEmpty(TextView textView) {
+        setVisibility(!TextUtils.isEmpty(textView.getText()), textView);
     }
 }

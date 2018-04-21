@@ -8,7 +8,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import static android.text.TextUtils.join;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.model.places.Car;
 import by.client.android.railwayapp.api.rw.model.places.Tariff;
+import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 import by.client.android.railwayapp.ui.utils.Utils;
 
@@ -35,7 +35,7 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tariff_item, parent, false);
+        View view = UiUtils.inflate(parent, R.layout.tariff_item);
         return new ViewHolder(view);
     }
 
@@ -54,7 +54,7 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
         carsRecyclerAdapter.setItemClickListener(new CarItemClickListener(tariff, holder));
 
         holder.carriageRecyclerView.setAdapter(carsRecyclerAdapter);
-        holder.tariffTextView.setText(tariff.getPriceByn());
+        holder.tariffTextView.setText(tariff.getPrice());
         holder.itemView.setTag(tariff);
     }
 
@@ -112,7 +112,7 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
         }
     }
 
-    private class CarItemClickListener implements CarsRecyclerAdapter.CarViewClickListener {
+    private class CarItemClickListener implements ModifiableRecyclerAdapter.RecyclerItemsClickListener {
 
         private Tariff tariff;
         private ViewHolder viewHolder;
@@ -123,7 +123,7 @@ class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter
         }
 
         @Override
-        public void onItemClick(View view, int position) {
+        public void itemClick(View view, int position) {
             updateCarInfo(viewHolder, tariff.getCars().get(position));
         }
     }

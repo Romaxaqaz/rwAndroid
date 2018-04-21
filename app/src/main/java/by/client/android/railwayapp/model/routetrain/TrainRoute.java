@@ -1,14 +1,17 @@
 package by.client.android.railwayapp.model.routetrain;
 
-import java.io.Serializable;
 import java.util.List;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+import by.client.android.railwayapp.model.ParcelableUtils;
 
 /**
  * Модель описания поезда
  *
  * @author ROMAN PANTELEEV
  */
-public class TrainRoute implements Serializable {
+public class TrainRoute implements Parcelable {
 
     /**
      * Номер поезда
@@ -130,4 +133,44 @@ public class TrainRoute implements Serializable {
     public TrainParameters getParameters() {
         return trainParameters;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.ico);
+        dest.writeString(this.path);
+        dest.writeString(this.trainType);
+        dest.writeParcelable(this.trainTime, flags);
+        dest.writeString(this.travelTime);
+        dest.writeParcelable(this.trainParameters, flags);
+        dest.writeTypedList(this.places);
+    }
+
+    private TrainRoute(Parcel in) {
+        this.id = in.readString();
+        this.ico = in.readString();
+        this.path = in.readString();
+        this.trainType = in.readString();
+        this.trainTime = ParcelableUtils.readParcelable(in, TrainTime.class);
+        this.travelTime = in.readString();
+        this.trainParameters = ParcelableUtils.readParcelable(in, TrainParameters.class);
+        this.places = in.createTypedArrayList(Place.CREATOR);
+    }
+
+    public static final Parcelable.Creator<TrainRoute> CREATOR = new Parcelable.Creator<TrainRoute>() {
+        @Override
+        public TrainRoute createFromParcel(Parcel source) {
+            return new TrainRoute(source);
+        }
+
+        @Override
+        public TrainRoute[] newArray(int size) {
+            return new TrainRoute[size];
+        }
+    };
 }

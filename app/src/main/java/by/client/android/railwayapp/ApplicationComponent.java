@@ -2,13 +2,14 @@ package by.client.android.railwayapp;
 
 import javax.inject.Singleton;
 
+import by.client.android.railwayapp.ui.news.NewsActivityFragment;
 import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment;
 import by.client.android.railwayapp.ui.trainroute.TrainRouteActivity;
 import by.client.android.railwayapp.ui.traintimetable.PlaceInfoActivity;
-import by.client.android.railwayapp.ui.traintimetable.SearchStationActivity;
+import by.client.android.railwayapp.ui.traintimetable.SearchStationDialog;
 import by.client.android.railwayapp.ui.traintimetable.TrainRoutesActivity;
 import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity;
-import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryFragment;
+import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryDialog;
 import dagger.Component;
 
 /**
@@ -28,7 +29,7 @@ public interface ApplicationComponent {
 
     void inject(TrainRouteActivity trainRouteActivity);
 
-    void inject(SearchStationActivity searchStationActivity);
+    void inject(SearchStationDialog searchStationDialog);
 
     void inject(PlaceInfoActivity placeInfoActivity);
 
@@ -36,5 +37,7 @@ public interface ApplicationComponent {
 
     void inject(TrainTimeTableActivity activity);
 
-    void inject(TrainRouteHistoryFragment trainRouteHistoryFragment);
+    void inject(TrainRouteHistoryDialog trainRouteHistoryDialog);
+
+    void inject(NewsActivityFragment newsActivityFragment);
 }
