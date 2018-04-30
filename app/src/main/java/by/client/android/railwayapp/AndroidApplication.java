@@ -32,4 +32,12 @@ public class AndroidApplication extends Application {
         }
         return applicationComponent;
     }
+
+    private void initCrashReporting() {
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread thread, Throwable throwable) {
+            }
+        });
+    }
 }

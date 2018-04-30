@@ -7,6 +7,7 @@ import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.SearchTrain;
 import by.client.android.railwayapp.ui.BaseHolder;
 import by.client.android.railwayapp.ui.BaseListAdapter;
+import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 
 /**
  * Адаптер для отображения элементов списка истории запросов
@@ -27,16 +28,19 @@ class RouteHistoryAdapter extends BaseListAdapter<SearchTrain, BaseHolder<Search
 
     private class ViewHolder implements BaseHolder<SearchTrain> {
 
+        private TextView date;
         private TextView departureStation;
         private TextView destinationStation;
 
         ViewHolder(View view) {
+            date = view.findViewById(R.id.date);
             departureStation = view.findViewById(R.id.departureStation);
             destinationStation = view.findViewById(R.id.destinationStation);
         }
 
         @Override
         public void bind(SearchTrain searchTrain) {
+            date.setText(new DateToStringConverter().convert(searchTrain.getDepartureDate()));
             departureStation.setText(searchTrain.getDepartureStation().getValue());
             destinationStation.setText(searchTrain.getDestinationStation().getValue());
         }

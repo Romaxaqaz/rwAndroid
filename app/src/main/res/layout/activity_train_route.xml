@@ -1,80 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/shellId">
+        android:fitsSystemWindows="true">
 
-
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+            android:id="@+id/main.appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_scrollFlags="scroll|enterAlways">
 
-        <LinearLayout
+        <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/main.collapsing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                style="@style/PageHeaderStyle">
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|snap"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginStart="48dp"
+                app:expandedTitleMarginEnd="64dp">
 
-            <LinearLayout
+            <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="7">
+                    android:layout_margin="4dp">
 
-                <ImageView
-                        android:id="@+id/iconImageView"
-                        style="@style/ImageHeader" />
-
-                <TextView
-                        android:id="@+id/idTextView"
+                <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/HeaderTextStyle"/>
+                        android:orientation="horizontal"
+                        style="@style/PageHeaderStyle">
 
-            </LinearLayout>
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="7"
+                            android:layout_gravity="center">
 
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginStart="4dp">
+                        <ImageView
+                                android:id="@+id/iconImageView"
+                                style="@style/ImageHeader" />
 
-                <TextView
-                        android:id="@+id/pathTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textColor="@color/white_text"/>
+                        <TextView
+                                android:id="@+id/idTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                style="@style/HeaderTextStyle" />
 
-                <TextView
-                        android:id="@+id/typeTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_size_micro"
-                        android:textColor="@color/tint_default"/>
+                    </LinearLayout>
 
-            </LinearLayout>
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:layout_gravity="center">
 
-        </LinearLayout>
+                        <TextView
+                                android:id="@+id/pathTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/text_size_medium"
+                                android:textColor="@color/white_text" />
 
-        <ListView
-                android:id="@+id/trainRouteListView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:scrollbars="vertical"
-                android:layout_weight="1"
-                android:divider="@android:color/transparent"/>
+                        <TextView
+                                android:id="@+id/typeTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/text_size_micro"
+                                android:textColor="@color/tint_default" />
 
-    </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/trainRouteListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminateOnly="true"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_gravity="center" />
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -1,9 +1,9 @@
 package by.client.android.railwayapp.ui.scoreboard;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import by.client.android.railwayapp.R;
+import by.client.android.railwayapp.support.common.MapBuilder;
 
 /**
  * Класс конвертер для преобразования строки типа поезда в иконку
@@ -12,17 +12,15 @@ import by.client.android.railwayapp.R;
  */
 public class TrainTypeToImage {
 
-    private final Map<String, Integer> imageDictionary = new HashMap<>();
-
-    public TrainTypeToImage() {
-        imageDictionary.put("b-pic train_type international", R.drawable.interational);
-        imageDictionary.put("b-pic train_type regional_economy", R.drawable.region_econom);
-        imageDictionary.put("b-pic train_type regional_business", R.drawable.region_business);
-        imageDictionary.put("b-pic train_type interregional_economy", R.drawable.interregional_economy);
-        imageDictionary.put("b-pic train_type interregional_business", R.drawable.interregional_business);
-        imageDictionary.put("b-pic train_type airport", R.drawable.airport);
-        imageDictionary.put("b-pic train_type city", R.drawable.city);
-    }
+    private final Map<String, Integer> imageDictionary = new MapBuilder<String, Integer>()
+        .put("b-pic train_type international", R.drawable.interational)
+        .put("b-pic train_type regional_economy", R.drawable.region_econom)
+        .put("b-pic train_type regional_business", R.drawable.region_business)
+        .put("b-pic train_type interregional_economy", R.drawable.interregional_economy)
+        .put("b-pic train_type interregional_business", R.drawable.interregional_business)
+        .put("b-pic train_type airport", R.drawable.airport)
+        .put("b-pic train_type city", R.drawable.city)
+        .build();
 
     public Integer convert(String type) {
         if (type != null && imageDictionary.containsKey(type)) {

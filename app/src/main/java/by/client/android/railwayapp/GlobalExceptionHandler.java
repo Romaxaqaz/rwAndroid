@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 
 import android.content.Context;
 import android.os.Handler;
-import android.widget.Toast;
 import by.client.android.railwayapp.ui.ParsingException;
+import by.client.android.railwayapp.ui.utils.Dialogs;
 
 /**
  * Класс для обработки глобальных ошибок
@@ -48,7 +48,6 @@ public class GlobalExceptionHandler {
         handle(new Exception(throwable));
     }
 
-
     private void onDefaultThreadSafeHandler(final Exception exception) {
         showError(exception.getMessage());
     }
@@ -62,8 +61,8 @@ public class GlobalExceptionHandler {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                Dialogs.showToast(context, message);
             }
-        }, 1000);
+        }, 100);
     }
 }

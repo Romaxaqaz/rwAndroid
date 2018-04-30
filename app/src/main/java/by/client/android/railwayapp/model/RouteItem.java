@@ -1,5 +1,7 @@
 package by.client.android.railwayapp.model;
 
+import java.util.Date;
+
 /**
  * Модель описания остановочного пункта по маршруту
  *
@@ -14,13 +16,17 @@ public class RouteItem {
 
     /**
      * Время отправления
+     *
+     * <p>Корректный формат отображения <code>HH:mm</code></p>
      */
-    private String arrival;
+    private Date arrival;
 
     /**
      * Время прибытия
+     *
+     * <p>Корректный формат отображения <code>HH:mm</code></p>
      */
-    private String arrived;
+    private Date arrived;
 
     /**
      * Время в пути
@@ -44,12 +50,12 @@ public class RouteItem {
         return this;
     }
 
-    public RouteItem setArrival(String arrival) {
+    public RouteItem setArrival(Date arrival) {
         this.arrival = arrival;
         return this;
     }
 
-    public RouteItem setArrived(String arrived) {
+    public RouteItem setArrived(Date arrived) {
         this.arrived = arrived;
         return this;
     }
@@ -68,11 +74,11 @@ public class RouteItem {
         return station;
     }
 
-    public String getArrival() {
+    public Date getArrival() {
         return arrival;
     }
 
-    public String getArrived() {
+    public Date getArrived() {
         return arrived;
     }
 

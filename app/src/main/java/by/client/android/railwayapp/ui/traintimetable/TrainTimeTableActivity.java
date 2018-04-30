@@ -7,24 +7,30 @@ import javax.inject.Inject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
 
 import android.app.DatePickerDialog;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.CardView;
 import static android.text.TextUtils.join;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import by.client.android.railwayapp.ApplicationComponent;
 import by.client.android.railwayapp.BaseDaggerFragment;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.model.SearchStation;
 import by.client.android.railwayapp.model.SearchTrain;
+import by.client.android.railwayapp.support.database.DataBase;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
-import by.client.android.railwayapp.ui.traintimetable.history.ObjectHistory;
-import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryFragment;
-import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryFragment_;
+import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryDialog;
+import by.client.android.railwayapp.ui.utils.DateUtils;
+import by.client.android.railwayapp.ui.utils.Dialogs;
 
 /**
  * Страница ввода данных для поиска поездов
@@ -34,11 +40,8 @@ import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryF
 @EFragment(R.layout.activity_train_time_table)
 public class TrainTimeTableActivity extends BaseDaggerFragment {
 
-    private static final int TRAIN_ROUTE_ACTIVITY_CODE = 2;
-    private static final String TAG = TrainTimeTableActivity.class.getSimpleName();
-
     @Inject
-    ObjectHistory<SearchTrain> trainRouteHistory;
+    DataBase<SearchTrain> trainHistoryDb;
 
     @ViewById(R.id.departureStation)
     TextView arriveEditText;
@@ -52,16 +55,50 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
     @ViewById(R.id.searchStationButton)
     Button searchStationButton;
 
-    private SearchStation arrive;
-    private SearchStation arrival;
-    private Calendar currentDate;
+    @ViewById(R.id.inputCardView)
+    CardView inputCardView;
+
+    @ViewById(R.id.root)
+    ViewGroup root;
+
+    @ViewById(R.id.history)
+    FloatingActionButton floatingActionButton;
+
+    @ViewById(R.id.imageHeader)
+    ImageView imageHeader;
+
+    @InstanceState
+    SearchStation arrive;
+
+    @InstanceState
+    SearchStation arrival;
+
+    @InstanceState
+    Calendar currentDate;
+
+    public static TrainTimeTableActivity newInstance() {
+        return new TrainTimeTableActivity_();
+    }
 
     @AfterViews
-    void initView() {
+    void initFragment() {
         arriveEditText.setOnClickListener(new OpenSearchStation(new StationArriveSelected()));
         arrivalEditText.setOnClickListener(new OpenSearchStation(new StationArrivalSelected()));
         dateTextView.setOnClickListener(new OnDatePickerClickListener());
-        searchStationButton.setOnClickListener(new SearchClickListenr());
+        searchStationButton.setOnClickListener(new SearchClickListener());
+
+        setStation(arriveEditText, arrive);
+        setStation(arrivalEditText, arrival);
+        setDate(currentDate);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable("arrive", arrive);
+        outState.putParcelable("arrival", arrive);
+        outState.putSerializable("currentDate", currentDate);
     }
 
     @Override
@@ -71,83 +108,78 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
 
     @Click(R.id.history)
     void showHistory() {
-        TrainRouteHistoryFragment trainRouteHistoryFragment = new TrainRouteHistoryFragment_();
-        trainRouteHistoryFragment.setClickListener(new TrainRouteHistoryFragment.ChooseRouteDialogListener() {
-            @Override
-            public void onSelectedStation(SearchTrain searchTrain) {
-                setArrive(searchTrain.getDepartureStation());
-                setArrival(searchTrain.getDestinationStation());
-            }
-        });
-        trainRouteHistoryFragment.show(getFragmentManager(), TAG);
+        TrainRouteHistoryDialog.show(getFragmentManager(), new TrainHistorySelectedListener());
     }
 
+    private void setStation(TextView textView, SearchStation selected) {
+        if (selected != null) {
+            textView.setText(selected.getValue());
+        }
+    }
+
+    private void setDate(Calendar currentDate) {
+        if (currentDate != null) {
+            dateTextView.setText(new DateToStringConverter().convert(currentDate.getTime()));
+        }
+    }
 
     private class OpenSearchStation implements View.OnClickListener {
 
-        private SearchStationActivity.ChooseStationDialogListener listener;
+        private ChooseStationDialogListener listener;
 
-        private OpenSearchStation(SearchStationActivity.ChooseStationDialogListener listener) {
+        private OpenSearchStation(ChooseStationDialogListener listener) {
             this.listener = listener;
         }
 
         @Override
         public void onClick(View view) {
-            SearchStationActivity searchStationActivity = new SearchStationActivity_();
-            searchStationActivity.setClickListener(listener);
-            searchStationActivity.show(getFragmentManager(), TAG);
+            SearchStationDialog.show(getFragmentManager(), listener);
         }
     }
 
-    private class StationArriveSelected implements SearchStationActivity.ChooseStationDialogListener {
+    private class StationArriveSelected implements ChooseStationDialogListener {
 
         @Override
         public void selectedStation(SearchStation station) {
-            setArrive(station);
+            arrive = station;
+            setStation(arriveEditText, station);
         }
     }
 
-    private class StationArrivalSelected implements SearchStationActivity.ChooseStationDialogListener {
+    private class StationArrivalSelected implements ChooseStationDialogListener {
 
         @Override
         public void selectedStation(SearchStation station) {
-            setArrival(station);
+            arrival = station;
+            setStation(arrivalEditText, station);
         }
-    }
-
-    private void setArrive(SearchStation selected) {
-        arrive = selected;
-        arriveEditText.setText(selected.getValue());
-    }
-
-    private void setArrival(SearchStation selected) {
-        arrival = selected;
-        arrivalEditText.setText(selected.getValue());
     }
 
     private class OnDatePickerClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
-            Calendar dateAndTime = Calendar.getInstance();
-            new DatePickerDialog(getActivity(), new DateListener(), dateAndTime.get(Calendar.YEAR),
-                dateAndTime.get(Calendar.MONTH),
-                dateAndTime.get(Calendar.DAY_OF_MONTH))
+            DateUtils date = new DateUtils();
+            new DatePickerDialog(getActivity(), new DateListener(),
+                date.getYear(),
+                date.getMonth(),
+                date.getDayOfMonth())
                 .show();
         }
     }
 
-    private class SearchClickListenr implements View.OnClickListener {
+    private class SearchClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
             SearchTrainValidator trainValidator = new SearchTrainValidator(getContext());
             SearchTrain searchTrain = trainValidator.validate(arrive, arrival, currentDate);
+
             if (searchTrain != null) {
-                trainRouteHistory.add(searchTrain);
-                TrainRoutesActivity.start(getActivity(), TRAIN_ROUTE_ACTIVITY_CODE, searchTrain);
+                trainHistoryDb.insert(searchTrain);
+                TrainRoutesActivity.start(getActivity(), searchTrain);
             } else {
-                Toast.makeText(getContext(), join("\n", trainValidator.getErrors()), Toast.LENGTH_LONG).show();
+                Dialogs.showToast(getContext(), join("\n", trainValidator.getErrors()));
             }
         }
     }
@@ -156,11 +188,24 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
 
         @Override
         public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-            currentDate = Calendar.getInstance();
-            currentDate.set(Calendar.YEAR, year);
-            currentDate.set(Calendar.MONTH, monthOfYear);
-            currentDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            currentDate = DateUtils.createDate()
+                .setYear(year)
+                .setMonthOfYear(monthOfYear)
+                .setDayOfMonth(dayOfMonth)
+                .build();
             dateTextView.setText(new DateToStringConverter().convert(currentDate.getTime()));
+        }
+    }
+
+    private class TrainHistorySelectedListener implements TrainRouteHistoryDialog.ChooseRouteDialogListener {
+
+        @Override
+        public void onSelectedStation(SearchTrain searchTrain) {
+            arrive = searchTrain.getDepartureStation();
+            setStation(arriveEditText, arrive);
+
+            arrival = searchTrain.getDestinationStation();
+            setStation(arrivalEditText, arrival);
         }
     }
 }

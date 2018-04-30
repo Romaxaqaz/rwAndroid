@@ -1,13 +1,14 @@
 package by.client.android.railwayapp.model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Описание сущности "Поезд"
  *
  * @author PRV
  */
-public class Train implements Serializable {
+public class Train implements Parcelable {
 
     /**
      * Номер поезда
@@ -141,4 +142,46 @@ public class Train implements Serializable {
     public String getPlatform() {
         return platform;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.path);
+        dest.writeString(this.trainType);
+        dest.writeString(this.start);
+        dest.writeString(this.end);
+        dest.writeString(this.numbering);
+        dest.writeString(this.way);
+        dest.writeString(this.platform);
+        dest.writeString(this.pathType);
+    }
+
+    private Train(Parcel in) {
+        this.id = in.readString();
+        this.path = in.readString();
+        this.trainType = in.readString();
+        this.start = in.readString();
+        this.end = in.readString();
+        this.numbering = in.readString();
+        this.way = in.readString();
+        this.platform = in.readString();
+        this.pathType = in.readString();
+    }
+
+    public static final Parcelable.Creator<Train> CREATOR = new Parcelable.Creator<Train>() {
+        @Override
+        public Train createFromParcel(Parcel source) {
+            return new Train(source);
+        }
+
+        @Override
+        public Train[] newArray(int size) {
+            return new Train[size];
+        }
+    };
 }

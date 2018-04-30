@@ -4,6 +4,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorPrimaryRipple</item>
+    </style>
+
+    <style name="SplashTheme" parent="android:Theme.Black">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -54,8 +60,8 @@
     </style>
 
     <style name="ImageHeader">
-        <item name="android:layout_width">@dimen/image_size_medium</item>
-        <item name="android:layout_height">@dimen/image_size_medium</item>
+        <item name="android:layout_width">@dimen/image_size_large</item>
+        <item name="android:layout_height">@dimen/image_size_large</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_margin">@dimen/image_margin_small</item>
     </style>
@@ -127,6 +133,11 @@
         <item name="android:layout_margin">2dp</item>
         <item name="android:textSize">@dimen/text_size_micro</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="DefaultCardView" parent="CardView">
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
     </style>
 
 </resources>
