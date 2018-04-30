@@ -5,10 +5,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
-import org.jetbrains.annotations.NotNull;
 
 import android.app.Activity;
-import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -17,9 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.Train;
-import by.client.android.railwayapp.support.common.StartActivityBuilder;
-import by.client.android.railwayapp.ui.widget.NewsWidget;
-import de.hdodenhof.circleimageview.CircleImageView;
+import by.client.android.railwayapp.ui.utils.PushNotification;
 
 /**
  * Страница для отображения детальной информации поезда со страницы "Виртуально табло"
@@ -27,12 +23,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author PRV
  */
 @EActivity(R.layout.activity_scroreboard_detail)
-public class ScoreboardDetailActivity extends AppCompatActivity {
+public class ScroreboardDetailActivity extends AppCompatActivity {
 
     private static final String TRAIN_KEY = "TRAIN_KEY";
 
     @ViewById(R.id.icoImageView)
-    CircleImageView icoImageView;
+    ImageView icoImageView;
 
     @ViewById(R.id.trainIdTextView)
     TextView trainIdTextView;
@@ -58,10 +54,10 @@ public class ScoreboardDetailActivity extends AppCompatActivity {
     @Extra(TRAIN_KEY)
     Train train;
 
-    public static void start(@NotNull Activity activity, @NotNull Train train, int requestCode) {
-        StartActivityBuilder.create(activity, ScoreboardDetailActivity_.class)
-            .param(ScoreboardDetailActivity.TRAIN_KEY, train)
-            .startForResult(requestCode);
+    public static void start(Activity activity, Train train, int requestCode) {
+        Intent intent = new Intent(activity, ScroreboardDetailActivity_.class);
+        intent.putExtra(ScroreboardDetailActivity.TRAIN_KEY, train);
+        activity.startActivityForResult(intent, requestCode);
     }
 
     @AfterViews
@@ -69,13 +65,20 @@ public class ScoreboardDetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         trainIdTextView.setText(train.getId());
-        icoImageView.setImageResource(new TrainTypeToImage().convert(train.getPathType()));
+        icoImageView.setBackgroundResource(new TrainTypeToImage().convert(train.getPathType()));
         trainTypeTextView.setText(train.getTrainType());
         pathTextView.setText(train.getPath());
         wayTextView.setText(train.getWay());
         platformTextView.setText(train.getPlatform());
         startTimeTextView.setText(train.getStart());
         endTimeTextView.setText(train.getEnd());
+    }
+
+    @Click(R.id.sendPush)
+    void submitButton(View view) {
+        if (view.getId() == R.id.sendPush) {
+            PushNotification.send(this, getPushContent(), null);
+        }
     }
 
     @Override
@@ -89,11 +92,8 @@ public class ScoreboardDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void updateWidget() {
-        Intent intent = new Intent(this, NewsWidget.class);
-        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-
-        intent.putExtra("TRAIN_ID", train);
-        sendBroadcast(intent);
+    private String getPushContent() {
+        return String.format(getString(R.string.push_content),
+            train.getWay(), train.getPlatform(), train.getPath());
     }
 }

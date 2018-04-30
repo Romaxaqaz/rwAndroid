@@ -8,11 +8,11 @@ import android.support.v4.app.NotificationCompat;
 import by.client.android.railwayapp.R;
 
 /**
- * Класс для отправки нотификации, которая будет отображаться в строке состояния.
+ * Класс для отправки push нотификации, которая будет отображаться в строке состояния.
  *
- * @author RPA
+ * @author Q-RPA
  */
-public class NotificationHelper {
+public class PushNotification {
 
     private static final String DEFAULT_NOTIFICATION_CHANNEL = "default_notification_channel";
 

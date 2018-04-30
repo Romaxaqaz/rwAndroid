@@ -14,11 +14,6 @@
             android:layout_marginEnd="@dimen/content_margin_end">
 
         <TextView
-                android:id="@+id/date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        <TextView
                 android:id="@+id/departureStation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

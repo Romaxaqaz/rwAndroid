@@ -6,9 +6,9 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
-import org.jetbrains.annotations.NotNull;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +22,6 @@ import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.api.rw.model.places.TrainPlaceInfo;
 import by.client.android.railwayapp.model.routetrain.Place;
-import by.client.android.railwayapp.support.common.StartActivityBuilder;
 import by.client.android.railwayapp.ui.RetrofitCallback;
 import by.client.android.railwayapp.ui.scoreboard.TrainTypeToImage;
 import by.client.android.railwayapp.ui.utils.UiUtils;
@@ -80,15 +79,10 @@ public class PlaceInfoActivity extends BaseDaggerActivity {
 
     private TariffsRecyclerAdapter tariffsRecyclerAdapter;
 
-    public static void start(@NotNull Activity activity, @NotNull Place place, int requestCode) {
-        StartActivityBuilder.create(activity, PlaceInfoActivity_.class)
-            .param(PLACE_KEY, place)
-            .startForResult(requestCode);
-    }
-
-    @Override
-    public void injectActivity(ApplicationComponent component) {
-        component.inject(this);
+    public static void start(Activity activity, Place place, int requestCode) {
+        Intent intent = new Intent(activity, PlaceInfoActivity_.class);
+        intent.putExtra(PLACE_KEY, place);
+        activity.startActivityForResult(intent, requestCode);
     }
 
     @AfterViews
@@ -98,7 +92,7 @@ public class PlaceInfoActivity extends BaseDaggerActivity {
     }
 
     private void initView() {
-        getSupportActionBar().setTitle(R.string.free_places);
+        getSupportActionBar().setTitle("Свободные места");
 
         tariffsRecyclerAdapter = new TariffsRecyclerAdapter(this);
         tariffsRecyclerView.setAdapter(tariffsRecyclerAdapter);
@@ -119,10 +113,15 @@ public class PlaceInfoActivity extends BaseDaggerActivity {
     }
 
     private void loadPlaceInfo() {
-        railwayApi.getPlacesInfo(place.getLink()).enqueue(new PlaceLoaderListener());
+        railwayApi.getPlacesInfo(place.getLink()).enqueue(new PlaceLoadeListener());
     }
 
-    private class PlaceLoaderListener extends RetrofitCallback<TrainPlaceInfo> {
+    @Override
+    public void injectActivity(ApplicationComponent component) {
+        component.inject(this);
+    }
+
+    private class PlaceLoadeListener extends RetrofitCallback<TrainPlaceInfo> {
 
         @Override
         public void onStart() {

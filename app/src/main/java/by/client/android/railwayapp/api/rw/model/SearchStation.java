@@ -1,15 +1,13 @@
 package by.client.android.railwayapp.api.rw.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import by.client.android.railwayapp.model.ParcelableUtils;
+import java.io.Serializable;
 
 /**
  * Модель для описания станции
  *
  * @author PRV
  */
-public class SearchStation implements Parcelable {
+public class SearchStation implements Serializable {
 
     private String prefix;
     private String label;
@@ -21,9 +19,6 @@ public class SearchStation implements Parcelable {
     private String exp;
     private String ecp;
     private Object otd;
-
-    public SearchStation() {
-    }
 
     public String getPrefix() {
         return prefix;
@@ -105,48 +100,4 @@ public class SearchStation implements Parcelable {
         this.otd = otd;
     }
 
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.prefix);
-        dest.writeString(this.label);
-        dest.writeString(this.labelTail);
-        dest.writeString(this.value);
-        dest.writeString(this.gid);
-        dest.writeValue(this.lon);
-        dest.writeValue(this.lat);
-        dest.writeString(this.exp);
-        dest.writeString(this.ecp);
-        dest.writeValue(this.otd);
-    }
-
-    private SearchStation(Parcel in) {
-        this.prefix = in.readString();
-        this.label = in.readString();
-        this.labelTail = in.readString();
-        this.value = in.readString();
-        this.gid = in.readString();
-        this.lon = ParcelableUtils.readValue(in, Double.class);
-        this.lat = ParcelableUtils.readValue(in, Double.class);
-        this.exp = in.readString();
-        this.ecp = in.readString();
-        this.otd = ParcelableUtils.readValue(in, Object.class);
-    }
-
-    public static final Parcelable.Creator<SearchStation> CREATOR = new Parcelable.Creator<SearchStation>() {
-        @Override
-        public SearchStation createFromParcel(Parcel source) {
-            return new SearchStation(source);
-        }
-
-        @Override
-        public SearchStation[] newArray(int size) {
-            return new SearchStation[size];
-        }
-    };
 }

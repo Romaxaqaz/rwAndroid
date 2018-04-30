@@ -1,14 +1,13 @@
 package by.client.android.railwayapp.model.routetrain;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
 /**
  * Модель для описания доступных мест поезда
  *
  * @author PRV
  */
-public class Place implements Parcelable {
+public class Place implements Serializable {
 
     /**
      * Тип места
@@ -69,36 +68,4 @@ public class Place implements Parcelable {
     public void setPrice(String price) {
         this.price = price;
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeString(this.freePlaces);
-        dest.writeString(this.link);
-        dest.writeString(this.price);
-    }
-
-    private Place(Parcel in) {
-        this.name = in.readString();
-        this.freePlaces = in.readString();
-        this.link = in.readString();
-        this.price = in.readString();
-    }
-
-    public static final Parcelable.Creator<Place> CREATOR = new Parcelable.Creator<Place>() {
-        @Override
-        public Place createFromParcel(Parcel source) {
-            return new Place(source);
-        }
-
-        @Override
-        public Place[] newArray(int size) {
-            return new Place[size];
-        }
-    };
 }

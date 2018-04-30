@@ -53,22 +53,18 @@ public class TrainPlaceView extends FrameLayout {
         trainPlaceAdapter.setData(places);
 
         listView.setAdapter(trainPlaceAdapter);
-        listView.setOnItemClickListener(new PlaceItemClickListener());
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                onPlaceItemClickListener.selectedStation(trainPlaceAdapter.getItem(position));
+            }
+        });
         UiUtils.setListViewHeightBasedOnItems(listView);
-        UiUtils.setVisibility(places.isEmpty(), emptyView);
+        UiUtils.setVisibility(places.size() <= 0, emptyView);
     }
 
     public void setClickListener(OnPlaceItemClickListener onPlaceItemClickListener) {
         this.onPlaceItemClickListener = onPlaceItemClickListener;
-    }
-
-    private class PlaceItemClickListener implements AdapterView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            onPlaceItemClickListener.selectedStation(trainPlaceAdapter.getItem(position));
-        }
     }
 
     /**

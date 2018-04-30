@@ -5,7 +5,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Callback обработки загрузки Retrofit
+ * Callback обработки загрузки Retrofit2
  *
  * <p>Основные методы</p>
  * <ul>

@@ -1,7 +1,6 @@
 package by.client.android.railwayapp.ui.trainroute;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -9,18 +8,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import android.nfc.FormatException;
 import by.client.android.railwayapp.model.RouteItem;
 import by.client.android.railwayapp.ui.BaseParsing;
 import by.client.android.railwayapp.ui.ParsingException;
-import by.client.android.railwayapp.ui.converters.DateToStringConverter;
-import by.client.android.railwayapp.ui.utils.DateUtils;
 
-/**
- * Класс для парсинга страницы отображния маршрута поезда
- *
- * @author RPA
- */
 class TrainRouteParsing extends BaseParsing<RouteItem, String> {
 
     private static final String STATION = "a[class=train_name -map train_text]";
@@ -49,8 +40,8 @@ class TrainRouteParsing extends BaseParsing<RouteItem, String> {
                 continue;
             }
 
-            Date arrival = toDate(checkEmpty(item.select(ARRIVAL).first()));
-            Date arrived = toDate(checkEmpty(item.select(ARRIVED).first()));
+            String arrival = checkEmpty(item.select(ARRIVAL).first());
+            String arrived = checkEmpty(item.select(ARRIVED).first());
             String travelTime = checkEmpty(item.select(TRAVEL_TIME).first());
             String stay = checkEmpty(item.select(STAY).first());
 
@@ -65,9 +56,5 @@ class TrainRouteParsing extends BaseParsing<RouteItem, String> {
         }
 
         return routeItemList;
-    }
-
-    private Date toDate(String date) throws FormatException {
-        return new DateToStringConverter(DateUtils.SHORT_TIME_FORMAT).convertBack(date);
     }
 }

@@ -15,6 +15,3 @@ local.properties
 google-services.json
 target
 out
-app/build.gradle
-.idea/misc.xml
-.idea/dictionaries/PanteleevRV.xml

@@ -8,14 +8,11 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
-import org.jetbrains.annotations.NotNull;
 
 import android.app.Activity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
+import android.content.Intent;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import by.client.android.railwayapp.ApplicationComponent;
@@ -27,7 +24,6 @@ import by.client.android.railwayapp.model.RouteItem;
 import by.client.android.railwayapp.model.routetrain.TrainRoute;
 import by.client.android.railwayapp.support.BaseLoaderListener;
 import by.client.android.railwayapp.support.Client;
-import by.client.android.railwayapp.support.common.StartActivityBuilder;
 import by.client.android.railwayapp.ui.scoreboard.TrainTypeToImage;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 
@@ -63,7 +59,7 @@ public class TrainRouteActivity extends BaseDaggerActivity {
     TextView typeTextView;
 
     @ViewById(R.id.trainRouteListView)
-    RecyclerView trainRouteRecyclerView;
+    ListView trainRouteListView;
 
     @ViewById(R.id.progressBar)
     ProgressBar progressBar;
@@ -73,21 +69,18 @@ public class TrainRouteActivity extends BaseDaggerActivity {
 
     private RouteAdapter routeAdapter;
 
-    public static void start(@NotNull Activity activity, @NotNull TrainRoute train, int requestCode) {
-        StartActivityBuilder.create(activity, TrainRouteActivity_.class)
-            .param(TRAIN_KEY, train)
-            .startForResult(requestCode);
+    public static void start(Activity activity, TrainRoute train, int requestCode) {
+        Intent intent = new Intent(activity, TrainRouteActivity_.class);
+        intent.putExtra(TRAIN_KEY, train);
+        activity.startActivityForResult(intent, requestCode);
     }
 
     @AfterViews
     void initActivity() {
         getSupportActionBar().setTitle(R.string.train_route);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        routeAdapter = new RouteAdapter();
-        trainRouteRecyclerView.setAdapter(routeAdapter);
-        trainRouteRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        trainRouteRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        routeAdapter = new RouteAdapter(this);
+        trainRouteListView.setAdapter(routeAdapter);
 
         loadData();
         initHeader();
@@ -98,17 +91,6 @@ public class TrainRouteActivity extends BaseDaggerActivity {
         component.inject(this);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     private void initHeader() {
         idTextView.setText(train.getId());
         iconImageView.setBackgroundResource(new TrainTypeToImage().convert(train.getIco()));
@@ -117,7 +99,8 @@ public class TrainRouteActivity extends BaseDaggerActivity {
     }
 
     private void loadData() {
-        client.send(new TrainRouteLoader(railwayApi, train.getId()), new TrainRouteLoadListener(this));
+        client.send(new TrainRouteLoader(railwayApi, train.getId()),
+            new TrainRouteLoadListener(this));
     }
 
     private static class TrainRouteLoadListener extends BaseLoaderListener<TrainRouteActivity, List<RouteItem>> {

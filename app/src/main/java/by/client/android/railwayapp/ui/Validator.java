@@ -68,7 +68,7 @@ public abstract class Validator {
      *
      * @param errorId сообщени ошибки.
      */
-    private void addError(int errorId) {
+    protected void addError(int errorId) {
         errors.add(context.getString(errorId));
     }
 }

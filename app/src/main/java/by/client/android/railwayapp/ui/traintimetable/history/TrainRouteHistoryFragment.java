@@ -1,7 +1,5 @@
 package by.client.android.railwayapp.ui.traintimetable.history;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 import org.androidannotations.annotations.AfterViews;
@@ -12,7 +10,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -21,7 +18,6 @@ import android.widget.TextView;
 import by.client.android.railwayapp.AndroidApplication;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.SearchTrain;
-import by.client.android.railwayapp.support.database.DataBase;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 
 /**
@@ -30,12 +26,10 @@ import by.client.android.railwayapp.ui.utils.UiUtils;
  * @author PRV
  */
 @EFragment(R.layout.fragment_train_route_history)
-public class TrainRouteHistoryDialog extends DialogFragment {
-
-    private static final String TAG = TrainRouteHistoryDialog.class.getSimpleName();
+public class TrainRouteHistoryFragment extends DialogFragment {
 
     @Inject
-    DataBase<SearchTrain> trainHistory;
+    ObjectHistory<SearchTrain> trainRouteHistory;
 
     @ViewById(R.id.resultListView)
     ListView resultListView;
@@ -49,14 +43,6 @@ public class TrainRouteHistoryDialog extends DialogFragment {
     private ChooseRouteDialogListener chooseRouteDialogListener;
     private RouteHistoryAdapter routeHistoryAdapter;
 
-    public static TrainRouteHistoryDialog show(@NonNull FragmentManager fragmentManager,
-        ChooseRouteDialogListener chooseRouteDialogListener) {
-        TrainRouteHistoryDialog trainRouteHistoryDialog = new TrainRouteHistoryDialog_();
-        trainRouteHistoryDialog.setClickListener(chooseRouteDialogListener);
-        trainRouteHistoryDialog.show(fragmentManager, TAG);
-        return trainRouteHistoryDialog;
-    }
-
     @AfterViews
     void onCreateView() {
         AndroidApplication.getApp().getApplicationComponent().inject(this);
@@ -65,7 +51,7 @@ public class TrainRouteHistoryDialog extends DialogFragment {
         resultListView.setAdapter(routeHistoryAdapter);
         resultListView.setOnItemClickListener(new RouteItemClickListener());
 
-        routeHistoryAdapter.setData(trainHistory.getAll());
+        routeHistoryAdapter.setData(trainRouteHistory.getAll());
         clearHistory.setOnClickListener(new ClearHistoryListener());
 
         updateEmptyView();
@@ -86,7 +72,7 @@ public class TrainRouteHistoryDialog extends DialogFragment {
     }
 
     private void updateEmptyView() {
-        boolean isEmpty = routeHistoryAdapter.isEmpty();
+        boolean isEmpty = trainRouteHistory.getAll().size() == 0;
         UiUtils.setVisibility(isEmpty, emptyView);
         UiUtils.setVisibility(!isEmpty, clearHistory);
     }
@@ -108,8 +94,8 @@ public class TrainRouteHistoryDialog extends DialogFragment {
 
         @Override
         public void onClick(View view) {
-            trainHistory.clear();
-            routeHistoryAdapter.setData(new ArrayList<SearchTrain>());
+            trainRouteHistory.clear();
+            routeHistoryAdapter.setData(trainRouteHistory.getAll());
             updateEmptyView();
         }
     }

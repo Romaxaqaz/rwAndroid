@@ -9,8 +9,6 @@ import by.client.android.railwayapp.GlobalExceptionHandler;
  * Реализация {@link RegisterLoader} - декоратор для других реализаций RegistrationSendListener.
  *
  * <p>Делегирует вызовы вложенной реализации и защищает сервис от исключений.</p>
- *
- * @author RPA
  */
 public class SafeRegistrationSendListener implements RegisterLoader {
 

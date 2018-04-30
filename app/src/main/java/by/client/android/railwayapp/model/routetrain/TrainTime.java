@@ -1,14 +1,13 @@
 package by.client.android.railwayapp.model.routetrain;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
 /**
  * Модель описания времени прибытия и отправления
  *
  * @author PRV
  */
-public class TrainTime implements Parcelable {
+public class TrainTime implements Serializable {
 
     /**
      * Время прибытия
@@ -29,35 +28,15 @@ public class TrainTime implements Parcelable {
         return arrival;
     }
 
+    public void setArrival(String arrival) {
+        this.arrival = arrival;
+    }
+
     public String getArrived() {
         return arrived;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setArrived(String arrived) {
+        this.arrived = arrived;
     }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.arrival);
-        dest.writeString(this.arrived);
-    }
-
-    private TrainTime(Parcel in) {
-        this.arrival = in.readString();
-        this.arrived = in.readString();
-    }
-
-    public static final Parcelable.Creator<TrainTime> CREATOR = new Parcelable.Creator<TrainTime>() {
-        @Override
-        public TrainTime createFromParcel(Parcel source) {
-            return new TrainTime(source);
-        }
-
-        @Override
-        public TrainTime[] newArray(int size) {
-            return new TrainTime[size];
-        }
-    };
 }
