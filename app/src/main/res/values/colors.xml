@@ -23,4 +23,6 @@
     <color name="tint_white">#ffffff</color>
 
     <color name="buttom_navigation_text_color">#c1c1c1</color>
+
+    <color name="shimmer">#d4d4d4</color>
 </resources>

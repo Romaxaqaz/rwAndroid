@@ -1,5 +1,11 @@
 package by.client.android.railwayapp.support.rss;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,12 +19,6 @@ import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 /**
  * Created by PanteleevRV on 15.02.2018.
@@ -49,17 +49,15 @@ public class RssParser implements RssReader<Article> {
                 RssNodeParser rssNode = new RssNodeParser(item);
 
                 articles.add(new Article()
-                    .setTitle(rssNode.getTitle())
-                    .setLink(rssNode.getLink())
-                    .setCategories(rssNode.getCategory())
-                    .setDescription(rssNode.getDescription())
-                    .setPubDate(rssNode.getDate()));
+                        .setTitle(rssNode.getTitle())
+                        .setLink(rssNode.getLink())
+                        .setCategories(rssNode.getCategory())
+                        .setDescription(rssNode.getDescription())
+                        .setPubDate(rssNode.getDate()));
             }
-        }
-        catch (ParserConfigurationException | SAXException exception) {
+        } catch (ParserConfigurationException | SAXException exception) {
             logger.log(Level.SEVERE, "Error configuration DocumentBuilder for rss news parsing", exception);
-        }
-        catch (IOException exception) {
+        } catch (IOException exception) {
             logger.log(Level.SEVERE, String.format("Error rss news parsing form url %s", url), exception);
         }
         return articles;
@@ -100,8 +98,7 @@ public class RssParser implements RssReader<Article> {
         public Date getDate() {
             try {
                 return new SimpleDateFormat(RSS_DATE_FORMAT, Locale.ENGLISH).parse(getValue(PUB_DATE));
-            }
-            catch (ParseException e) {
+            } catch (ParseException e) {
                 return null;
             }
         }

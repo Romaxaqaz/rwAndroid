@@ -13,24 +13,11 @@ import by.client.android.railwayapp.ui.BaseLoader;
  *
  * @author PRV
  */
-final class NewsLoader implements Loader {
+final class NewsLoader {
 
-    private static final String URL = "http://www.rw.by/rss/";
+    private static final String URL = "https://www.rw.by/rss/";
 
-    @Override
-    public void load(RegisterLoader registerLoader) {
-        new LoadNewsAsync(registerLoader).execute(URL);
-    }
-
-    private class LoadNewsAsync extends BaseLoader<String, List<Article>> {
-
-        LoadNewsAsync(RegisterLoader registerLoader) {
-            super(registerLoader);
-        }
-
-        @Override
-        protected List<Article> call(String url) throws Exception {
-            return new RssParser().parseRss(url);
-        }
+    public List<Article> load() {
+        return new RssParser().parseRss(URL);
     }
 }
