@@ -6,6 +6,7 @@ import java.util.concurrent.Callable;
 import by.client.android.railwayapp.support.BaseRxObserverListener;
 import by.client.android.railwayapp.support.Client;
 import by.client.android.railwayapp.support.rss.Article;
+import by.client.android.railwayapp.ui.Presenter;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -15,7 +16,7 @@ import io.reactivex.schedulers.Schedulers;
  *
  * @author RPA
  */
-public class NewsPresenter implements NewsContract.Presenter {
+public class NewsPresenter extends Presenter implements NewsContract.Presenter {
 
     private Client client;
     private final NewsContract.View view;
@@ -25,14 +26,22 @@ public class NewsPresenter implements NewsContract.Presenter {
         this.view = view;
 
         view.setPresenter(this);
+
+        super.onViewAttached();
     }
 
     @Override
-    public void start() {
+    public void load() {
         Observable.fromCallable(new NewsLoaderCallable())
+                .compose(this.<List<Article>>applyBinding())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new NewsLoaderListener(this));
+    }
+
+    @Override
+    public void onViewDetached() {
+        super.onViewDetached();
     }
 
     private class NewsLoaderCallable implements Callable<List<Article>> {

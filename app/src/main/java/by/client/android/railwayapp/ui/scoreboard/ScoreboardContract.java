@@ -21,5 +21,7 @@ public interface ScoreboardContract {
     interface Presenter extends BasePresenter {
 
         void load(ScoreboardStation scoreboardStation);
+
+        void onViewDetached();
     }
 }

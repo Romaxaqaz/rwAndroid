@@ -118,6 +118,14 @@ public class ScoreboardActivityFragment extends BaseDaggerFragment
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (presenter != null) {
+            presenter.onViewDetached();
+        }
+    }
+
+    @Override
     public void onRefresh() {
         loadData();
     }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.jsoup.nodes.Element;
 
-
 /**
  * Базовый класс парсинга страниц
  *

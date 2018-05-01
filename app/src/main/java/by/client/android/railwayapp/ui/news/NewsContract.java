@@ -24,5 +24,8 @@ public interface NewsContract {
 
     interface Presenter extends BasePresenter {
 
+        void load();
+
+        void onViewDetached();
     }
 }

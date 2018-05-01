@@ -2,7 +2,6 @@ package by.client.android.railwayapp.ui.news;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -65,7 +64,15 @@ public class NewsActivityFragment extends BaseDaggerFragment
         initView();
 
         if (saveNews.isEmpty()) {
-            presenter.start();
+            presenter.load();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (presenter != null) {
+            presenter.onViewDetached();
         }
     }
 
@@ -93,7 +100,7 @@ public class NewsActivityFragment extends BaseDaggerFragment
 
     @Override
     public void onRefresh() {
-        presenter.start();
+        presenter.load();
     }
 
     @Override

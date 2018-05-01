@@ -7,11 +7,12 @@ import by.client.android.railwayapp.api.ScoreboardStation;
 import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.model.Train;
 import by.client.android.railwayapp.support.BaseRxObserverListener;
+import by.client.android.railwayapp.ui.Presenter;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class ScoreboardPresenter implements ScoreboardContract.Presenter {
+public class ScoreboardPresenter extends Presenter implements ScoreboardContract.Presenter {
 
     private RailwayApi railwayApi;
     private final ScoreboardContract.View view;
@@ -21,6 +22,7 @@ public class ScoreboardPresenter implements ScoreboardContract.Presenter {
         this.view = view;
 
         view.setPresenter(this);
+        super.onViewAttached();
     }
 
     @Override
@@ -29,12 +31,13 @@ public class ScoreboardPresenter implements ScoreboardContract.Presenter {
     }
 
     @Override
-    public void start() {
-        // ignored
+    public void onViewDetached() {
+        super.onViewDetached();
     }
 
     private void loadScoreboard(ScoreboardStation scoreboardStation) {
         Observable.fromCallable(new ScoreboardLoaderCallable(railwayApi, scoreboardStation))
+                .compose(this.<List<Train>>applyBinding())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ScoreboardLoadListener(this));
@@ -45,7 +48,7 @@ public class ScoreboardPresenter implements ScoreboardContract.Presenter {
         private RailwayApi railwayApi;
         private ScoreboardStation scoreboardStation;
 
-        public ScoreboardLoaderCallable(RailwayApi railwayApi, ScoreboardStation scoreboardStation) {
+        ScoreboardLoaderCallable(RailwayApi railwayApi, ScoreboardStation scoreboardStation) {
             this.railwayApi = railwayApi;
             this.scoreboardStation = scoreboardStation;
         }
