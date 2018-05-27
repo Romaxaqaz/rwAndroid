@@ -20,12 +20,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShellActivity_" />
-        <activity android:name=".ui.scoreboard.ScoreboardDetailActivity_" />
-        <activity android:name=".ui.traintimetable.TrainRoutesActivity_" android:parentActivityName=".ShellActivity_" />
-        <activity android:name=".ui.trainroute.TrainRouteActivity_" />
+        <activity android:name=".ui.page.scoreboard.ScoreboardDetailActivity_" />
+        <activity android:name=".ui.page.traintimetable.TrainRoutesActivity_" android:parentActivityName=".ShellActivity_" />
+        <activity android:name=".ui.page.trainroute.TrainRouteActivity_" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.traintimetable.PlaceInfoActivity_" />
-        <activity android:name=".ui.news.NewsDetailActivity_"/>
+        <activity android:name=".ui.page.traintimetable.PlaceInfoActivity_" />
+        <activity android:name=".ui.page.news.NewsDetailActivity_"/>
 
         <receiver android:name=".ui.widget.NewsWidget">
             <intent-filter>

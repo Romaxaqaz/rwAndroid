@@ -1,16 +1,15 @@
 package by.client.android.railwayapp.api.rw.model.places;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
- * Created by PanteleevRV on 06.02.2018.
+ * Model to represent the cost of travel
  *
  * @author PRV
  */
-
 public class Tariff {
 
     private String price;

@@ -58,11 +58,6 @@ public class GlobalExceptionHandler {
 
     private void showError(final String message) {
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Dialogs.showToast(context, message);
-            }
-        }, 100);
+        handler.postDelayed(() -> Dialogs.showToast(context, message), 100);
     }
 }

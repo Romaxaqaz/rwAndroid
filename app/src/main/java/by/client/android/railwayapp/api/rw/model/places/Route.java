@@ -1,11 +1,10 @@
 package by.client.android.railwayapp.api.rw.model.places;
 
 /**
- * Created by PanteleevRV on 06.02.2018.
+ * Model to represent the path
  *
  * @author PRV
  */
-
 public class Route {
 
     private String from;

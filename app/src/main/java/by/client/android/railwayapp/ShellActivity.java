@@ -1,21 +1,23 @@
 package by.client.android.railwayapp;
 
-import java.util.Map;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.MenuItem;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
+import java.util.Map;
+
 import by.client.android.railwayapp.support.common.MapBuilder;
-import by.client.android.railwayapp.ui.news.NewsActivityFragment;
-import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment;
-import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity;
+import by.client.android.railwayapp.ui.base.BaseDaggerActivity;
+import by.client.android.railwayapp.ui.page.news.NewsActivityFragment;
+import by.client.android.railwayapp.ui.page.scoreboard.ScoreboardActivityFragment;
+import by.client.android.railwayapp.ui.page.traintimetable.TrainTimeTableActivity;
 
 /**
  * Главная страница приложения с отображением меню
@@ -33,16 +35,16 @@ public class ShellActivity extends BaseDaggerActivity {
     BottomNavigationView bottomNavigationView;
 
     private static final Map<Integer, Fragment> FRAGMENT_HASH_MAP = new MapBuilder<Integer, Fragment>()
-        .put(R.id.action_favorites, ScoreboardActivityFragment.newInstance())
-        .put(R.id.action_schedules, TrainTimeTableActivity.newInstance())
-        .put(R.id.action_news, NewsActivityFragment.newInstance())
-        .build();
+            .put(R.id.action_favorites, ScoreboardActivityFragment.newInstance())
+            .put(R.id.action_schedules, TrainTimeTableActivity.newInstance())
+            .put(R.id.action_news, NewsActivityFragment.newInstance())
+            .build();
 
     private static final Map<Integer, String> FRAGMENT_HEADER_MAP = new MapBuilder<Integer, String>()
-        .put(R.id.action_favorites, "Виртуальное табло")
-        .put(R.id.action_schedules, "Поиск маршрута")
-        .put(R.id.action_news, "Новости")
-        .build();
+            .put(R.id.action_favorites, "Виртуальное табло")
+            .put(R.id.action_schedules, "Поиск маршрута")
+            .put(R.id.action_news, "Новости")
+            .build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +69,9 @@ public class ShellActivity extends BaseDaggerActivity {
     private void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
-            .addToBackStack(fragment.getClass().getName())
-            .commit();
+                .replace(R.id.fragmentContainer, fragment)
+                .addToBackStack(fragment.getClass().getName())
+                .commit();
     }
 
     @Override
@@ -88,8 +90,8 @@ public class ShellActivity extends BaseDaggerActivity {
 
     private void changeHeader(int menuId) {
         getSupportActionBar().setTitle(FRAGMENT_HEADER_MAP.containsKey(menuId)
-            ? FRAGMENT_HEADER_MAP.get(menuId)
-            : getResources().getString(R.string.app_name));
+                ? FRAGMENT_HEADER_MAP.get(menuId)
+                : getResources().getString(R.string.app_name));
     }
 
     private void appExit() {

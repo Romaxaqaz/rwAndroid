@@ -1,7 +1,5 @@
 package by.client.android.railwayapp.ui.view;
 
-import java.util.List;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -9,9 +7,12 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.List;
+
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.routetrain.Place;
-import by.client.android.railwayapp.ui.traintimetable.TrainPlaceAdapter;
+import by.client.android.railwayapp.ui.page.traintimetable.TrainPlaceAdapter;
 import by.client.android.railwayapp.ui.utils.UiUtils;
 
 /**

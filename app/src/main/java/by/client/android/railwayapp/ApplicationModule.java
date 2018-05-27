@@ -1,13 +1,12 @@
 package by.client.android.railwayapp;
 
+import android.app.Application;
+
 import javax.inject.Singleton;
 
-import android.app.Application;
 import by.client.android.railwayapp.api.rw.RailwayApi;
 import by.client.android.railwayapp.api.rw.RailwayRetrofitService;
-import by.client.android.railwayapp.support.Client;
-import by.client.android.railwayapp.support.RailwayClient;
-import by.client.android.railwayapp.ui.settings.SettingsService;
+import by.client.android.railwayapp.ui.page.settings.SettingsService;
 import dagger.Module;
 import dagger.Provides;
 
@@ -29,12 +28,6 @@ class ApplicationModule {
     @Singleton
     SettingsService provideSettingService() {
         return new SettingsService(application);
-    }
-
-    @Provides
-    @Singleton
-    Client getClient() {
-        return new RailwayClient();
     }
 
     @Provides

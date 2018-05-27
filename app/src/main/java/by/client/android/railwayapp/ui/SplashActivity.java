@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import by.client.android.railwayapp.ShellActivity_;
+import by.client.android.railwayapp.support.base.BaseAsyncTask;
 import by.client.android.railwayapp.ui.utils.Utils;
 
 /**
@@ -47,7 +48,6 @@ public class SplashActivity extends Activity {
     }
 
     private final class LoadFakeDataAsync extends BaseAsyncTask<Void, Void> {
-
 
         @Override
         protected Void runTask(Void... voids) {

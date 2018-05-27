@@ -6,12 +6,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 import android.widget.RemoteViews;
+
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.model.Train;
-import by.client.android.railwayapp.ui.scoreboard.TrainTypeToImage;
+import by.client.android.railwayapp.ui.page.scoreboard.TrainTypeToImage;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * Implementation of App Widget functionality.

@@ -10,13 +10,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RailwayRetrofitService {
 
-    private static final String BASE_URL = "http://rasp.rw.by/";
+    private static final String BASE_URL = "https://rasp.rw.by/";
 
     public RailwayApi getRailwayApi() {
         Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         return retrofit.create(RailwayApi.class);
     }
 }

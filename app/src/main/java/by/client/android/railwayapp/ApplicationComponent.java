@@ -2,14 +2,15 @@ package by.client.android.railwayapp;
 
 import javax.inject.Singleton;
 
-import by.client.android.railwayapp.ui.news.NewsActivityFragment;
-import by.client.android.railwayapp.ui.scoreboard.ScoreboardActivityFragment;
-import by.client.android.railwayapp.ui.trainroute.TrainRouteActivity;
-import by.client.android.railwayapp.ui.traintimetable.PlaceInfoActivity;
-import by.client.android.railwayapp.ui.traintimetable.SearchStationDialog;
-import by.client.android.railwayapp.ui.traintimetable.TrainRoutesActivity;
-import by.client.android.railwayapp.ui.traintimetable.TrainTimeTableActivity;
-import by.client.android.railwayapp.ui.traintimetable.history.TrainRouteHistoryDialog;
+import by.client.android.railwayapp.ui.base.BaseDaggerActivity;
+import by.client.android.railwayapp.ui.page.news.NewsActivityFragment;
+import by.client.android.railwayapp.ui.page.scoreboard.ScoreboardActivityFragment;
+import by.client.android.railwayapp.ui.page.trainroute.TrainRouteActivity;
+import by.client.android.railwayapp.ui.page.traintimetable.PlaceInfoActivity;
+import by.client.android.railwayapp.ui.page.traintimetable.SearchStationDialog;
+import by.client.android.railwayapp.ui.page.traintimetable.TrainRoutesActivity;
+import by.client.android.railwayapp.ui.page.traintimetable.TrainTimeTableActivity;
+import by.client.android.railwayapp.ui.page.traintimetable.history.TrainRouteHistoryDialog;
 import dagger.Component;
 
 /**

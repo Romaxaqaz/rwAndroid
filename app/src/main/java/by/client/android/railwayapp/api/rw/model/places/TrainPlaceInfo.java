@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Модель для описания свододных мест поезда
+ * Model to represent available seats of the train
  *
  * @author PRV
  */

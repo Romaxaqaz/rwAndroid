@@ -2,10 +2,11 @@ package by.client.android.railwayapp.api.rw.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import by.client.android.railwayapp.model.ParcelableUtils;
 
 /**
- * Модель для описания станции
+ * Model to represent station of the train
  *
  * @author PRV
  */
