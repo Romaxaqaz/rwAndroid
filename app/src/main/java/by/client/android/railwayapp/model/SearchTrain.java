@@ -2,30 +2,42 @@ package by.client.android.railwayapp.model;
 
 import java.util.Date;
 
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
 import android.os.Parcelable;
 import by.client.android.railwayapp.api.rw.model.SearchStation;
+import by.client.android.railwayapp.support.database.room.DateConverters;
 
 /**
  * Модель запроса поездов
  *
  * @author ROMAN PANTELEEV
  */
+@Entity
 public class SearchTrain implements Parcelable {
+
+    @PrimaryKey(autoGenerate = true)
+    private long id;
 
     /**
      * Станция отправления
      */
+    @Embedded(prefix = "departure_")
     private SearchStation departureStation;
 
     /**
      * Станция назначения
      */
+    @Embedded(prefix = "destination_")
     private SearchStation destinationStation;
 
     /**
      * Дата отправления
      */
+    @TypeConverters({DateConverters.class})
     private Date departureDate;
 
     public SearchTrain(SearchStation departureStation, SearchStation destinationStation, Date departureDate) {
@@ -47,28 +59,16 @@ public class SearchTrain implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        SearchTrain that = (SearchTrain) o;
-        return departureStation.equals(that.departureStation) && destinationStation.equals(that.destinationStation);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = departureStation.hashCode();
-        result = 31 * result + destinationStation.hashCode();
-        return result;
-    }
-
-    @Override
     public int describeContents() {
         return 0;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override

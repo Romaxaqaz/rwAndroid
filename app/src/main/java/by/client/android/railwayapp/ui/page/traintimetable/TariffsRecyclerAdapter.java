@@ -24,7 +24,7 @@ import static android.text.TextUtils.join;
 /**
  * Адаптер для элемента списка информации по вагону
  *
- * @autor PRV
+ * @author PRV
  */
 class TariffsRecyclerAdapter extends RecyclerView.Adapter<TariffsRecyclerAdapter.ViewHolder> {
 

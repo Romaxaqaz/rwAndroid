@@ -1,15 +1,8 @@
 package by.client.android.railwayapp.ui.page.traintimetable;
 
-import android.app.DatePickerDialog;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.CardView;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.ImageView;
-import android.widget.TextView;
+import java.util.Calendar;
+
+import javax.inject.Inject;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -17,22 +10,27 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.Calendar;
-
-import javax.inject.Inject;
-
+import android.app.DatePickerDialog;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.CardView;
+import static android.text.TextUtils.join;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.TextView;
 import by.client.android.railwayapp.ApplicationComponent;
 import by.client.android.railwayapp.R;
 import by.client.android.railwayapp.api.rw.model.SearchStation;
 import by.client.android.railwayapp.model.SearchTrain;
-import by.client.android.railwayapp.support.database.DataBase;
+import by.client.android.railwayapp.support.database.room.SearchTrainCacheManager;
 import by.client.android.railwayapp.ui.base.BaseDaggerFragment;
 import by.client.android.railwayapp.ui.converters.DateToStringConverter;
 import by.client.android.railwayapp.ui.page.traintimetable.history.TrainRouteHistoryDialog;
 import by.client.android.railwayapp.ui.utils.DateUtils;
 import by.client.android.railwayapp.ui.utils.Dialogs;
-
-import static android.text.TextUtils.join;
 
 /**
  * Страница ввода данных для поиска поездов
@@ -43,7 +41,7 @@ import static android.text.TextUtils.join;
 public class TrainTimeTableActivity extends BaseDaggerFragment {
 
     @Inject
-    DataBase<SearchTrain> trainHistoryDb;
+    SearchTrainCacheManager searchTrainCacheManager;
 
     @ViewById(R.id.departureStation)
     TextView arriveEditText;
@@ -163,10 +161,10 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
         public void onClick(View view) {
             DateUtils date = new DateUtils();
             new DatePickerDialog(getActivity(), new DateListener(),
-                    date.getYear(),
-                    date.getMonth(),
-                    date.getDayOfMonth())
-                    .show();
+                date.getYear(),
+                date.getMonth(),
+                date.getDayOfMonth())
+                .show();
         }
     }
 
@@ -178,7 +176,7 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
             SearchTrain searchTrain = trainValidator.validate(arrive, arrival, currentDate);
 
             if (searchTrain != null) {
-                trainHistoryDb.insert(searchTrain);
+                searchTrainCacheManager.insert(searchTrain);
                 TrainRoutesActivity.start(getActivity(), searchTrain);
             } else {
                 Dialogs.showToast(getContext(), join("\n", trainValidator.getErrors()));
@@ -191,10 +189,10 @@ public class TrainTimeTableActivity extends BaseDaggerFragment {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
             currentDate = DateUtils.createDate()
-                    .setYear(year)
-                    .setMonthOfYear(monthOfYear)
-                    .setDayOfMonth(dayOfMonth)
-                    .build();
+                .setYear(year)
+                .setMonthOfYear(monthOfYear)
+                .setDayOfMonth(dayOfMonth)
+                .build();
             dateTextView.setText(new DateToStringConverter().convert(currentDate.getTime()));
         }
     }

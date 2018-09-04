@@ -11,11 +11,11 @@ import by.client.android.railwayapp.ui.ModifiableRecyclerAdapter;
 /**
  * Created by PanteleevRV on 06.02.2018.
  *
- * @autor PRV
+ * @author PRV
  */
 class CarsRecyclerAdapter extends ModifiableRecyclerAdapter<CarsRecyclerAdapter.ViewHolder, Car> {
 
-    public CarsRecyclerAdapter() {
+    CarsRecyclerAdapter() {
         super(R.layout.train_car_header);
     }
 

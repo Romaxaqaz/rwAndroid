@@ -81,15 +81,12 @@ public class SearchStationDialog extends DialogFragment implements SearchView.On
         resultListView.setTextFilterEnabled(true);
         resultListView.setOnItemClickListener(new StationClickListener());
 
-        locationIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LocationHelper locationHelper = new LocationHelper(getActivity());
-                if (locationHelper.isPermission()) {
-                    searchView.setQuery(locationHelper.getCity(), false);
-                } else {
-                    locationHelper.requestPermission();
-                }
+        locationIcon.setOnClickListener(view -> {
+            LocationHelper locationHelper = new LocationHelper(getActivity());
+            if (locationHelper.isPermission()) {
+                searchView.setQuery(locationHelper.getCity(), false);
+            } else {
+                locationHelper.requestPermission();
             }
         });
 

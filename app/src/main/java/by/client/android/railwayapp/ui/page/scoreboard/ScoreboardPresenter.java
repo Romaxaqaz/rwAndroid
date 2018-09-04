@@ -37,10 +37,10 @@ public class ScoreboardPresenter extends Presenter implements ScoreboardContract
 
     private void loadScoreboard(ScoreboardStation scoreboardStation) {
         Observable.fromCallable(new ScoreboardLoaderCallable(railwayApi, scoreboardStation))
-                .compose(this.<List<Train>>applyBinding())
+                .compose(this.applyBinding())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new ScoreboardLoadListener(this));
+                .subscribe(new ScoreboardLoadListener(this));
     }
 
     private class ScoreboardLoaderCallable implements Callable<List<Train>> {

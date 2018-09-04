@@ -1,20 +1,16 @@
 package by.client.android.railwayapp;
 
-import android.app.Application;
-
 import javax.inject.Singleton;
 
-import by.client.android.railwayapp.model.SearchTrain;
-import by.client.android.railwayapp.support.database.DataBase;
-import by.client.android.railwayapp.ui.page.traintimetable.history.TrainHistoryDataBase;
-import by.client.android.railwayapp.ui.page.traintimetable.history.TrainHistoryDbHelper;
+import android.app.Application;
+import by.client.android.railwayapp.support.database.room.SearchTrainCacheManager;
 import dagger.Module;
 import dagger.Provides;
 
 /**
  * Модуль для работы с кэшем приложения
  *
- * @autor PRV
+ * @author PRV
  */
 @Module
 class ApplicationCacheModule {
@@ -27,7 +23,7 @@ class ApplicationCacheModule {
 
     @Provides
     @Singleton
-    DataBase<SearchTrain> getTrainHistoryDb() {
-        return new TrainHistoryDataBase(new TrainHistoryDbHelper(application));
+    SearchTrainCacheManager getTrainSearchDb() {
+        return new SearchTrainCacheManager(application);
     }
 }

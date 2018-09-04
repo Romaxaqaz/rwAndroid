@@ -33,7 +33,7 @@ public class NewsPresenter extends Presenter implements NewsContract.Presenter {
                 .compose(this.<List<Article>>applyBinding())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new NewsLoaderListener(this));
+                .subscribe(new NewsLoaderListener(this));
     }
 
     @Override

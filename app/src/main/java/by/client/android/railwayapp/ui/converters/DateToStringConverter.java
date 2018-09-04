@@ -18,7 +18,7 @@ import by.client.android.railwayapp.ui.utils.Utils;
  */
 public class DateToStringConverter {
 
-    public static final String DEFAULT_FORMAT = "yyyy-MM-dd";
+    private static final String DEFAULT_FORMAT = "yyyy-MM-dd";
     private final String stringDateFormat;
 
     public DateToStringConverter() {

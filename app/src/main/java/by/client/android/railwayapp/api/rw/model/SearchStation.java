@@ -1,8 +1,9 @@
 package by.client.android.railwayapp.api.rw.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import by.client.android.railwayapp.model.ParcelableUtils;
 
 /**
@@ -10,6 +11,7 @@ import by.client.android.railwayapp.model.ParcelableUtils;
  *
  * @author PRV
  */
+@Entity(tableName = "stations")
 public class SearchStation implements Parcelable {
 
     private String prefix;
@@ -21,7 +23,7 @@ public class SearchStation implements Parcelable {
     private Double lat;
     private String exp;
     private String ecp;
-    private Object otd;
+    private String otd;
 
     public SearchStation() {
     }
@@ -98,14 +100,13 @@ public class SearchStation implements Parcelable {
         this.ecp = ecp;
     }
 
-    public Object getOtd() {
+    public String getOtd() {
         return otd;
     }
 
-    public void setOtd(Object otd) {
+    public void setOtd(String otd) {
         this.otd = otd;
     }
-
 
     @Override
     public int describeContents() {

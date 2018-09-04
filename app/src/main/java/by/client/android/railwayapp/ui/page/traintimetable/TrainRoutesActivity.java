@@ -151,7 +151,7 @@ public class TrainRoutesActivity extends BaseDaggerActivity {
         getRoutes(trainRoute)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new TrainTimeLoadListener(this));
+                .subscribe(new TrainTimeLoadListener(this));
     }
 
     public Observable<List<TrainRoute>> getRoutes(SearchTrain trainRoute) {

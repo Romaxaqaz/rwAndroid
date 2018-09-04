@@ -18,7 +18,7 @@ public abstract class BaseDaggerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         applicationComponent = AndroidApplication.getApp().getApplicationComponent();
         injectActivity(applicationComponent);
 
